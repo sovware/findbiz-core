@@ -65,6 +65,9 @@ class DirHooks
         //ajax_callback_send_contact_email
         add_action('wp_ajax_findbiz_public_send_contact_email',               array($this, 'ajax_callback_send_contact_email'));
         add_action('wp_ajax_nopriv_findbiz_public_send_contact_email',        array($this, 'ajax_callback_send_contact_email'));
+
+        add_action( 'directorist_dashboard_listing_td_2',                     array($this, 'directorist_dashboard_listing_td_2') );
+        add_action( 'directorist_dashboard_listing_th_2',                     array($this, 'directorist_dashboard_listing_th_2') );
     }
 
     public static function listing_map_view()
@@ -451,6 +454,90 @@ You can login now using the below credentials:
         }
         echo wp_json_encode($data);
         wp_die();
+    }
+
+    // Add review & category in dashboard table.
+    public static function directorist_dashboard_listing_th_2(){
+        echo '<th class="directorist-table-review">' . __( 'Review', 'direo' ) . '</th>';
+        echo '<th class="directorist-table-review">' . __( 'Category', 'direo' ) . '</th>';
+    }
+
+    public static function directorist_dashboard_listing_td_2() {
+        $review = get_directorist_option( 'enable_review', 1 );
+        if ( ! $review ) return;
+        $reviews_count = ATBDP()->review->db->count( array( 'post_id' => get_the_ID() ) );
+        $cats          = get_the_terms( get_the_ID(), ATBDP_CATEGORY );
+        $cats          = $cats ? $cats : array();
+        ?>
+        <td class="directorist_dashboard_rating">
+            <ul class="rating">
+                <?php
+                $average   = ATBDP()->review->get_average( get_the_ID() );
+                $star      = '<li><span class="la la-star rate_active"></span></li>';
+                $half_star = '<li><span class="la la-star-half-o rate_active"></span></li>';
+                $none_star = '<li><span class="la la-star-o"></span></li>';
+
+                if ( is_int( $average ) ) {
+                    for ( $i = 1; $i <= 5; $i++ ) {
+
+                        if ( $i <= $average ) {
+                            echo wp_kses_post( $star );
+                        } else {
+                            echo wp_kses_post( $none_star );
+                        }
+                    }
+                } elseif ( ! is_int( $average ) ) {
+                    $exp       = explode( '.', $average );
+                    $float_num = $exp[0];
+
+                    for ( $i = 1; $i <= 5; $i++ ) {
+                        if ( $i <= $average ) {
+                            echo wp_kses_post( $star );
+                        } elseif ( ! empty( $average ) && $i > $average && $i <= $float_num + 1 ) {
+                            echo wp_kses_post( $half_star );
+                        } else {
+                            echo wp_kses_post( $none_star );
+                        }
+                    }
+                }
+
+                $review_title = '';
+                if ( $reviews_count ) {
+                    if ( 1 < $reviews_count ) {
+                        $review_title = $reviews_count . esc_html__( ' Reviews', 'direo' );
+                    } else {
+                        $review_title = $reviews_count . esc_html__( ' Review', 'direo' );
+                    }
+                }
+                ?>
+
+                <li class="reviews">
+                    <span class="atbd_count">
+                        <?php echo sprintf( '(<b>%s</b> %s )', esc_attr( $average . '/5' ), esc_attr( $review_title ) ); ?>
+                    </span>
+                </li>
+            </ul>
+        </td>
+
+        <td class="directorist_dashboard_category">
+            <ul>
+                <li>
+                    <?php
+                    if ( $cats ) {
+                        foreach ( $cats as $cat ) {
+                            $link          = \ATBDP_Permalink::atbdp_get_category_page( $cat );
+                            $space         = str_repeat( ' ', 1 );
+                            $category_icon = $cats ? get_cat_icon( $cat->term_id ) : atbdp_icon_type() . '-tags';
+                            $icon_type     = substr( $category_icon, 0, 2 );
+                            $icon          = 'la' === $icon_type ? $icon_type . ' ' . $category_icon : 'fa ' . $category_icon;
+                            echo sprintf( '%s<span><i class="%s"></i><a href="%s">%s</a></span>', esc_attr( $space ), esc_attr( $icon ), esc_url( $link ), esc_attr( $cat->name ) );
+                        }
+                    }
+                    ?>
+                </li>
+            </ul>
+        </td>
+        <?php
     }
 }
 

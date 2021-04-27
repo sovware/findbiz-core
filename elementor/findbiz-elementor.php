@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
 use Elementor\Plugin as Plugin;
 
 if (!class_exists('FindBizWidgets')) {
+
     final class FindBizWidgets
     {
         const VERSION = '1.0.0';
@@ -75,7 +76,7 @@ if (!class_exists('FindBizWidgets')) {
             $manager->add_category(
                 'findbiz_category',
                 [
-                    'title' => __('findbiz', 'findbiz-core'),
+                    'title' => __( 'findbiz', 'findbiz-core' ),
                 ]
             );
         }
