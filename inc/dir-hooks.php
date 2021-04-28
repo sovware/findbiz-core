@@ -458,8 +458,8 @@ You can login now using the below credentials:
 
     // Add review & category in dashboard table.
     public static function directorist_dashboard_listing_th_2(){
-        echo '<th class="directorist-table-review">' . __( 'Review', 'direo' ) . '</th>';
-        echo '<th class="directorist-table-review">' . __( 'Category', 'direo' ) . '</th>';
+        echo '<th class="directorist-table-review">' . __( 'Review', 'findbiz' ) . '</th>';
+        echo '<th class="directorist-table-review">' . __( 'Category', 'findbiz' ) . '</th>';
     }
 
     public static function directorist_dashboard_listing_td_2() {
@@ -504,9 +504,9 @@ You can login now using the below credentials:
                 $review_title = '';
                 if ( $reviews_count ) {
                     if ( 1 < $reviews_count ) {
-                        $review_title = $reviews_count . esc_html__( ' Reviews', 'direo' );
+                        $review_title = $reviews_count . esc_html__( ' Reviews', 'findbiz' );
                     } else {
-                        $review_title = $reviews_count . esc_html__( ' Review', 'direo' );
+                        $review_title = $reviews_count . esc_html__( ' Review', 'findbiz' );
                     }
                 }
                 ?>

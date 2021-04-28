@@ -18,8 +18,6 @@ class DirHelper
 
         //login actions hook
         add_action('init', array($this, 'login_init'));
-        add_action('wp_ajax_nopriv_findbiz_ajaxlogin', array($this, 'login'));
-        add_action('wp_ajax_nopriv_findbiz_recovery_password', array($this, 'password_recovery'));
 
         //search form
         add_action('atbdp_search_form_fields', array($this, 'search_form'));
@@ -36,68 +34,12 @@ class DirHelper
         add_action('bdmv_after_filter_button_in_listings_header', array($this, 'listings_with_map_header'), 10, 2);
     }
 
-    // Elementor functions
-    public static function categories()
-    {
-        $categories = get_terms('at_biz_dir-category');
-        $cat = [];
-        if ($categories) {
-            foreach ($categories as $category) {
-                $cat[$category->slug] = $category->name;
-            }
-            wp_reset_postdata();
-        }
-        return $cat;
-    }
-
-    public static function tags()
-    {
-        $tags = get_terms('at_biz_dir-tags');
-        $all_tag = [];
-        if ($tags) {
-            foreach ($tags as $tag) {
-                $all_tag[$tag->slug] = $tag->name;
-            }
-        }
-        return $all_tag;
-    }
-
-    public static function locations()
-    {
-        $locations = get_terms('at_biz_dir-location');
-        $loc = [];
-        if ($locations) {
-            foreach ($locations as $location) {
-                $loc[$location->slug] = $location->name;
-            }
-        }
-        return $loc;
-    }
-
-    public static function cf7_names()
-    {
-        global $wpdb;
-        $cf7_list = $wpdb->get_results("SELECT ID, post_title
-                    FROM $wpdb->posts
-                    WHERE post_type = 'wpcf7_contact_form'");
-        $cf7_val = array();
-        if ($cf7_list) {
-            $cf7_val[0] = __('Select a Contact Form', 'findbiz');
-            foreach ($cf7_list as $value) {
-                $cf7_val[$value->ID] = $value->post_title;
-            }
-        } else {
-            $cf7_val[0] = esc_html__('No contact forms found', 'findbiz');
-        }
-        return $cf7_val;
-    }
-
     // Login functions
     public function login_init()
     {
         wp_enqueue_script('ajax-login-script', get_theme_file_uri('theme_assets/js/ajax-login-register-script.js'), 'jquery', null, true);
-        $password = get_directorist_option('password_reg', 1);
-        $notice = $password ? __(' Go to your inbox or spam/junk and get your password.', 'findbiz-core') : __(' Congratulations! Registration completed.', 'findbiz-core');
+        $password = get_directorist_option('display_password_reg', 1);
+        $notice = ! $password ? __(' Go to your inbox or spam/junk and get your password.', 'findbiz-core') : __(' Congratulations! Registration completed.', 'findbiz-core');
 
         wp_localize_script('ajax-login-script', 'findbiz_ajax_login_object', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
@@ -106,6 +48,9 @@ class DirHelper
             'registration_confirmation' => $notice,
             'login_failed' => esc_html__('Sorry! Login failed', 'findbiz-core'),
         ));
+
+        add_action('wp_ajax_nopriv_findbiz_ajaxlogin', array($this, 'login'));
+        add_action('wp_ajax_nopriv_findbiz_recovery_password', array($this, 'password_recovery'));
     }
 
     public function login()
@@ -126,56 +71,75 @@ class DirHelper
         exit();
     }
 
-    public function password_recovery()
-    {
-        global $wpdb;
-        $error = '';
-        $success = '';
-        $email = trim($_POST['user_login']);
-        if (empty($email)) {
-            $error = esc_html__('Enter valid e-mail address', 'findbiz-core');
-        } else if (!is_email($email)) {
-            $error = esc_html__('Invalid e-mail address.', 'findbiz-core');
-        } else if (!email_exists($email)) {
-            $error = esc_html__('There is no user registered with that email address.', 'findbiz-core');
-        } else {
-            $random_password = wp_generate_password(12, false);
-            $user = get_user_by('email', $email);
+    function password_recovery() {
+		global $wpdb;
+		$error   = '';
+		$success = '';
+		$email   = trim( $_POST['user_login'] );
+		if ( empty( $email ) ) {
+			$error = esc_html__( 'Enter a username or e-mail address..', 'findbiz-core' );
+		} elseif ( ! is_email( $email ) ) {
+			$error = esc_html__( 'Invalid username or e-mail address.', 'findbiz-core' );
+		} elseif ( ! email_exists( $email ) ) {
+			$error = esc_html__( 'There is no user registered with that email address.', 'findbiz-core' );
+		} else {
+			$random_password = wp_generate_password( 12, false );
+			$user            = get_user_by( 'email', $email );
+			$update_user     = update_user_meta( $user->ID, '_atbdp_recovery_key', $random_password );
 
-            $update_user = wp_update_user(array(
-                'ID' => $user->ID,
-                'user_pass' => $random_password
-            ));
+			// if  update user return true then lets send user an email containing the new password
+			if ( $update_user ) {
+				$subject = esc_html__( '	Password Reset Request', 'findbiz-core' );
+				// $message = esc_html__('Your new password is: ', 'findbiz-core') . $random_password;
 
-            // if  update user return true then lets send user an email containing the new password
-            if ($update_user) {
-                $subject = esc_html__('Your new password', 'findbiz-core');
-                $message = esc_html__('Your new password is: ', 'findbiz-core') . $random_password;
+				$site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+				$message   = __( 'Someone has requested a password reset for the following account:', 'findbiz-core' ) . '<br>';
+				/* translators: %s: site name */
+				$message .= sprintf( __( 'Site Name: %s', 'findbiz-core' ), $site_name ) . '<br>';
+				/* translators: %s: user login */
+				$message .= sprintf( __( 'User: %s', 'findbiz-core' ), $user->user_login ) . '<br>';
+				$message .= __( 'If this was a mistake, just ignore this email and nothing will happen.', 'findbiz-core' ) . '<br>';
+				$message .= __( 'To reset your password, visit the following address:', 'findbiz-core' ) . '<br>';
+				$link     = array(
+					'key'  => $random_password,
+					'user' => $email,
+				);
+				$message .= '<a href="' . esc_url( add_query_arg( $link, ATBDP_Permalink::get_login_page_url() ) ) . '">' . esc_url( add_query_arg( $link, ATBDP_Permalink::get_login_page_url() ) ) . '</a>';
 
-                $headers[] = 'Content-Type: text/html; charset=UTF-8';
+				$message = atbdp_email_html( $subject, $message );
 
-                $mail = wp_mail($email, $subject, $message, $headers);
-                if ($mail) {
-                    $success = esc_html__('Check your email address for you new password.', 'findbiz-core');
-                } else {
-                    $error = esc_html__('Password updated! But something went wrong sending email.', 'findbiz-core');
-                }
-            } else {
-                $error = esc_html__('Oops something went wrong updating your account.', 'findbiz-core');
-            }
-        }
+				$headers[] = 'Content-Type: text/html; charset=UTF-8';
+				$mail      = wp_mail( $email, $subject, $message, $headers );
+				if ( $mail ) {
+					$success = __( 'A password reset email has been sent to the email address on file for your account, but may take several minutes to show up in your inbox.', 'findbiz-core' );
+				} else {
+					$error = __( 'Password updated! But something went wrong sending email.', 'findbiz-core' );
+				}
+			} else {
+				$error = esc_html__( 'Oops something went wrong updaing your account.', 'findbiz-core' );
+			}
+		}
 
+		if ( ! empty( $error ) ) {
+			echo json_encode(
+				array(
+					'loggedin' => false,
+					'message'  => $error,
+				)
+			);
+		}
 
-        if (!empty($error)) {
-            echo json_encode(array('loggedin' => false, 'message' => $error));
-        }
+		if ( ! empty( $success ) ) {
+			echo json_encode(
+				array(
+					'loggedin' => true,
+					'message'  => $success,
+				)
+			);
+		}
 
-        if (!empty($success)) {
-            echo json_encode(array('loggedin' => true, 'message' => $success));
-        }
-
-        die();
-    }
+		die();
+	}
 
     //search form
     public static function search_form($input = 'yes', $input_ph = '', $cat = 'yes', $cat_ph = '', $loc = 'yes', $loc_ph = '', $btn = '', $more = '')
@@ -682,8 +646,7 @@ class DirHelper
     }
 
     public static function contact_form($listing_id)
-    {
-    ?>
+    { ?>
         <div class="atbdp-widget-listing-contact contact-form">
             <div class="atbd_contfindbiz_public_send_contact_emailent_module atbd_contact_information_module">
                 <form id="findbiz-contact-owner-form" class="form-vertical contact_listing_owner" role="form">
@@ -734,6 +697,62 @@ class DirHelper
     
     public static function listings_with_map_header() {
         echo '<h4>'.__('All Items', 'findbiz-core').'</h4>';
+    }
+
+    // Elementor functions
+    public static function categories()
+    {
+        $categories = get_terms('at_biz_dir-category');
+        $cat = [];
+        if ($categories) {
+            foreach ($categories as $category) {
+                $cat[$category->slug] = $category->name;
+            }
+            wp_reset_postdata();
+        }
+        return $cat;
+    }
+
+    public static function tags()
+    {
+        $tags = get_terms('at_biz_dir-tags');
+        $all_tag = [];
+        if ($tags) {
+            foreach ($tags as $tag) {
+                $all_tag[$tag->slug] = $tag->name;
+            }
+        }
+        return $all_tag;
+    }
+
+    public static function locations()
+    {
+        $locations = get_terms('at_biz_dir-location');
+        $loc = [];
+        if ($locations) {
+            foreach ($locations as $location) {
+                $loc[$location->slug] = $location->name;
+            }
+        }
+        return $loc;
+    }
+
+    public static function cf7_names()
+    {
+        global $wpdb;
+        $cf7_list = $wpdb->get_results("SELECT ID, post_title
+                    FROM $wpdb->posts
+                    WHERE post_type = 'wpcf7_contact_form'");
+        $cf7_val = array();
+        if ($cf7_list) {
+            $cf7_val[0] = __('Select a Contact Form', 'findbiz');
+            foreach ($cf7_list as $value) {
+                $cf7_val[$value->ID] = $value->post_title;
+            }
+        } else {
+            $cf7_val[0] = esc_html__('No contact forms found', 'findbiz');
+        }
+        return $cf7_val;
     }
 
 }
