@@ -974,7 +974,7 @@ class DirHelper
     }
 
     public static function all_listings_wrapper() {
-        echo ' all-listings-carousel owl-carousel ';
+        return ' all-listings-carousel owl-carousel ';
     }
 
 }
