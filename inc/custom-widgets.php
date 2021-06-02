@@ -160,7 +160,7 @@ class findbiz_popular_post_widget extends WP_Widget {
 	}
 
 	public function form( $instance ) {
-		$title     = ! empty( $instance['title'] ) ? $instance['title'] : '';
+		$title      = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$post_count = ! empty( $instance['post_count'] ) ? $instance['post_count'] : '';
 		?>
 
@@ -445,10 +445,15 @@ class findbiz_sponsor_widget extends WP_Widget {
 	}
 
 	public function widget( $args, $instance ) {
-		$title     = ( ! empty( $instance['title'] ) ) ? $instance['title'] : '';
+		$title      = ( ! empty( $instance['title'] ) ) ? $instance['title'] : '';
 		$number_cat = ( ! empty( $instance['posts_per'] ) ) ? $instance['posts_per'] : '';
-		add_filter( 'all_listings_wrapper', array( new DirHelper, 'all_listings_wrapper') );
-		add_filter( 'all_listings_column', function(){ return ''; } );
+		add_filter( 'all_listings_wrapper', array( new DirHelper(), 'all_listings_wrapper' ) );
+		add_filter(
+			'all_listings_column',
+			function() {
+				return '';
+			}
+		);
 		?>
 		<div id="listing-carousel" class="widget-wrapper sponsored-listing-widget">
 			<?php if ( $title ) { ?>
@@ -465,7 +470,7 @@ class findbiz_sponsor_widget extends WP_Widget {
 	}
 
 	public function form( $instance ) {
-		$title    = ( ! empty( $instance['title'] ) ) ? $instance['title'] : '';
+		$title     = ( ! empty( $instance['title'] ) ) ? $instance['title'] : '';
 		$posts_per = ( ! empty( $instance['posts_per'] ) ) ? $instance['posts_per'] : '';
 		?>
 		<p>

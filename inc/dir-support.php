@@ -41,7 +41,7 @@ class DirSupport {
 			),
 		);
 
-		//Placement of contact button for listing card.
+		// Placement of contact button for listing card.
 		foreach ( $fields as $key => $value ) {
 
 			if ( 'listings_card_grid_view' === $key ) {
@@ -65,12 +65,12 @@ class DirSupport {
 	}
 
 	// Remove video widget for single page layout.
-	public static function single_listing_content_widgets($fields){
-		unset($fields['video']);
+	public static function single_listing_content_widgets( $fields ) {
+		unset( $fields['video'] );
 		return $fields;
 	}
 
-	//Remove single listing header layout.
+	// Remove single listing header layout.
 	public static function directorist_single_listing_header( $layout ) {
 
 		unset( $layout['single_page_layout']['submenu']['listing_header'] );
