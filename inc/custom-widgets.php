@@ -6,7 +6,6 @@
  */
 
 use AazzTech\FindBiz\DirHelper;
-use AazzTech\FindBiz\DirHooks;
 use AazzTech\FindBiz\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {

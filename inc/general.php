@@ -15,12 +15,6 @@ class General_Setup {
 		add_action( 'widgets_init', array( $this, 'register_sidebars' ), 5 );
 		add_filter( 'elementor/widgets/wordpress/widget_args', array( $this, 'elementor_widget_args' ) );
 		add_filter( 'user_contactmethods', array( $this, 'author_social' ) );
-
-		// disable auto page creation
-		add_filter( 'atbdp_create_required_pages', '__return_false' );
-
-		// disable setup widget
-		add_filter( 'atbdp_setup_wizard', '__return_false' );
 	}
 
 	public static function instance() {

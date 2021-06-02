@@ -12,7 +12,7 @@ use ATBDP_Permalink;
 class DirHelper {
 
 	public function __construct() {
-		 // disable contact form 7 auto p tag
+		// disable contact form 7 auto p tag
 		add_action( 'wpcf7_autop_or_not', '__return_false' );
 
 		// single listing shortcodes
@@ -761,7 +761,7 @@ class DirHelper {
 	}
 
 	public static function tags() {
-		 $tags   = get_terms( 'at_biz_dir-tags' );
+		$tags   = get_terms( 'at_biz_dir-tags' );
 		$all_tag = array();
 		if ( $tags ) {
 			foreach ( $tags as $tag ) {
