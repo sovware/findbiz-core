@@ -16,6 +16,9 @@ class DirHelper
         //disable contact form 7 auto p tag
         add_action('wpcf7_autop_or_not', '__return_false');
 
+        //single listing shortcodes
+        add_shortcode('findbiz_listing_gallery', array($this, 'gallery'));
+
         //login actions hook
         add_action('init', array($this, 'login_init'));
 
@@ -32,6 +35,15 @@ class DirHelper
 
         //locations & cats
         add_action('bdmv_after_filter_button_in_listings_header', array($this, 'listings_with_map_header'), 10, 2);
+
+        //Findbiz core script.
+        add_action('wp_enqueue_scripts', array($this, 'core_script'), 10, 2);
+
+    }
+
+    /* Plugin scripts */
+    public function core_script() {
+        wp_enqueue_script( 'findbiz-core-main', plugin_dir_url( __DIR__ ). 'assets/main.js', array( 'jquery' ), null, true );
     }
 
     // Login functions
@@ -753,6 +765,216 @@ class DirHelper
             $cf7_val[0] = esc_html__('No contact forms found', 'findbiz');
         }
         return $cf7_val;
+    }
+
+    //listing badges and price
+    public static function budgets()
+    {
+        $price   = get_directorist_option('disable_list_price');
+        $budget  = get_post_meta(get_the_ID(), '_price', true);
+        $range   = get_post_meta(get_the_ID(), '_price_range', true);
+        $pricing = get_post_meta(get_the_ID(), '_atbd_listing_pricing', true);
+        $hourly  = get_post_meta(get_the_ID(), '_pyn_is_hourly', true);
+        $hourly  = $hourly ? sprintf('<span class="budget-hr">%s</span>', __('/hr', 'findbiz-core')) : '';
+    ?>
+
+        <?php
+        $html = '';
+        if ($budget || $range) {
+            $html = '<p class="atbd_service_budget">' . __('Budget:', 'findbiz-core') . '<span>';
+            if ($range && ('range' === $pricing)) {
+                $html .= atbdp_display_price_range($range) . $hourly;
+            } else {
+                $html .= atbdp_display_price($budget, $price, $currency = null, $symbol = null, $c_position = null, $echo = false) . $hourly;
+            }
+            $html .= '</span> </p>';
+        }
+
+        return $html;
+    }
+
+    //listing badges
+    public static function badges()
+    {
+        $featured      = get_post_meta(get_the_ID(), '_featured', true);
+        $feature_badge = get_directorist_option('feature_badge', 1);
+        $feature_text  = get_directorist_option('feature_badge_text', 'Featured');
+        $popular_text  = get_directorist_option('popular_badge_text', 'Popular');
+        $id            = atbdp_popular_listings(get_the_ID());
+        ?>
+
+        <?php
+
+        if ($featured && !empty($feature_badge)) {
+            echo sprintf('<span class="atbd_badge atbd_badge_featured">%s</span>', esc_attr($feature_text));
+        }
+
+        if ($id === get_the_ID()) {
+            echo sprintf('<span class="atbd_badge atbd_badge_popular">%s</span>', esc_attr($popular_text));
+        }
+
+        echo new_badge();
+    }
+
+    //gallery section
+    public static function gallery()
+    {
+        $listing_img = [];
+        $title = get_directorist_option('findbiz_details_text', __('Gallery', 'findbiz-core'));
+        $listing_info['listing_img'] = get_post_meta(get_the_ID(), '_listing_img', true);
+        extract($listing_info);
+        ?>
+
+        <div class="atbd_content_module atbd_listing_details">
+
+            <?php if ($title) { ?>
+                <div class="atbd_content_module__tittle_area">
+                    <div class="atbd_area_title">
+                        <h4>
+                            <span class="la la-image atbd_area_icon"></span>
+                            <?php echo esc_attr($title); ?>
+                        </h4>
+                    </div>
+                </div>
+            <?php
+            }
+
+            if ($listing_img) { ?>
+                <div class="atbdb_content_module_contents">
+                    <div class="atbd_directry_gallery_wrapper">
+                        <ul class="single-listing-gallery popup-gallery">
+                            <?php foreach ($listing_img as $ids) {
+                                $image   = wp_get_attachment_image_src($ids, 'listing-gallery', false);
+                                $preview = wp_get_attachment_image_src($ids, 'full', false);
+                                ?>
+                                <li>
+                                    <figure>
+                                        <img src="<?php echo $image ? esc_url($image[0]) : ''; ?>" alt="<?php echo esc_attr(Helper::image_alt($ids)) ?>">
+                                        <figcaption>
+                                            <a href="<?php echo $preview ? esc_url($preview[0]) : ''; ?>" class="hoverZoomLink">
+                                                <span class="la la-search-plus"></span>
+                                            </a>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                                <?php
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
+            <?php
+            } ?>
+
+        </div>
+        <?php
+    }
+
+    public static function findbiz_get_form_field( $listing, $key ) {
+		$submission_form_fields = get_term_meta( $listing->type, 'submission_form_fields', true );
+		if ( ! empty( $submission_form_fields['fields'][ $key ] ) ) {
+			return $submission_form_fields['fields'][ $key ];
+		} else {
+			return false;
+		}
+	}
+
+	public static function findbiz_single_has_slider( $listing ) {
+		$image_upload = self::findbiz_get_form_field( $listing, 'image_upload' );
+		if ( ! $image_upload ) {
+			return false;
+		}
+
+		$plan_id    = get_post_meta( get_the_ID(), '_fm_plans', true );
+		$plan_photo = true;
+		if ( is_fee_manager_active() ) {
+			$plan_photo = is_plan_allowed_slider( $plan_id );
+		}
+		if ( ! $plan_photo ) {
+			return false;
+		}
+
+		$listing_img = get_post_meta( get_the_ID(), '_listing_img', true );
+		if ( ! $listing_img ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public static function findbiz_single_has_video( $listing ) {
+		$video = self::findbiz_get_form_field( $listing, 'video' );
+		if ( ! $video ) {
+			return false;
+		}
+
+		$plan_video = true;
+		$fm_plan    = get_post_meta( get_the_ID(), '_fm_plans', true );
+		if ( is_fee_manager_active() ) {
+			$plan_video = is_plan_allowed_listing_video( $fm_plan );
+		}
+
+		if ( ! $plan_video ) {
+			return false;
+		}
+
+		$value = ! empty( $video['field_key'] ) ? get_post_meta( $listing->id, '_' . $video['field_key'], true ) : '';
+
+		if ( ! $value ) {
+			return false;
+		}
+
+		return true;
+    }
+    
+    public static function findbiz_single_has_review( $listing ) {
+		$plan_id     = get_post_meta( get_the_ID(), '_fm_plans', true );
+		$plan_review = true;
+		if ( is_fee_manager_active() ) {
+			$plan_review = is_plan_allowed_listing_review( $plan_id );
+		}
+		if ( ! $plan_review ) {
+			return false;
+		}
+
+		$enable_review = get_directorist_option( 'enable_review', 'yes' );
+		if ( ! $enable_review ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public static function findbiz_single_has_owner_contact( $listing ) {
+		$plan_id      = get_post_meta( get_the_ID(), '_fm_plans', true );
+		$plan_contact = true;
+		if ( is_fee_manager_active() ) {
+			$plan_contact = is_plan_allowed_owner_contact_widget( $plan_id );
+		}
+		if ( ! $plan_contact ) {
+			return false;
+		}
+
+		return true;
+    }
+    
+    public static function findbiz_file_get_video_contents($url) {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        return $data;
+    }
+
+    public static function all_listings_wrapper() {
+        echo ' all-listings-carousel owl-carousel ';
     }
 
 }
