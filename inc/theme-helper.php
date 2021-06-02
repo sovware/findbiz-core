@@ -9,8 +9,6 @@ namespace AazzTech\FindBiz;
 
 class Helper {
 
-	use URI_Trait;
-
 	public static function filter_content( $content ) {
 		// wp filters
 		$content = wptexturize( $content );
