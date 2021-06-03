@@ -801,7 +801,7 @@ class DirHelper {
 		return $cf7_val;
 	}
 
-	// listing badges and price
+	// listing price
 	public static function budgets() {
 		$price   = get_directorist_option( 'disable_list_price' );
 		$budget  = get_post_meta( get_the_ID(), '_price', true );
@@ -834,18 +834,70 @@ class DirHelper {
 		$popular_text  = get_directorist_option( 'popular_badge_text', 'Popular' );
 		$id            = atbdp_popular_listings( get_the_ID() );
 		?>
+		<ul class="list-unstyled listing-info--badges">
+			<?php
 
+			if ( $featured && ! empty( $feature_badge ) ) {
+				echo sprintf( '<li><span class="atbd_badge atbd_badge_featured">%s</span></li>', esc_attr( $feature_text ) );
+			}
+
+			if ( $id === get_the_ID() ) {
+				echo sprintf( '<li><span class="atbd_badge atbd_badge_popular">%s</span></li>', esc_attr( $popular_text ) );
+			}
+
+			if ( new_badge() ) {
+				echo sprintf( '<li>%s</li>', new_badge() );
+			}
+			?>
+		</ul>
 		<?php
+	}
 
-		if ( $featured && ! empty( $feature_badge ) ) {
-			echo sprintf( '<span class="atbd_badge atbd_badge_featured">%s</span>', esc_attr( $feature_text ) );
-		}
+	public static function reviews() {
+		$enable_review = get_directorist_option( 'enable_review', 'yes' );
+		if( ! $enable_review ) return;
 
-		if ( $id === get_the_ID() ) {
-			echo sprintf( '<span class="atbd_badge atbd_badge_popular">%s</span>', esc_attr( $popular_text ) );
-		}
+		$average = ATBDP()->review->get_average( get_the_ID() );
+		$average_int_float = ! strchr( $average, '.' ) ? $average . '.0' : $average;
+		?>
+		<div class="atbd_rated_stars">
+			<ul>
+				<?php
+				$star      = '<i class="la la-star rate_active"></i>';
+				$half_star = '<i class="la la-star-half-o rate_active"></i>';
+				$none_star = '<i class="la la-star-o rate_disable"></i>';
 
-		echo new_badge();
+				if ( ! strchr( $average, '.' ) ) {
+					for ( $i = 1; $i <= 5; $i++ ) {
+						if ( $i <= $average ) {
+							echo wp_kses_post( $star );
+						} else {
+							echo wp_kses_post( $none_star );
+						}
+					}
+					wp_reset_postdata();
+				} elseif ( strchr( $average, '.' ) ) {
+					$exp       = explode( '.', $average );
+					$float_num = $exp[0];
+
+					for ( $i = 1; $i <= 5; $i++ ) {
+						if ( $i <= $average ) {
+							echo wp_kses_post( $star );
+						} elseif ( ! empty( $average ) && $i > $average && $i <= $float_num + 1 ) {
+							echo wp_kses_post( $half_star );
+						} else {
+							echo wp_kses_post( $none_star );
+						}
+					}
+					wp_reset_postdata();
+				}
+
+				echo sprintf( '<span class="atbd_count"><span>%s </span>%s %s </span>', esc_attr( $average_int_float ), esc_attr( $reviews_count ), esc_attr( $review_text ) );
+				?>
+
+			</ul>
+		</div>
+		<?php
 	}
 
 	// gallery section

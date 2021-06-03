@@ -41,16 +41,6 @@ class Helper {
 		self::get_template_part( 'template-parts/comments-callback', $args2 );
 	}
 
-	public static function get_nav_menu_args() {
-		$nav_menu_args = array(
-			'theme_location' => 'primary',
-			'container'      => false,
-			'fallback_cb'    => false,
-			'menu_class'     => 'navbar-nav mr-auto mb-0',
-		);
-		return $nav_menu_args;
-	}
-
 	public static function get_page_title() {
 		if ( is_search() ) {
 			$title = esc_html__( 'Search Results for : ', 'drestaurant' ) . get_search_query();
