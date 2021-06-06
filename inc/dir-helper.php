@@ -48,7 +48,7 @@ class DirHelper {
 	// Login functions
 	public function login_init() {
 		wp_enqueue_script( 'ajax-login-script', get_theme_file_uri( 'theme_assets/js/ajax-login-register-script.js' ), 'jquery', null, true );
-		$password = get_directorist_option( 'display_password_reg', 1 );
+		$password = class_exists( 'Directorist_Base' ) ? get_directorist_option( 'display_password_reg', 1 ) : '';
 		$notice   = ! $password ? __( ' Go to your inbox or spam/junk and get your password.', 'findbiz-core' ) : __( ' Congratulations! Registration completed.', 'findbiz-core' );
 
 		wp_localize_script(
@@ -725,7 +725,7 @@ class DirHelper {
 	}
 
 	public static function directorist_listing_types() {
-		$all_types = directory_types();
+		$all_types = class_exists( 'Directorist_Base' ) ? directory_types() : [];
 		$types     = array();
 		foreach ( $all_types as $type ) {
 			$types[ $type->slug ] = $type->name;

@@ -137,3 +137,17 @@ unset( $aztheme_error_fields['layout'] );
 		'fields' => $aztheme_error_fields,
 	)
 );
+
+if ( 1 ) {
+	// Products
+	$aztheme_products_fields = findbiz_post_type_fields( 'products' );
+	unset( $aztheme_products_fields['layout'] );
+	\CSF::createSection(
+		$opt_name,
+		array(
+			'title'  => esc_html__( 'Products', 'findbiz-core' ),
+			'parent' => 'layout_defaults',
+			'fields' => $aztheme_products_fields,
+		)
+	);
+}

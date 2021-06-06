@@ -41,28 +41,6 @@ class Helper {
 		self::get_template_part( 'template-parts/comments-callback', $args2 );
 	}
 
-	public static function get_page_title() {
-		if ( is_search() ) {
-			$title = esc_html__( 'Search Results for : ', 'drestaurant' ) . get_search_query();
-		} elseif ( is_404() ) {
-			$title = esc_html__( 'Page not Found', 'drestaurant' );
-		} elseif ( is_home() ) {
-			if ( get_option( 'page_for_posts' ) ) {
-				$title = get_the_title( get_option( 'page_for_posts' ) );
-			} else {
-				$title = apply_filters( 'aztheme_blog_title', esc_html__( 'All Posts', 'drestaurant' ) );
-			}
-		} elseif ( class_exists( 'woocommerce' ) && is_shop() || class_exists( 'woocommerce' ) && is_product() ) {
-			$title = get_the_title( wc_get_page_id( 'shop' ) );
-		} elseif ( is_archive() ) {
-			$title = get_the_archive_title();
-		} else {
-			$title = get_the_title();
-		}
-
-		return apply_filters( 'aztheme_page_title', $title );
-	}
-
 	public static function get_template_part( $template, $args = array() ) {
 		extract( $args );
 
@@ -78,19 +56,6 @@ class Helper {
 	}
 
 	/* == Blog functions == */
-
-	public static function categories() {
-		$cats = get_the_category_list( esc_html__( ', ', 'findbiz' ) );
-		if ( $cats ) {
-			printf( '<li>%s %s</li>', __( 'in', 'findbiz' ), $cats );
-		}
-	}
-
-	public static function tags() {
-		if ( get_the_tags() ) {
-			the_tags( '<div class="tags"><ul class="list-unstyled"><li>', '</li><li>', '</li></ul></div>' );
-		}
-	}
 
 	public static function social() {
 		global $post;
@@ -151,53 +116,6 @@ class Helper {
 		}
 	}
 
-	public static function setPostViews( $postID ) {
-		$countKey = 'post_views_count';
-		$count    = get_post_meta( $postID, $countKey, true );
-		if ( $count == '' ) {
-			$count = 0;
-			delete_post_meta( $postID, $countKey );
-			add_post_meta( $postID, $countKey, '0' );
-		} else {
-			$count++;
-			update_post_meta( $postID, $countKey, $count );
-		}
-	}
-
-	public static function page_id() {
-		$id = '';
-		if ( class_exists( 'woocommerce' ) && is_shop() || class_exists( 'woocommerce' ) && is_product_taxonomy() ) {
-			$id = wc_get_page_id( 'shop' );
-		} elseif ( class_exists( 'woocommerce' ) && is_cart() ) {
-			$id = wc_get_page_id( 'cart' );
-		} elseif ( class_exists( 'woocommerce' ) && is_checkout() ) {
-			$id = wc_get_page_id( 'checkout' );
-		} elseif ( class_exists( 'woocommerce' ) && is_account_page() ) {
-			$id = wc_get_page_id( 'myaccount' );
-		} elseif ( is_archive() || is_home() || is_search() ) {
-			$id = get_option( 'page_for_posts' );
-		} else {
-			$id = get_the_ID();
-		}
-		return $id;
-	}
-
-	public static function time() {
-		$markup     = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-		$time_string = sprintf( $markup, get_the_date( DATE_W3C ), get_the_date(), get_the_modified_date( DATE_W3C ), get_the_modified_date() );
-		return sprintf( '<a href="%s" rel="bookmark">%s</a>', esc_url( get_permalink() ), $time_string );
-	}
-
-	public static function pagination() {
-		wp_link_pages(
-			array(
-				'before'   => '<div class="m-top-50"><nav class="navigation pagination d-flex justify-content-center" role="navigation"><div class="nav-links">',
-				'after'    => '</div></nav></div>',
-				'pagelink' => '<span class="page-numbers">%</span>',
-			)
-		);
-	}
-
 	public static function image_alt( $id = null ) {
 		if ( is_object( $id ) || is_array( $id ) ) :
 
@@ -227,22 +145,6 @@ class Helper {
 
 		endif;
 	}
-
-	public static function using_elementor() {
-		global $post;
-		if ( in_array( 'elementor/elementor.php', (array) get_option( 'active_plugins' ) ) ) {
-			return \Elementor\Plugin::$instance->db->is_built_with_elementor( $post->ID );
-		}
-	}
-
-	public static function directorist() {
-		return class_exists( 'Directorist_Base' ) ? true : false;
-	}
-
-	public static function woocommerce() {
-		return class_exists( 'WooCommerce' ) ? true : false;
-	}
-
 
 	public static function social_url( $name ) {
 		$listingURL   = urlencode( get_permalink() );
@@ -334,4 +236,5 @@ class Helper {
 		$term         = get_term_by( is_numeric( $listing_type ) ? 'id' : 'slug', $listing_type, ATBDP_TYPE );
 		return $term->term_id;
 	}
+
 }

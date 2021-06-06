@@ -399,9 +399,8 @@ class FindBiz_Accordion extends Widget_Base
                                     </h3>
                                     <p class="dac_body"><?php echo esc_attr($desc); ?></p>
                                 </div>
-                        <?php
+                                <?php
                             }
-                            wp_reset_postdata();
                         } ?>
                     </div>
                 </div>

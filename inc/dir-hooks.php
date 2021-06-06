@@ -15,7 +15,7 @@ class DirHooks {
 	public static $copyright;
 
 	public function __construct() {
-		 self::$shorting = get_directorist_option( 'display_sort_by', 1 );
+		self::$shorting  = class_exists( 'Directorist_Base' ) ? get_directorist_option( 'display_sort_by', 1 ) : '';
 		self::$sign_in   = get_option( 'findbiz' )['sign_in'];
 		self::$copyright = get_option( 'findbiz' )['copyright_area'];
 
@@ -72,7 +72,7 @@ class DirHooks {
 	}
 
 	public static function listing_map_view() {
-		 $listing_map_view = get_directorist_option( 'listing_map_view', 'grid' );
+		$listing_map_view = get_directorist_option( 'listing_map_view', 'grid' );
 		$view_as           = isset( $_POST['view_as'] ) ? $_POST['view_as'] : $listing_map_view; ?>
 		<div class="view-mode-2 view-as">
 			<a data-view="grid" class="action-btn-2 ab-grid map-view-grid <?php echo 'grid' == $view_as ? esc_html( 'active' ) : ''; ?>">
@@ -87,7 +87,7 @@ class DirHooks {
 
 	// listing shorting
 	public static function shorting() {
-		 global $bdmv_listings;
+		global $bdmv_listings;
 		$sort_by           = isset( $_POST['sort_by'] ) ? $_POST['sort_by'] : '';
 		$title_asc_active  = ( 'title-asc' == $sort_by ) ? 'active' : '';
 		$title_desc_active = ( 'title-desc' == $sort_by ) ? 'active' : '';
@@ -157,7 +157,7 @@ class DirHooks {
 
 	// copyright
 	public static function copyright() {
-		$footer = get_post_meta( Helper::page_id(), 'footer', true );
+		$footer = get_post_meta( get_the_ID(), 'footer', true );
 		$text   = get_option( 'findbiz' )['copyright_text'];
 		?>
 		<div class="listing_map_footer bg-<?php echo esc_attr( $footer ); ?>"><?php echo apply_filters( 'get_the_content', $text ); ?></div>
@@ -170,7 +170,7 @@ class DirHooks {
 
 	// Login & register Form popup Ajax
 	public static function vb_register_user_scripts() {
-		 wp_localize_script( 'vb_reg_script', 'vb_reg_vars', array( 'vb_ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script( 'vb_reg_script', 'vb_reg_vars', array( 'vb_ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 	}
 
 	public static function vb_reg_new_user() {
@@ -270,7 +270,7 @@ class DirHooks {
 
 	// mail notification
 	public static function mail_notification( $wp_new_user_notification_email, $user, $blogname ) {
-		 $user_password = get_user_meta( $user->ID, '_atbdp_generated_password', true );
+		$user_password = get_user_meta( $user->ID, '_atbdp_generated_password', true );
 
 		$sub                                       = get_directorist_option( 'email_sub_registration_confirmation', __( 'Registration Confirmation!', 'findbiz-core' ) );
 		$body                                      = get_directorist_option(
@@ -306,10 +306,10 @@ You can login now using the below credentials:
 	// contact listing owner form
 	public static function email_listing_owner_listing_contact() {
 		/**
-		   * If fires sending processing the submitted contact information
-		   *
-		   * @since 1.0.0
-		   */
+		 * If fires sending processing the submitted contact information
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'atbdp_before_processing_contact_to_owner' );
 
 		if ( ! in_array( 'listing_contact_form', get_directorist_option( 'notify_user', array() ) ) ) {

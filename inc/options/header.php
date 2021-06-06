@@ -53,9 +53,9 @@
 				'id'      => 'woo_cart',
 				'type'    => 'switcher',
 				'title'   => esc_html__( 'Woocommerce Cart Icon', 'findbiz-core' ),
+				'desc'   => esc_html__( 'This option will be worked with the woocommerce plugin.', 'findbiz-core' ),
 				'default' => true,
 			),
-
 		),
 	)
 );

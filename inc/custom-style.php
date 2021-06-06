@@ -15,7 +15,7 @@ function findbiz_custom_style()
     $warnning = get_theme_mod('wr_color', '#fa8b0c'); ?>
 
     <style>
-        <?php if('#1ec659' != $primary){ ?>
+        <?php if('#1ec659' != $primary) { ?>
             /* Primary color */
             #gmap .leaflet-popup-content .media-body .osm-iw-get-location span,
             #gmap .leaflet-popup-content .media-body .osm-iw-location span,
