@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @author  aazztech
  * @since   1.0
@@ -47,6 +46,7 @@ require_once $path . 'typography.php';
 require_once $path . 'layout.php';
 require_once $path . 'blog.php';
 require_once $path . 'post.php';
+require_once $path . 'directorist.php';
 require_once $path . 'error.php';
 require_once $path . 'advanced.php';
 require_once $path . 'export.php';

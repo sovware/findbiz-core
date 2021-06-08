@@ -19,22 +19,13 @@ class DirHooks {
 		self::$sign_in   = get_option( 'findbiz' )['sign_in'];
 		self::$copyright = get_option( 'findbiz' )['copyright_area'];
 
-		/* ==action hooks== */
-
 		// login in failed
 		add_action( 'wp_login_failed', array( $this, 'login_fail' ) );
-
-		// page creation
-		add_action( 'init', array( $this, 'page_creation' ), 100 );
-		// page creation notic
-		add_action( 'admin_notices', array( $this, 'page_creation_notice' ) );
 
 		// copyright
 		if ( self::$copyright ) {
 			add_action( 'bdmv-after-listing', array( $this, 'copyright' ) );
 		}
-
-		add_filter( 'atbdp_right_sidebar_name', array( $this, 'dir_sidebar' ) );
 
 		if ( self::$sign_in ) {
 			// sign modal
@@ -73,7 +64,7 @@ class DirHooks {
 
 	public static function listing_map_view() {
 		$listing_map_view = get_directorist_option( 'listing_map_view', 'grid' );
-		$view_as           = isset( $_POST['view_as'] ) ? $_POST['view_as'] : $listing_map_view; ?>
+		$view_as = isset( $_POST['view_as'] ) ? $_POST['view_as'] : $listing_map_view; ?>
 		<div class="view-mode-2 view-as">
 			<a data-view="grid" class="action-btn-2 ab-grid map-view-grid <?php echo 'grid' == $view_as ? esc_html( 'active' ) : ''; ?>">
 				<span class="la la-th-large"></span>
@@ -118,43 +109,6 @@ class DirHooks {
 		<?php
 	}
 
-	// page creation
-	public static function page_creation() {
-		if ( isset( $_GET['findbiz_create_page'] ) ) {
-			atbdp_create_required_pages();
-			update_user_meta( get_current_user_id(), '_atbdp_shortcode_regenerate_notice', 'false' );
-			if ( class_exists( 'ATBDP_Pricing_Plans' ) ) {
-				atpp_create_required_pages();
-			}
-			if ( class_exists( 'DWPP_Pricing_Plans' ) ) {
-				dwpp_create_required_pages();
-			}
-			set_transient( 'findbiz-page-creation-notice', true, 2 );
-		}
-		if ( isset( $_GET['findbiz_demo_import'] ) ) {
-			update_option( 'findbiz_demo_import', 1 );
-		}
-		// remove fav icon for listing list
-		remove_action( 'directorist_list_view_top_content_end', array( 'Directorist_Listings', 'mark_as_favourite_button' ), 15 );
-	}
-
-	// page creation notic
-	public static function page_creation_notice() {
-		if ( ( get_option( 'atbdp_pages_version' ) < 1 ) && ( get_option( 'findbiz_demo_import' ) < 1 ) ) {
-			$link  = add_query_arg( 'findbiz_demo_import', 'true', admin_url() . '/tools.php?page=fw-backups-demo-content' );
-			$link2 = add_query_arg( 'findbiz_create_page', 'true', $_SERVER['REQUEST_URI'] );
-			echo '<div class="notice notice-warning is-dismissible findbiz_importer_notice"><p><a href="' . esc_url( $link ) . '">' . __( 'Import Demo', 'findbiz-core' ) . '</a> or <a href="' . esc_url( $link2 ) . '">' . __( 'Generate', 'findbiz-core' ) . '</a>' . __( ' Required Pages' ) . '</p></div>';
-		}
-		if ( get_transient( 'findbiz-page-creation-notice' ) ) {
-			?>
-			<div class="updated notice is-dismissible">
-				<p><?php _e( 'Page created successfully!', 'findbiz-core' ); ?></p>
-			</div>
-			<?php
-			delete_transient( 'findbiz-page-creation-notice' );
-		}
-	}
-
 	// copyright
 	public static function copyright() {
 		$footer = get_post_meta( get_the_ID(), 'footer', true );
@@ -162,57 +116,6 @@ class DirHooks {
 		?>
 		<div class="listing_map_footer bg-<?php echo esc_attr( $footer ); ?>"><?php echo apply_filters( 'get_the_content', $text ); ?></div>
 		<?php
-	}
-
-	public static function dir_sidebar() {
-		return __( 'Directorist Sidebar' );
-	}
-
-	// Login & register Form popup Ajax
-	public static function vb_register_user_scripts() {
-		wp_localize_script( 'vb_reg_script', 'vb_reg_vars', array( 'vb_ajax_url' => admin_url( 'admin-ajax.php' ) ) );
-	}
-
-	public static function vb_reg_new_user() {
-		$display_password = class_exists( 'Directorist_Base' ) ? get_directorist_option( 'display_password_reg', 1 ) : '';
-		// Verify nonce
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'vb_new_user' ) ) {
-			echo __( 'Ooops, something went wrong, please try again later.', 'findbiz-core' );
-			die();
-		}
-
-		// Post values
-		$username = $_POST['user'];
-		$email    = $_POST['mail'];
-		if ( empty( $display_password ) ) {
-			$password = wp_generate_password( 12, false );
-		} elseif ( empty( $_POST['password'] ) ) {
-			$password = wp_generate_password( 12, false );
-		} else {
-			$password = sanitize_text_field( $_POST['password'] );
-		}
-		if ( ! empty( $password ) && 5 > strlen( $password ) ) {
-			echo __( 'Password length must be greater than 5', 'findbiz-core' );
-			die();
-		}
-		/**
-		 * IMPORTANT: You should make server side validation here!
-		 */
-		$userdata = array(
-			'user_login' => $username,
-			'user_email' => $email,
-			'user_pass'  => $password,
-		);
-		$user_id  = wp_insert_user( $userdata );
-		if ( ! is_wp_error( $user_id ) ) {
-			update_user_meta( $user_id, '_atbdp_generated_password', $password );
-			wp_new_user_notification( $user_id, null, 'admin' ); // send activation to the admin
-			ATBDP()->email->custom_wp_new_user_notification_email( $user_id );
-			echo '1';
-		} else {
-			echo $user_id->get_error_message();
-		}
-		die();
 	}
 
 	// sign modal

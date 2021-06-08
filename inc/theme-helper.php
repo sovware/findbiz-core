@@ -237,4 +237,8 @@ class Helper {
 		return $term->term_id;
 	}
 
+	public static function options() {
+		return get_option('findbiz');
+	}
+
 }

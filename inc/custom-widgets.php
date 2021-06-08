@@ -12,78 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function findbiz_mail_desc() {
-	$html = '<strong>Login <a href="https://mailchimp.com" target="_blank">Mailchimp</a> > Profile > Audience > Create  Audience / select existing audience</strong><br> Then go to <strong>Signup forms > Embedded forms </strong> and scroll down then you will found <strong>Copy/paste onto your site</strong> textarea including some text. Copy the form action URL and paste it here. <b style="color: green;">[For more details follow theme docs: <a href="http://directorist.com/docs/page-builder/" target="_blank">Page Builder</a>]</b>';
-	echo wp_kses_post( $html );
-}
-
-// **************************************************************************************
-// Subscribe for blog
-// **************************************************************************************
-
-class findbiz_subscribe_widget extends WP_Widget {
-
-	public function __construct() {
-		$widget_details = array(
-			'classname'   => 'findbiz_subscribe_widget',
-			'description' => esc_html__( 'You can use it to display Subscribe form.', 'findbiz_core' ),
-		);
-		parent::__construct( 'findbiz_subscribe_widget', esc_html__( '-[Subscribe]', 'findbiz_core' ), $widget_details );
-	}
-
-	public function widget( $args, $instance ) {
-		$form = ! empty( $instance['form'] ) ? $instance['form'] : ''; ?>
-
-		<div class="widget-wrapper">
-			<div class="widget-default">
-				<div class="widget-content">
-					<div class="subscribe-widget">
-						<form action="<?php echo esc_url( $form ); ?>" method="get">
-							<input type="email" class="form-control m-bottom-20" placeholder="<?php echo esc_attr_x( 'Enter email', 'placeholder', 'findbiz_core' ); ?>">
-							<button class="btn btn-sm btn-primary shadow-none" type="submit"><i class="la la-send"></i>
-							</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php
-	}
-
-	public function form( $instance ) {
-		$form = ! empty( $instance['form'] ) ? $instance['form'] : '';
-		?>
-
-		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'form' ) ); ?>">
-				<b><?php esc_html_e( 'Mailchimp Action Url', 'findbiz' ); ?></b>
-			</label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'form' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'form' ) ); ?>" type="text" value="<?php echo esc_attr( $form ); ?>" />
-		</p>
-
-		<p class="help">
-			<?php findbiz_mail_desc(); ?>
-		</p>
-
-		<?php
-	}
-
-	public function update( $new_instance, $old_instance ) {
-		if ( ! empty( $new_instance['title'] ) ) {
-			$new_instance['title'] = sanitize_text_field( $new_instance['title'] );
-		}
-		if ( ! empty( $new_instance['form'] ) ) {
-			$new_instance['form'] = sanitize_text_field( $new_instance['form'] );
-		}
-		return $new_instance;
-	}
-}
-
-
 // **************************************************************************************
 // Popular post
 // **************************************************************************************
-
 
 class findbiz_popular_post_widget extends WP_Widget {
 
@@ -700,7 +631,6 @@ class findbiz_widget_button extends WP_Widget {
 
 
 function findbiz_widgets_register() {
-	register_widget( 'findbiz_subscribe_widget' );
 	register_widget( 'findbiz_popular_post_widget' );
 	register_widget( 'findbiz_latest_post_widget' );
 	register_widget( 'findbiz_connect_follow_widget' );

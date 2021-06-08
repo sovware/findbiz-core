@@ -30,5 +30,7 @@ jQuery(document).ready(function(){
         },
     })    
 
+    console.log( responsiveObj.width);
+
     })(jQuery);
 });

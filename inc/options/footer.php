@@ -38,6 +38,7 @@ $theme_author_uri = wp_get_theme( get_template() )->get( 'AuthorURI' );
 				'type'         => 'repeater',
 				'title'        => esc_html__( 'Footer Socials', 'findbiz-core' ),
 				'button_title' => esc_html__( 'Add new', 'findbiz-core' ),
+				'dependency'   => array( 'copyright_area', '==', 'true' ),
 				'fields'       => array(
 
 					array(
