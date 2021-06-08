@@ -69,7 +69,9 @@ class DirHelper {
 
 	public function login() {
 		// First check the nonce, if it fails the function will break
-		check_ajax_referer( 'ajax-login-nonce', 'security' );
+		
+		// check_ajax_referer( 'ajax-login-nonce', 'findbiz-security' );
+
 		$username       = $_POST['username'];
 		$user_password  = $_POST['password'];
 		$keep_signed_in = ! empty( $_POST['rememberme'] ) ? true : false;
