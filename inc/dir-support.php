@@ -13,7 +13,7 @@ class DirSupport {
 		if ( Helper::options()['tabs'] ) {
 			add_filter( 'atbdp_single_listing_content_widgets', array( $this, 'single_listing_content_widgets' ) );
 		}
-		add_filter( 'atbdp_single_listing_other_fields_widget', array( $this, 'single_listing_other_fields_widget' ) );
+		//add_filter( 'atbdp_single_listing_other_fields_widget', array( $this, 'single_listing_other_fields_widget' ) );
 		add_filter( 'atbdp_listing_type_settings_field_list', array( $this, 'directorist_contact_button_of_listing_card' ) );
 		add_filter( 'atbdp_listing_type_settings_layout', array( $this, 'directorist_single_listing_header' ) );
 		add_filter( 'directorist_disable_shortcode_restriction_on_scripts', '__return_true' );
