@@ -517,7 +517,7 @@ class DirHelper {
 	}
 
 	public static function all_listings_wrapper() {
-		return ' all-listings-carousel owl-carousel ';
+		return esc_attr( ' all-listings-carousel owl-carousel ' );
 	}
 
 }

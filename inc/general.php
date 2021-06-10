@@ -97,6 +97,7 @@ class General_Setup {
 
 		return $social;
 	}
+
 }
 
 General_Setup::instance();

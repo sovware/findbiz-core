@@ -32,5 +32,10 @@ jQuery(document).ready(function(){
 
     console.log( responsiveObj.width);
 
+    wp.editor.initialize("custom-textarea-2", {
+        tinymce: true,
+        quicktags: true
+      });
+
     })(jQuery);
 });

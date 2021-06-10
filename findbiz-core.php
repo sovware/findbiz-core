@@ -31,9 +31,8 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/dir-options.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/activation.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/custom-widgets.php';
 require_once plugin_dir_path( __FILE__ ) . 'elementor/findbiz-elementor.php';
-require_once plugin_dir_path( __FILE__ ) . 'lib/cdf/codestar-framework.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/demo-importer.php';
 
-if ( is_admin() ) {
-	include_once plugin_dir_path( __FILE__ ) . 'inc/options/init.php';
+if ( ! class_exists( 'CSF' ) ) {
+	require_once plugin_dir_path( __FILE__ ) . 'lib/cdf/codestar-framework.php';
 }
