@@ -28,9 +28,9 @@ jQuery(document).ready(function(){
             items: 3,
         },
         },
-    })    
+    });
 
-    console.log( responsiveObj.width);
+    //console.log( responsiveObj.width);
 
     })(jQuery);
 });
