@@ -28,14 +28,14 @@ jQuery(document).ready(function(){
             items: 3,
         },
         },
-    })    
+    });
 
-    console.log( responsiveObj.width);
-
-    wp.editor.initialize("custom-textarea-2", {
-        tinymce: true,
-        quicktags: true
-      });
+    /*
+        wp.editor.initialize("custom-textarea-2", {
+            tinymce: true,
+            quicktags: true
+        });
+    */
 
     })(jQuery);
 });
