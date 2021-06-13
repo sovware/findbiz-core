@@ -90,10 +90,10 @@ class General_Setup {
 	}
 
 	public function author_social( $social ) {
-		$social['twitter']     = esc_html__( 'Twitter Username', 'findbiz' );
-		$social['google_plus'] = esc_html__( 'Google plus profile', 'findbiz' );
-		$social['facebook']    = esc_html__( 'Facebook Profile', 'findbiz' );
-		$social['linkedin']    = esc_html__( 'Linkedin Profile', 'findbiz' );
+		$social['twitter']     = esc_html__( 'Twitter Username', 'findbiz-core' );
+		$social['google_plus'] = esc_html__( 'Google plus profile', 'findbiz-core' );
+		$social['facebook']    = esc_html__( 'Facebook Profile', 'findbiz-core' );
+		$social['linkedin']    = esc_html__( 'Linkedin Profile', 'findbiz-core' );
 
 		return $social;
 	}

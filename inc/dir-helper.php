@@ -40,7 +40,7 @@ class DirHelper {
 
 	//Theme option responsive localized.
 	public function menu_responsive() {
-		$width = get_option( 'findbiz' )['resmenu_width'];
+		$width = get_option( 'findbiz-core' )['resmenu_width'];
 		wp_localize_script( 'findbiz-core-main', 'responsiveObj', array(
 			'width' => $width,
 		) );
@@ -273,12 +273,12 @@ class DirHelper {
 		);
 		$cf7_val  = array();
 		if ( $cf7_list ) {
-			$cf7_val[0] = __( 'Select a Contact Form', 'findbiz' );
+			$cf7_val[0] = __( 'Select a Contact Form', 'findbiz-core' );
 			foreach ( $cf7_list as $value ) {
 				$cf7_val[ $value->ID ] = $value->post_title;
 			}
 		} else {
-			$cf7_val[0] = esc_html__( 'No contact forms found', 'findbiz' );
+			$cf7_val[0] = esc_html__( 'No contact forms found', 'findbiz-core' );
 		}
 		return $cf7_val;
 	}

@@ -96,14 +96,14 @@ class findbiz_popular_post_widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-				<b><?php esc_html_e( 'Title', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'Title', 'findbiz-core' ); ?></b>
 			</label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'post_count' ) ); ?>">
-				<b><?php esc_html_e( 'How many posts you want to show ?', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'How many posts you want to show ?', 'findbiz-core' ); ?></b>
 			</label>
 
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'post_count' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'post_count' ) ); ?>" type="text" value="<?php echo esc_attr( $post_count ); ?> " />
@@ -211,14 +211,14 @@ class findbiz_latest_post_widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-				<b><?php esc_html_e( 'Title', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'Title', 'findbiz-core' ); ?></b>
 			</label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'post_count' ) ); ?>">
-				<b><?php esc_html_e( 'How many posts you want to show ?', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'How many posts you want to show ?', 'findbiz-core' ); ?></b>
 			</label>
 
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'post_count' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'post_count' ) ); ?>" type="text" value="<?php echo esc_attr( $post_count ); ?> " />
@@ -304,13 +304,13 @@ class findbiz_connect_follow_widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-				<b><?php esc_html_e( 'Title', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'Title', 'findbiz-core' ); ?></b>
 			</label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'social' ) ); ?>">
-				<b><?php esc_html_e( 'How many social field would you want? & hit save.', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'How many social field would you want? & hit save.', 'findbiz-core' ); ?></b>
 			</label>
 		</p>
 
@@ -405,13 +405,13 @@ class findbiz_sponsor_widget extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-				<b><?php esc_html_e( 'Title', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'Title', 'findbiz-core' ); ?></b>
 			</label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'posts_per' ) ); ?>">
-				<b><?php esc_html_e( 'How many listing you want to show ?', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'How many listing you want to show ?', 'findbiz-core' ); ?></b>
 			</label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'posts_per' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'posts_per' ) ); ?>" type="text" value="<?php echo esc_attr( $posts_per ); ?>" />
 		</p>
@@ -481,7 +481,7 @@ class findbiz_icon_title_widget extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'social' ) ); ?>">
-				<b><?php esc_html_e( 'How many social field would you want? & hit save.', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'How many social field would you want? & hit save.', 'findbiz-core' ); ?></b>
 			</label>
 		</p>
 
@@ -579,7 +579,7 @@ class findbiz_widget_button extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'social' ) ); ?>">
-				<b><?php esc_html_e( 'How many button you want? & hit save.', 'findbiz' ); ?></b>
+				<b><?php esc_html_e( 'How many button you want? & hit save.', 'findbiz-core' ); ?></b>
 			</label>
 		</p>
 

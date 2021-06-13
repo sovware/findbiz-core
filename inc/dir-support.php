@@ -114,7 +114,7 @@ class DirSupport {
 	// Included Extensions.
 	public static function theme_required_dir_extensions( $required_extensions ) {
 		$required_extensions[] = array(
-			'ref'        => 'findbiz',
+			'ref'        => 'findbiz-core',
 			'extensions' => array(
 				'directorist-business-hours',
 				'directorist-listings-with-map',

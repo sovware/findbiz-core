@@ -169,26 +169,26 @@ class Helper {
 
 		<span class="dropdown-toggle" id="social-links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
 			<span class="la la-share"></span>
-			<?php esc_html_e( 'Share', 'findbiz' ); ?>
+			<?php esc_html_e( 'Share', 'findbiz-core' ); ?>
 		</span>
 
 		<div class="atbd_director_social_wrap dropdown-menu" aria-labelledby="social-links">
 			<ul class="list-unstyled">
 				<li>
 					<a href="<?php echo self::social_url( 'facebook' ); ?>" target="_blank">
-						<span class="fab fa-facebook color-facebook"></span><?php esc_html_e( 'Facebook', 'findbiz' ); ?>
+						<span class="fab fa-facebook color-facebook"></span><?php esc_html_e( 'Facebook', 'findbiz-core' ); ?>
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo self::social_url( 'twitter' ); ?>" target="_blank">
 						<!-- twitter icon by Icons8 -->
-						<span class="fab fa-twitter color-twitter"></span><?php esc_html_e( 'Twitter', 'findbiz' ); ?>
+						<span class="fab fa-twitter color-twitter"></span><?php esc_html_e( 'Twitter', 'findbiz-core' ); ?>
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo self::social_url( 'linkedin' ); ?>" target="_blank">
 						<!-- linkedin icon by Icons8 -->
-						<span class="fab fa-linkedin-in color-linkedin"></span><?php esc_html_e( 'LinkedIn', 'findbiz' ); ?>
+						<span class="fab fa-linkedin-in color-linkedin"></span><?php esc_html_e( 'LinkedIn', 'findbiz-core' ); ?>
 					</a>
 				</li>
 			</ul>
@@ -204,7 +204,7 @@ class Helper {
 			?>
 			<div class="alert alert-danger">
 				<i class="la la-times-circle"></i>
-				<?php _e( 'Link appears to be invalid.', 'findbiz' ); ?>
+				<?php _e( 'Link appears to be invalid.', 'findbiz-core' ); ?>
 			</div>
 			<?php
 		}
@@ -213,7 +213,7 @@ class Helper {
 			?>
 			<div class="alert alert-success">
 				<i class="la la-check-circle"></i>
-				<?php _e( 'Renewed successfully.', 'findbiz' ); ?>
+				<?php _e( 'Renewed successfully.', 'findbiz-core' ); ?>
 			</div>
 			<?php
 		}

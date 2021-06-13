@@ -71,7 +71,7 @@ if ( ! class_exists( 'FindBizWidgets' ) ) {
 			$manager->add_category(
 				'findbiz_category',
 				array(
-					'title' => __( 'findbiz', 'findbiz-core' ),
+					'title' => __( 'findbiz-core', 'findbiz-core' ),
 				)
 			);
 		}

@@ -16,8 +16,8 @@ class DirHooks {
 
 	public function __construct() {
 		self::$shorting  = class_exists( 'Directorist_Base' ) ? get_directorist_option( 'display_sort_by', 1 ) : '';
-		self::$sign_in   = get_option( 'findbiz' )['sign_in'];
-		self::$copyright = get_option( 'findbiz' )['copyright_area'];
+		self::$sign_in   = get_option( 'findbiz-core' )['sign_in'];
+		self::$copyright = get_option( 'findbiz-core' )['copyright_area'];
 
 		// login in failed
 		add_action( 'wp_login_failed', array( $this, 'login_fail' ) );
@@ -112,7 +112,7 @@ class DirHooks {
 	// copyright
 	public static function copyright() {
 		$footer = get_post_meta( get_the_ID(), 'footer', true );
-		$text   = get_option( 'findbiz' )['copyright_text'];
+		$text   = get_option( 'findbiz-core' )['copyright_text'];
 		?>
 		<div class="listing_map_footer bg-<?php echo esc_attr( $footer ); ?>"><?php echo apply_filters( 'get_the_content', $text ); ?></div>
 		<?php
@@ -120,7 +120,7 @@ class DirHooks {
 
 	// sign modal
 	public static function sign_modal() {
-		$sign_in_text = get_option( 'findbiz' )['sign_in_text'];
+		$sign_in_text = get_option( 'findbiz-core' )['sign_in_text'];
 		return sprintf( '<a href="#" class="access-link" data-toggle="modal" data-target="#login_modal">%s</a>', esc_attr( $sign_in_text ) );
 	}
 
@@ -355,8 +355,8 @@ You can login now using the below credentials:
 
 	// Add review & category in dashboard table.
 	public static function directorist_dashboard_listing_th_2() {
-		echo '<th class="directorist-table-review">' . __( 'Review', 'findbiz' ) . '</th>';
-		echo '<th class="directorist-table-review">' . __( 'Category', 'findbiz' ) . '</th>';
+		echo '<th class="directorist-table-review">' . __( 'Review', 'findbiz-core' ) . '</th>';
+		echo '<th class="directorist-table-review">' . __( 'Category', 'findbiz-core' ) . '</th>';
 	}
 
 	public static function directorist_dashboard_listing_td_2() {
@@ -403,9 +403,9 @@ You can login now using the below credentials:
 				$review_title = '';
 				if ( $reviews_count ) {
 					if ( 1 < $reviews_count ) {
-						$review_title = $reviews_count . esc_html__( ' Reviews', 'findbiz' );
+						$review_title = $reviews_count . esc_html__( ' Reviews', 'findbiz-core' );
 					} else {
-						$review_title = $reviews_count . esc_html__( ' Review', 'findbiz' );
+						$review_title = $reviews_count . esc_html__( ' Review', 'findbiz-core' );
 					}
 				}
 				?>
