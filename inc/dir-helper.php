@@ -520,6 +520,11 @@ class DirHelper {
 		return esc_attr( ' all-listings-carousel owl-carousel ' );
 	}
 
+	
+	public static function add_listing_action_url() {
+		return esc_url($_SERVER['REQUEST_URI']);
+	}
+
 }
 
 new DirHelper();

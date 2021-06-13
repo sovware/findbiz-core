@@ -23,7 +23,6 @@ add_action( 'plugins_loaded', 'findbiz_textdomain' );
 
 require_once plugin_dir_path( __FILE__ ) . 'inc/general.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/theme-helper.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/custom-style.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/dir-helper.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/dir-hooks.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/dir-support.php';
