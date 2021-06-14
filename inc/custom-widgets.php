@@ -7,6 +7,7 @@
 
 use AazzTech\FindBiz\DirHelper;
 use AazzTech\FindBiz\Helper;
+use AazzTech\FindBiz\Theme_Setup;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -63,13 +64,12 @@ class findbiz_popular_post_widget extends WP_Widget {
 										<?php the_post_thumbnail( array( 60, 60 ), array( 'class' => 'rounded' ) ); ?>
 										<p>
 											<a href="<?php the_permalink(); ?>" class="post-title"><?php the_title(); ?></a>
-											<span><?php echo Helper::time(); ?></span>
+											<span><?php echo Theme_Setup::time(); ?></span>
 										</p>
 									</div>
 								</div>
 								<?php
 							}
-							wp_reset_postdata();
 							?>
 						</div>
 					</div>
@@ -176,14 +176,13 @@ class findbiz_latest_post_widget extends WP_Widget {
 										<?php the_post_thumbnail( array( 60, 60 ), array( 'class' => 'rounded' ) ); ?>
 										<p>
 											<a href="<?php the_permalink(); ?>" class="post-title"><?php the_title(); ?></a>
-											<span><?php echo Helper::time(); ?></span>
+											<span><?php echo Theme_Setup::time(); ?></span>
 
 										</p>
 									</div>
 								</div><!-- ends: .post-single -->
 								<?php
 							}
-							wp_reset_postdata();
 							?>
 						</div>
 					</div>
@@ -283,8 +282,7 @@ class findbiz_connect_follow_widget extends WP_Widget {
 									</li>
 									<?php
 							endif;
-							}
-							wp_reset_postdata();
+						}
 							?>
 
 						</ul>
@@ -340,7 +338,6 @@ class findbiz_connect_follow_widget extends WP_Widget {
 
 				<?php
 			}
-			wp_reset_postdata();
 		}
 		?>
 
@@ -466,7 +463,6 @@ class findbiz_icon_title_widget extends WP_Widget {
 						<?php
 					}
 				}
-				wp_reset_postdata();
 				?>
 
 			</ul>
@@ -517,7 +513,6 @@ class findbiz_icon_title_widget extends WP_Widget {
 
 				<?php
 			}
-			wp_reset_postdata();
 		}
 	}
 
@@ -565,8 +560,7 @@ class findbiz_widget_button extends WP_Widget {
 
 					<?php
 			endif;
-			}
-			wp_reset_postdata();
+		}
 			?>
 		</ul>
 
@@ -610,7 +604,6 @@ class findbiz_widget_button extends WP_Widget {
 
 				<?php
 			}
-			wp_reset_postdata();
 		}
 		?>
 
