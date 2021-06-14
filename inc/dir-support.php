@@ -14,7 +14,7 @@ class DirSupport {
 		if ( Helper::options()['tabs'] ) {
 			add_filter( 'atbdp_single_listing_content_widgets', array( $this, 'single_listing_content_widgets' ) );
 		}
-		
+
 		add_filter( 'atbdp_single_listing_other_fields_widget', array( $this, 'single_listing_other_fields_widget' ) );
 		add_filter( 'atbdp_style_settings_submenu', array( $this, 'single_listing_template' ) );
 		add_filter( 'atbdp_listing_type_settings_field_list', array( $this, 'directorist_contact_button_of_listing_card' ) );
@@ -31,15 +31,15 @@ class DirSupport {
 		$hours_widget = array(
 			'type'    => 'button',
 			'id'      => 'contact_button',
-			'label'   => 'Contact Button',
+			'label'   => esc_html__( 'Contact Button', 'findbiz' ),
 			'icon'    => 'uil uil-phone',
 			'hook'    => 'atbdp_open_close_badge',
 			'options' => array(
-				'title'  => 'Button Label',
+				'title'  => esc_html__( 'Button Label', 'findbiz' ),
 				'fields' => array(
 					'value' => array(
 						'type'  => 'text',
-						'label' => 'Contact Label',
+						'label' => esc_html__( 'Contact Label', 'findbiz' ),
 						'value' => 'Contact',
 					),
 				),
@@ -75,7 +75,7 @@ class DirSupport {
 		unset( $fields['video'] );
 		return $fields;
 	}
-	
+
 	// Remove video widget for single page layout.
 	public static function single_listing_template( $fields ) {
 		unset( $fields['single_template'] );

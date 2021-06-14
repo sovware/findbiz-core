@@ -196,7 +196,6 @@ class findbiz_latest_post_widget extends WP_Widget {
 					</div>
 					<?php
 				}
-				wp_reset_query();
 				?>
 			</div>
 		</div>
@@ -282,7 +281,7 @@ class findbiz_connect_follow_widget extends WP_Widget {
 									</li>
 									<?php
 							endif;
-						}
+							}
 							?>
 
 						</ul>
@@ -560,7 +559,7 @@ class findbiz_widget_button extends WP_Widget {
 
 					<?php
 			endif;
-		}
+			}
 			?>
 		</ul>
 

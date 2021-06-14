@@ -26,7 +26,6 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/theme-helper.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/dir-helper.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/dir-hooks.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/dir-support.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/dir-options.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/activation.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/custom-widgets.php';
 require_once plugin_dir_path( __FILE__ ) . 'elementor/findbiz-elementor.php';

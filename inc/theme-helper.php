@@ -238,7 +238,7 @@ class Helper {
 	}
 
 	public static function options() {
-		return get_option('findbiz');
+		return get_option( 'findbiz' );
 	}
 
 }
