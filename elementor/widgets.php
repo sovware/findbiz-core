@@ -10,6 +10,7 @@
 
 use AazzTech\FindBiz\DirHelper;
 use AazzTech\FindBiz\Helper;
+use AazzTech\FindBiz\Theme_Setup;
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;
 use Elementor\Repeater;
@@ -548,7 +549,7 @@ class FindBiz_Profile extends Widget_Base
 
     protected function render()
     { ?>
-        <div class="findbiz-author"> <?php echo do_shortcode('[directorist_author_profile]'); ?> </div>
+        <div class="findbiz-directorist-author"> <?php echo do_shortcode('[directorist_author_profile]'); ?> </div>
         <?php
     }
 }
@@ -662,8 +663,8 @@ class FindBiz_Blogs extends Widget_Base
                         <div class="blog-posts__single__contents">
                             <?php the_title(sprintf('<h4><a href="%s">', get_the_permalink()), '</a></h4>'); ?>
                             <ul>
-                                <li><?php echo Helper::time(); ?></li>
-                                <?php Helper::categories(); ?>
+                                <li><?php echo Theme_Setup::time(); ?></li>
+                                <?php Theme_Setup::categories(); ?>
                             </ul>
                             <?php the_excerpt(); ?>
                         </div>
