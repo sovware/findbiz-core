@@ -16,6 +16,7 @@ class DirSupport {
 		}
 		
 		add_filter( 'atbdp_single_listing_other_fields_widget', array( $this, 'single_listing_other_fields_widget' ) );
+		add_filter( 'atbdp_style_settings_submenu', array( $this, 'single_listing_template' ) );
 		add_filter( 'atbdp_listing_type_settings_field_list', array( $this, 'directorist_contact_button_of_listing_card' ) );
 		add_filter( 'atbdp_listing_type_settings_layout', array( $this, 'directorist_single_listing_header' ) );
 		add_filter( 'directorist_disable_shortcode_restriction_on_scripts', '__return_true' );
@@ -65,6 +66,7 @@ class DirSupport {
 				array_push( $fields[ $key ]['card_templates']['list_view_with_thumbnail']['layout']['body']['right']['acceptedWidgets'], 'pricing' );
 			}
 		}
+		unset( $fields['dsiplay_slider_single_page'] );
 		return $fields;
 	}
 
@@ -73,12 +75,19 @@ class DirSupport {
 		unset( $fields['video'] );
 		return $fields;
 	}
+	
+	// Remove video widget for single page layout.
+	public static function single_listing_template( $fields ) {
+		unset( $fields['single_template'] );
+		unset( $fields['color_settings'] );
+		return $fields;
+	}
 
 	// Remove single listing header layout FROM builder.
 	public static function directorist_single_listing_header( $layout ) {
 
 		unset( $layout['single_page_layout']['submenu']['listing_header'] );
-
+		unset( $layout['listing_settings']['submenu']['categories_locations'] );
 		return $layout;
 	}
 
