@@ -64,7 +64,7 @@ class DirHooks {
 
 	public static function listing_map_view() {
 		$listing_map_view = get_directorist_option( 'listing_map_view', 'grid' );
-		$view_as = isset( $_POST['view_as'] ) ? $_POST['view_as'] : $listing_map_view; ?>
+		$view_as          = isset( $_POST['view_as'] ) ? $_POST['view_as'] : $listing_map_view; ?>
 		<div class="view-mode-2 view-as">
 			<a data-view="grid" class="action-btn-2 ab-grid map-view-grid <?php echo 'grid' == $view_as ? esc_html( 'active' ) : ''; ?>">
 				<span class="la la-th-large"></span>

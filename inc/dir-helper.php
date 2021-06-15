@@ -33,17 +33,21 @@ class DirHelper {
 		add_action( 'wp_enqueue_scripts', array( $this, 'menu_responsive' ) );
 	}
 
-	//Plugin main js scripts.
+	// Plugin main js scripts.
 	public function core_script() {
 		wp_enqueue_script( 'findbiz-core-main', plugin_dir_url( __DIR__ ) . 'assets/main.js', array( 'jquery' ), null, true );
 	}
 
-	//Theme option responsive localized.
+	// Theme option responsive localized.
 	public function menu_responsive() {
 		$width = get_option( 'findbiz' )['resmenu_width'];
-		wp_localize_script( 'findbiz-core-main', 'responsiveObj', array(
-			'width' => $width,
-		) );
+		wp_localize_script(
+			'findbiz-core-main',
+			'responsiveObj',
+			array(
+				'width' => $width,
+			)
+		);
 	}
 
 	// Login functions
@@ -70,7 +74,7 @@ class DirHelper {
 
 	public function login() {
 		// First check the nonce, if it fails the function will break
-		
+
 		// check_ajax_referer( 'ajax-login-nonce', 'findbiz-security' );
 
 		$username       = $_POST['username'];
@@ -173,7 +177,7 @@ class DirHelper {
 		die();
 	}
 
-	//Contact button of listings card
+	// Contact button of listings card
 	public static function contact_form( $listing_id ) {
 		?>
 		<div class="atbdp-widget-listing-contact contact-form">
@@ -205,9 +209,9 @@ class DirHelper {
 		<?php
 	}
 
-	//Directory type
+	// Directory type
 	public static function directorist_listing_types() {
-		$all_types = class_exists( 'Directorist_Base' ) ? directory_types() : [];
+		$all_types = class_exists( 'Directorist_Base' ) ? directory_types() : array();
 		$types     = array();
 		foreach ( $all_types as $type ) {
 			$types[ $type->slug ] = $type->name;
@@ -243,7 +247,7 @@ class DirHelper {
 	}
 
 	public static function tags() {
-		$tags   = get_terms( 'at_biz_dir-tags' );
+		$tags    = get_terms( 'at_biz_dir-tags' );
 		$all_tag = array();
 		if ( $tags ) {
 			foreach ( $tags as $tag ) {
@@ -312,9 +316,11 @@ class DirHelper {
 
 	public static function reviews() {
 		$enable_review = get_directorist_option( 'enable_review', 'yes' );
-		if( ! $enable_review ) return;
+		if ( ! $enable_review ) {
+			return;
+		}
 
-		$average = ATBDP()->review->get_average( get_the_ID() );
+		$average           = ATBDP()->review->get_average( get_the_ID() );
 		$average_int_float = ! strchr( $average, '.' ) ? $average . '.0' : $average;
 		?>
 		<div class="atbd_rated_stars">
@@ -357,7 +363,7 @@ class DirHelper {
 		<?php
 	}
 
-	//single listing gallery section
+	// single listing gallery section
 	public static function gallery() {
 		$listing_img                 = array();
 		$title                       = get_directorist_option( 'findbiz_details_text', __( 'Gallery', 'findbiz-core' ) );
@@ -520,9 +526,9 @@ class DirHelper {
 		return esc_attr( ' all-listings-carousel owl-carousel ' );
 	}
 
-	
+
 	public static function add_listing_action_url() {
-		return esc_url($_SERVER['REQUEST_URI']);
+		return esc_url( $_SERVER['REQUEST_URI'] );
 	}
 
 }
