@@ -542,27 +542,31 @@ class findbiz_widget_button extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 		?>
-		<ul class="list-unstyled store-btns d-flex flex-wrap">
-			<?php
-			for ( $i = 1; $i <= $instance['social']; $i++ ) {
-
-				$btn_text = ! empty( $instance[ "btn_text$i" ] ) ? $instance[ "btn_text$i" ] : '';
-				$btn_url  = ! empty( $instance[ "btn_url$i" ] ) ? $instance[ "btn_url$i" ] : '';
-				$icon     = ! empty( $instance[ "icon$i" ] ) ? $instance[ "icon$i" ] : '';
-				if ( $btn_text ) :
-					?>
-					<li>
-						<a href="<?php echo esc_url( $btn_url ); ?>" class="btn">
-							<span class="fab fa-<?php echo esc_html( $icon ); ?>"></span>
-							<?php echo esc_html( $btn_text ); ?>
-						</a>
-					</li>
-
+		<div class="wpwax-widget wpwax-widget--buttons">
+			<div class="wpwax-widget__body">
+				<ul class="list-unstyled store-btns d-flex flex-wrap">
 					<?php
-			endif;
-		}
-			?>
-		</ul>
+					for ( $i = 1; $i <= $instance['social']; $i++ ) {
+
+						$btn_text = ! empty( $instance[ "btn_text$i" ] ) ? $instance[ "btn_text$i" ] : '';
+						$btn_url  = ! empty( $instance[ "btn_url$i" ] ) ? $instance[ "btn_url$i" ] : '';
+						$icon     = ! empty( $instance[ "icon$i" ] ) ? $instance[ "icon$i" ] : '';
+						if ( $btn_text ) :
+							?>
+							<li>
+								<a href="<?php echo esc_url( $btn_url ); ?>" class="btn">
+									<span class="fab fa-<?php echo esc_html( $icon ); ?>"></span>
+									<?php echo esc_html( $btn_text ); ?>
+								</a>
+							</li>
+
+							<?php
+					endif;
+				}
+					?>
+				</ul>
+			</div>
+		</div>
 
 		<?php
 	}
