@@ -37,5 +37,12 @@ jQuery(document).ready(function(){
         });
     */
 
+    //Trigger responsive menu from settings value
+    const navCollapse = Number(responsiveObj.width);
+    const windowWidth = window.innerWidth;
+    if(navCollapse >= windowWidth){
+        document.querySelector('body').classList.add('trigger-res-nav');
+    }
+
     })(jQuery);
 });
