@@ -238,7 +238,14 @@ class Helper {
 	}
 
 	public static function options() {
-		return get_option( 'findbiz' );
+		if ( class_exists( 'Theme_Setup' )) {
+			$options = Theme_Setup::$options;
+		}
+		else {
+			$options = [];
+		}
+
+		return $options;
 	}
 
 }

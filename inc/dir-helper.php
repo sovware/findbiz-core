@@ -40,7 +40,7 @@ class DirHelper {
 
 	// Theme option responsive localized.
 	public function menu_responsive() {
-		$width = get_option( 'findbiz' )['resmenu_width'];
+		$width = Helper::options()['resmenu_width'];
 		wp_localize_script(
 			'findbiz-core-main',
 			'responsiveObj',
