@@ -1,36 +1,78 @@
 <?php
 /*
 Plugin Name: Findbiz Core
-Plugin URI: https://aazztech.com/product/category/themes/wordpress/findbiz/
+Plugin URI: https://wpwax.com/product/category/themes/wordpress/findbiz/
 Description: Core plugin of FindBiz.
-Author: AazzTech
+Author: WpWax
 Author URI: https://aazzztech.com
 Domain Path: /languages
 Text Domain: findbiz-core
 Version: 1.0.0
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+if ( ! defined( 'FINDBIZ_CORE' ) ) {
+	$plugin_data = get_file_data( __FILE__, array( 'version' => 'Version' ) );
+	define( 'FINDBIZ_CORE',               $plugin_data['version'] );
+	define( 'FINDBIZ_CORE_SCRIPT_VER',    ( WP_DEBUG ) ? time() : FINDBIZ_CORE );
+	define( 'FINDBIZ_CORE_THEME_PREFIX',  'findbiz' );
+	define( 'FINDBIZ_CORE_BASE_DIR',      plugin_dir_path( __FILE__ ) );
 }
 
-function findbiz_textdomain() {
-	$plugin_rel_path = dirname( plugin_basename( __FILE__ ) ) . '/languages';
-	load_plugin_textdomain( 'findbiz-core', false, $plugin_rel_path );
+class FindBiz_Core {
+
+	public $plugin  = 'findbiz-core';
+	public $action  = 'findbiz_theme_init';
+	protected static $instance;
+
+	public function __construct() {
+		add_action( 'plugins_loaded',       array( $this, 'load_textdomain' ), 20 );
+		add_action( 'plugins_loaded',       array( $this, 'demo_importer' ), 17 );
+		add_action( $this->action,          array( $this, 'after_theme_loaded' ) );
+		//add_action( 'rdtheme_social_share', array( $this, 'social_share' ) );
+	}
+
+	public static function instance() {
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+		return self::$instance;
+	}
+	
+	public function after_theme_loaded() {
+
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/general.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/theme-helper.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/dir-helper.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/dir-hooks.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/dir-support.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'widgets/custom-widgets.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/demo-importer.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/social-share.php';
+
+		if ( ! class_exists( 'CSF' ) ) {
+			require_once FINDBIZ_CORE_BASE_DIR . 'lib/cdf/codestar-framework.php';
+		}
+
+		/* if ( defined( 'RT_FRAMEWORK_VERSION' ) ) {
+			require_once FINDBIZ_CORE_BASE_DIR . 'inc/post-meta.php'; // Post Meta
+			require_once FINDBIZ_CORE_BASE_DIR . 'widgets/init.php'; // Widgets
+		} */
+
+		if ( did_action( 'elementor/loaded' ) ) {
+			require_once FINDBIZ_CORE_BASE_DIR . 'elementor/init.php'; // Elementor
+		}
+	}
+
+	public function demo_importer() {
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/demo-importer.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'inc/demo-importer-ocdi.php';
+	}
+
+	public function load_textdomain() {
+		load_plugin_textdomain( $this->plugin , false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+	}
 }
 
-add_action( 'plugins_loaded', 'findbiz_textdomain' );
-
-require_once plugin_dir_path( __FILE__ ) . 'inc/general.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/theme-helper.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/dir-helper.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/dir-hooks.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/dir-support.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/activation.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/custom-widgets.php';
-require_once plugin_dir_path( __FILE__ ) . 'elementor/findbiz-elementor.php';
-require_once plugin_dir_path( __FILE__ ) . 'inc/demo-importer.php';
-
-if ( ! class_exists( 'CSF' ) ) {
-	require_once plugin_dir_path( __FILE__ ) . 'lib/cdf/codestar-framework.php';
-}
+FindBiz_Core::instance();

@@ -5,7 +5,7 @@ msgstr ""
 "POT-Creation-Date: 2020-04-11 10:20+0600\n"
 "PO-Revision-Date: 2019-11-27 14:20+0600\n"
 "Last-Translator: \n"
-"Language-Team: aazztech\n"
+"Language-Team: wpwax\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,8 +38,8 @@ msgstr ""
 #: extensions/includes/claim-listing/inc/class-claim-now.php:42
 #: extensions/includes/plans/directorist-pricing-plans.php:1486
 #: extensions/includes/post-your-need/directorist-post-your-need.php:2443
-#: inc/custom-widgets.php:166 inc/custom-widgets.php:282
-#: inc/custom-widgets.php:378 inc/custom-widgets.php:673
+#: widgets/custom-widgets.php:166 widgets/custom-widgets.php:282
+#: widgets/custom-widgets.php:378 widgets/custom-widgets.php:673
 msgid "Title"
 msgstr ""
 
@@ -727,7 +727,7 @@ msgstr ""
 #: extensions/includes/directorist-listings-map/templates/view/listings/grid.php:364
 #: extensions/includes/post-your-need/directorist-post-your-need.php:1449
 #: extensions/includes/post-your-need/templates/need-card.php:131
-#: inc/custom-widgets.php:631
+#: widgets/custom-widgets.php:631
 #, php-format
 msgid "Posted %s ago"
 msgstr ""
@@ -735,7 +735,7 @@ msgstr ""
 #: elementor/widgets.php:2658
 #: extensions/includes/directorist-listings-map/templates/view/listings/grid.php:479
 #: extensions/includes/directorist-listings-map/templates/view/listings/list.php:31
-#: inc/custom-widgets.php:657
+#: widgets/custom-widgets.php:657
 msgid "No listing found."
 msgstr ""
 
@@ -3125,11 +3125,11 @@ msgid "Example 500"
 msgstr ""
 
 #: extensions/includes/plans/templates/admin-meta-fields.php:260
-msgid "Business Hours (It requires <a style=\"text-decoration: underline\" href=\"https://aazztech.com/product/directorist-business-hours/\" target=\"_blank\">Business Hours</a> extension)"
+msgid "Business Hours (It requires <a style=\"text-decoration: underline\" href=\"https://wpwax.com/product/directorist-business-hours/\" target=\"_blank\">Business Hours</a> extension)"
 msgstr ""
 
 #: extensions/includes/plans/templates/admin-meta-fields.php:276
-msgid "Image Gallery (It requires <a style=\"text-decoration: underline\" href=\"https://aazztech.com/product/directorist-image-gallery\" target=\"_blank\">Image Gallery</a> extension)"
+msgid "Image Gallery (It requires <a style=\"text-decoration: underline\" href=\"https://wpwax.com/product/directorist-image-gallery\" target=\"_blank\">Image Gallery</a> extension)"
 msgstr ""
 
 #: extensions/includes/plans/templates/admin-meta-fields.php:285
@@ -3170,11 +3170,11 @@ msgid "Customer Reviews"
 msgstr ""
 
 #: extensions/includes/plans/templates/admin-meta-fields.php:392
-msgid "FAQs (It requires <a style=\"text-decoration: underline\" href=\"https://aazztech.com/product/directorist-listing-faqs/\" target=\"_blank\">Listing's FAQs</a> extension)"
+msgid "FAQs (It requires <a style=\"text-decoration: underline\" href=\"https://wpwax.com/product/directorist-listing-faqs/\" target=\"_blank\">Listing's FAQs</a> extension)"
 msgstr ""
 
 #: extensions/includes/plans/templates/admin-meta-fields.php:418
-msgid "Claim Badge Included (It requires <a style=\"text-decoration: underline\" href=\"https://aazztech.com/product/directorist-claim-listing/\" target=\"_blank\">Claim Listing</a> extension)"
+msgid "Claim Badge Included (It requires <a style=\"text-decoration: underline\" href=\"https://wpwax.com/product/directorist-claim-listing/\" target=\"_blank\">Claim Listing</a> extension)"
 msgstr ""
 
 #: extensions/includes/plans/templates/admin-meta-fields.php:430
@@ -4014,7 +4014,7 @@ msgid "Unlimited Price"
 msgstr ""
 
 #: extensions/includes/woo-plans/templates/woo-custom-fields.php:282
-msgid "Business Hours (It requires <a target=\"_blank\" href=\"https://aazztech.com/product/directorist-business-hours/\">Business Hours</a> extension)"
+msgid "Business Hours (It requires <a target=\"_blank\" href=\"https://wpwax.com/product/directorist-business-hours/\">Business Hours</a> extension)"
 msgstr ""
 
 #: extensions/includes/woo-plans/templates/woo-custom-fields.php:302
@@ -4022,7 +4022,7 @@ msgid "Allow Gallery"
 msgstr ""
 
 #: extensions/includes/woo-plans/templates/woo-custom-fields.php:309
-msgid "Gallery Image Limit (It requires <a target=\"_blank\" href=\"https://aazztech.com/product/directorist-image-gallery/\">Image Gallery</a> extension)"
+msgid "Gallery Image Limit (It requires <a target=\"_blank\" href=\"https://wpwax.com/product/directorist-image-gallery/\">Image Gallery</a> extension)"
 msgstr ""
 
 #: extensions/includes/woo-plans/templates/woo-custom-fields.php:324
@@ -4030,11 +4030,11 @@ msgid "Unlimited Gallery Image"
 msgstr ""
 
 #: extensions/includes/woo-plans/templates/woo-custom-fields.php:472
-msgid "FAQs (It requires <a target=\"_blank\" href=\"https://aazztech.com/product/directorist-listing-faqs/\">Listing's FAQs</a> extension)"
+msgid "FAQs (It requires <a target=\"_blank\" href=\"https://wpwax.com/product/directorist-listing-faqs/\">Listing's FAQs</a> extension)"
 msgstr ""
 
 #: extensions/includes/woo-plans/templates/woo-custom-fields.php:508
-msgid "Claim Badge Included (It requires <a target=\"_blank\" href=\"https://aazztech.com/product/directorist-claim-listing/\">Claim Listing</a> extension)"
+msgid "Claim Badge Included (It requires <a target=\"_blank\" href=\"https://wpwax.com/product/directorist-claim-listing/\">Claim Listing</a> extension)"
 msgstr ""
 
 #: extensions/includes/woo-plans/templates/woo-custom-fields.php:552
@@ -4201,100 +4201,100 @@ msgstr ""
 msgid "Sorry! Login failed"
 msgstr ""
 
-#: inc/custom-widgets.php:22
+#: widgets/custom-widgets.php:22
 msgid "You can use it to display Subscribe form."
 msgstr ""
 
-#: inc/custom-widgets.php:24
+#: widgets/custom-widgets.php:24
 msgid "-[Subscribe]"
 msgstr ""
 
-#: inc/custom-widgets.php:37
+#: widgets/custom-widgets.php:37
 msgctxt "placeholder"
 msgid "Enter email"
 msgstr ""
 
-#: inc/custom-widgets.php:55
+#: widgets/custom-widgets.php:55
 msgid "Mailchimp Action Url"
 msgstr ""
 
-#: inc/custom-widgets.php:94
+#: widgets/custom-widgets.php:94
 msgid "You can use it to display popular post."
 msgstr ""
 
-#: inc/custom-widgets.php:96
+#: widgets/custom-widgets.php:96
 msgid "-[Popular Blog]"
 msgstr ""
 
-#: inc/custom-widgets.php:148 inc/custom-widgets.php:264
+#: widgets/custom-widgets.php:148 widgets/custom-widgets.php:264
 msgid "No Post Found."
 msgstr ""
 
-#: inc/custom-widgets.php:175 inc/custom-widgets.php:291
+#: widgets/custom-widgets.php:175 widgets/custom-widgets.php:291
 msgid "How many posts you want to show ?"
 msgstr ""
 
-#: inc/custom-widgets.php:211
+#: widgets/custom-widgets.php:211
 msgid "You can use it to display latest post."
 msgstr ""
 
-#: inc/custom-widgets.php:213
+#: widgets/custom-widgets.php:213
 msgid "-[Latest Blog]"
 msgstr ""
 
-#: inc/custom-widgets.php:326 inc/custom-widgets.php:713
+#: widgets/custom-widgets.php:326 widgets/custom-widgets.php:713
 msgid "You can use it to display social profile with icon."
 msgstr ""
 
-#: inc/custom-widgets.php:328
+#: widgets/custom-widgets.php:328
 msgid "-[Social Icon]"
 msgstr ""
 
-#: inc/custom-widgets.php:386 inc/custom-widgets.php:751
+#: widgets/custom-widgets.php:386 widgets/custom-widgets.php:751
 msgid "How many social field would you want? & hit save."
 msgstr ""
 
-#: inc/custom-widgets.php:397 inc/custom-widgets.php:868
+#: widgets/custom-widgets.php:397 widgets/custom-widgets.php:868
 msgid "Please Note: Social Icon Names are just Fonts Awesome Icon Name in lower case(eg. facebook-f or twitter etc)"
 msgstr ""
 
-#: inc/custom-widgets.php:397 inc/custom-widgets.php:868
+#: widgets/custom-widgets.php:397 widgets/custom-widgets.php:868
 msgid "Font Awesome Icons List"
 msgstr ""
 
-#: inc/custom-widgets.php:453
+#: widgets/custom-widgets.php:453
 msgid "You can use it to display featured service listings."
 msgstr ""
 
-#: inc/custom-widgets.php:455
+#: widgets/custom-widgets.php:455
 msgid "-[Featured Listing Carousel]"
 msgstr ""
 
-#: inc/custom-widgets.php:681
+#: widgets/custom-widgets.php:681
 msgid "How many listing you want to show ?"
 msgstr ""
 
-#: inc/custom-widgets.php:715
+#: widgets/custom-widgets.php:715
 msgid "-[Icon With Title]"
 msgstr ""
 
-#: inc/custom-widgets.php:763
+#: widgets/custom-widgets.php:763
 msgid "Please Note: Social Icon Names are just Line Awesome Icon Name in lower case(eg. facebook-f or twitter etc)"
 msgstr ""
 
-#: inc/custom-widgets.php:763
+#: widgets/custom-widgets.php:763
 msgid "Line Awesome Icons List"
 msgstr ""
 
-#: inc/custom-widgets.php:820
+#: widgets/custom-widgets.php:820
 msgid "You can use it to button with icon."
 msgstr ""
 
-#: inc/custom-widgets.php:822
+#: widgets/custom-widgets.php:822
 msgid "-[Button]"
 msgstr ""
 
-#: inc/custom-widgets.php:856
+#: widgets/custom-widgets.php:856
 msgid "How many button you want? & hit save."
 msgstr ""
 

@@ -1,13 +1,13 @@
 <?php
 /**
- * @author  AazzTech
+ * @author  WpWax
  * @since   1.0
  * @version 1.0
  */
 
-use AazzTech\FindBiz\DirHelper;
-use AazzTech\FindBiz\Helper;
-use AazzTech\FindBiz\Theme_Setup;
+use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
+use WpWax\FindBiz\Theme_Setup;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

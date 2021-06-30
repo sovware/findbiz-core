@@ -1,16 +1,13 @@
 <?php
 /**
- * Description.
- *
- * @package WordPress
- * @author  AazzTech
+ * @author  WpWax
  * @since   1.0
  * @version 1.0
  */
 
-use AazzTech\FindBiz\DirHelper;
-use AazzTech\FindBiz\Helper;
-use AazzTech\FindBiz\Theme_Setup;
+use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
+use WpWax\FindBiz\Theme_Setup;
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;
 use Elementor\Repeater;
@@ -22,7 +19,7 @@ if (!defined('ABSPATH')) {
 }
 
 //Heading Pro
-class FindBiz_Heading extends Widget_Base
+class Heading extends Widget_Base
 {
 
     public function get_name()
@@ -37,7 +34,7 @@ class FindBiz_Heading extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-t-letter';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -206,7 +203,7 @@ class FindBiz_Heading extends Widget_Base
 }
 
 //Accordion
-class FindBiz_Accordion extends Widget_Base
+class Accordion extends Widget_Base
 {
 
     public function get_name()
@@ -221,9 +218,8 @@ class FindBiz_Accordion extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-accordion';
+        return 'findbiz-el-custom';
     }
-
     public function get_categories()
     {
         return ['findbiz_category'];
@@ -412,7 +408,7 @@ class FindBiz_Accordion extends Widget_Base
 }
 
 //Add listing form
-class FindBiz_findbiz_Form extends Widget_Base
+class Form extends Widget_Base
 {
     public function get_name()
     {
@@ -426,7 +422,7 @@ class FindBiz_findbiz_Form extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-post-excerpt';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -483,7 +479,7 @@ class FindBiz_findbiz_Form extends Widget_Base
 }
 
 //Author Profile
-class FindBiz_Profile extends Widget_Base
+class Profile extends Widget_Base
 {
     public function get_name()
     {
@@ -497,7 +493,7 @@ class FindBiz_Profile extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-site-identity';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -555,7 +551,7 @@ class FindBiz_Profile extends Widget_Base
 }
 
 //Blog Posts
-class FindBiz_Blogs extends Widget_Base
+class Blogs extends Widget_Base
 {
     public function get_name()
     {
@@ -569,9 +565,8 @@ class FindBiz_Blogs extends Widget_Base
 
     public function get_icon()
     {
-        return '  eicon-post';
+        return 'findbiz-el-custom';
     }
-
     public function get_categories()
     {
         return ['findbiz_category'];
@@ -679,7 +674,7 @@ class FindBiz_Blogs extends Widget_Base
 }
 
 //Checkout
-class FindBiz_Checkout extends Widget_Base
+class Checkout extends Widget_Base
 {
     public function get_name()
     {
@@ -693,7 +688,7 @@ class FindBiz_Checkout extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-product-price';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -753,7 +748,7 @@ class FindBiz_Checkout extends Widget_Base
 }
 
 //Contact form 7
-class FindBiz_ContactForm extends Widget_Base
+class ContactForm extends Widget_Base
 {
     public function get_name()
     {
@@ -767,7 +762,7 @@ class FindBiz_ContactForm extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-form-horizontal';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -837,7 +832,7 @@ class FindBiz_ContactForm extends Widget_Base
 }
 
 //Contact items
-class FindBiz_ContactItems extends Widget_Base
+class ContactItems extends Widget_Base
 {
     public function get_name()
     {
@@ -851,7 +846,7 @@ class FindBiz_ContactItems extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-bullet-list';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -947,7 +942,7 @@ class FindBiz_ContactItems extends Widget_Base
 }
 
 //Counter
-class FindBiz_Counter extends Widget_Base
+class Counter extends Widget_Base
 {
     public function get_name()
     {
@@ -961,9 +956,8 @@ class FindBiz_Counter extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-counter';
+        return 'findbiz-el-custom';
     }
-
     public function get_categories()
     {
         return ['findbiz_category'];
@@ -1041,7 +1035,7 @@ class FindBiz_Counter extends Widget_Base
 }
 
 //Call To Action
-class FindBiz_CTA extends Widget_Base
+class CTA extends Widget_Base
 {
 
     public function get_name()
@@ -1056,7 +1050,7 @@ class FindBiz_CTA extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-call-to-action';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -1206,7 +1200,7 @@ class FindBiz_CTA extends Widget_Base
 }
 
 //Dashboard
-class FindBiz_Dashboard extends Widget_Base
+class Dashboard extends Widget_Base
 {
     public function get_name()
     {
@@ -1220,9 +1214,8 @@ class FindBiz_Dashboard extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-dashboard';
+        return 'findbiz-el-custom';
     }
-
     public function get_categories()
     {
         return ['findbiz_category'];
@@ -1280,7 +1273,7 @@ class FindBiz_Dashboard extends Widget_Base
 }
 
 //Feature Box
-class FindBiz_FeatureBox extends Widget_Base
+class FeatureBox extends Widget_Base
 {
     public function get_name()
     {
@@ -1294,7 +1287,7 @@ class FindBiz_FeatureBox extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-post-list';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -1526,7 +1519,7 @@ class FindBiz_FeatureBox extends Widget_Base
 }
 
 //Feature section
-class FindBiz_FeatureSection extends Widget_Base
+class FeatureSection extends Widget_Base
 {
     public function get_name()
     {
@@ -1540,9 +1533,8 @@ class FindBiz_FeatureSection extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-banner';
+        return 'findbiz-el-custom';
     }
-
     public function get_categories()
     {
         return ['findbiz_category'];
@@ -1737,7 +1729,7 @@ class FindBiz_FeatureSection extends Widget_Base
 }
 
 //Listings
-class FindBiz_Listings extends Widget_Base
+class Listings extends Widget_Base
 {
     public function get_name()
     {
@@ -1751,7 +1743,7 @@ class FindBiz_Listings extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-posts-grid';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -2101,7 +2093,7 @@ class FindBiz_Listings extends Widget_Base
 }
 
 //Registration
-class FindBiz_Registration extends Widget_Base
+class Registration extends Widget_Base
 {
     public function get_name()
     {
@@ -2115,7 +2107,7 @@ class FindBiz_Registration extends Widget_Base
 
     public function get_icon()
     {
-        return ' fas fa-user-plus';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -2168,7 +2160,7 @@ class FindBiz_Registration extends Widget_Base
 }
 
 //Login
-class FindBiz_Login extends Widget_Base
+class Login extends Widget_Base
 {
     public function get_name()
     {
@@ -2182,7 +2174,7 @@ class FindBiz_Login extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-lock-user';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -2237,7 +2229,7 @@ class FindBiz_Login extends Widget_Base
 }
 
 //Transaction
-class FindBiz_Transaction extends Widget_Base
+class Transaction extends Widget_Base
 {
     public function get_name()
     {
@@ -2251,9 +2243,8 @@ class FindBiz_Transaction extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-sync';
+        return 'findbiz-el-custom';
     }
-
     public function get_keywords()
     {
         return ['transaction'];
@@ -2312,7 +2303,7 @@ class FindBiz_Transaction extends Widget_Base
 }
 
 //Logos
-class FindBiz_Logos extends Widget_Base
+class Logos extends Widget_Base
 {
     public function get_name()
     {
@@ -2326,9 +2317,8 @@ class FindBiz_Logos extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-carousel';
+        return 'findbiz-el-custom';
     }
-
     public function get_categories()
     {
         return ['findbiz_category'];
@@ -2412,7 +2402,7 @@ class FindBiz_Logos extends Widget_Base
 }
 
 //Payment
-class FindBiz_Payment extends Widget_Base
+class Payment extends Widget_Base
 {
     public function get_name()
     {
@@ -2426,7 +2416,7 @@ class FindBiz_Payment extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-product-breadcrumbs';
+        return 'findbiz-el-custom';
     }
 
     public function get_keywords()
@@ -2486,7 +2476,7 @@ class FindBiz_Payment extends Widget_Base
 }
 
 //Pricing plan
-class FindBiz_PricingPlan extends Widget_Base
+class PricingPlan extends Widget_Base
 {
     public function get_name()
     {
@@ -2500,7 +2490,7 @@ class FindBiz_PricingPlan extends Widget_Base
 
     public function get_icon()
     {
-        return ' fas fa-dollar-sign';
+        return 'findbiz-el-custom';
     }
 
     public function get_keywords()
@@ -2557,7 +2547,7 @@ class FindBiz_PricingPlan extends Widget_Base
 }
 
 //Hero area
-class FindBiz_SearchForm extends Widget_Base
+class SearchForm extends Widget_Base
 {
 
     public function get_name()
@@ -2572,7 +2562,7 @@ class FindBiz_SearchForm extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-device-desktop';
+        return 'findbiz-el-custom';
     }
 
     public function get_keywords()
@@ -2802,7 +2792,7 @@ class FindBiz_SearchForm extends Widget_Base
 }
 
 //Search result
-class FindBiz_SearchResult extends Widget_Base
+class SearchResult extends Widget_Base
 {
     public function get_name()
     {
@@ -2816,7 +2806,7 @@ class FindBiz_SearchResult extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-search-results';
+        return 'findbiz-el-custom';
     }
 
     public function get_keywords()
@@ -3104,7 +3094,7 @@ class FindBiz_SearchResult extends Widget_Base
 }
 
 //Categories
-class FindBiz_Categories extends Widget_Base
+class Categories extends Widget_Base
 {
     public function get_name()
     {
@@ -3118,7 +3108,7 @@ class FindBiz_Categories extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-theme-builder';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -3315,7 +3305,7 @@ class FindBiz_Categories extends Widget_Base
 }
 
 //Locations
-class FindBiz_Locations extends Widget_Base
+class Locations extends Widget_Base
 {
     public function get_name()
     {
@@ -3329,7 +3319,7 @@ class FindBiz_Locations extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-map-pin';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -3513,7 +3503,7 @@ class FindBiz_Locations extends Widget_Base
 }
 
 //Single category
-class FindBiz_SingleCat extends Widget_Base
+class SingleCat extends Widget_Base
 {
     public function get_name()
     {
@@ -3527,7 +3517,7 @@ class FindBiz_SingleCat extends Widget_Base
 
     public function get_icon()
     {
-        return '  eicon-theme-builder';
+        return 'findbiz-el-custom';
     }
 
     public function get_keywords()
@@ -3817,7 +3807,7 @@ class FindBiz_SingleCat extends Widget_Base
 }
 
 //Single location
-class FindBiz_SingleLoc extends Widget_Base
+class SingleLoc extends Widget_Base
 {
     public function get_name()
     {
@@ -3831,7 +3821,7 @@ class FindBiz_SingleLoc extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-map-pin';
+        return 'findbiz-el-custom';
     }
 
     public function get_keywords()
@@ -4121,7 +4111,7 @@ class FindBiz_SingleLoc extends Widget_Base
 }
 
 //Single tag
-class FindBiz_SingleTag extends Widget_Base
+class SingleTag extends Widget_Base
 {
     public function get_name()
     {
@@ -4135,9 +4125,8 @@ class FindBiz_SingleTag extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-tags';
+        return 'findbiz-el-custom';
     }
-
     public function get_keywords()
     {
         return ['single tag', 'need tag', 'tag',];
@@ -4463,7 +4452,7 @@ class FindBiz_SingleTag extends Widget_Base
 }
 
 //Team
-class FindBiz_Team extends Widget_Base
+class Team extends Widget_Base
 {
     public function get_name()
     {
@@ -4477,9 +4466,8 @@ class FindBiz_Team extends Widget_Base
 
     public function get_icon()
     {
-        return ' eicon-person';
+        return 'findbiz-el-custom';
     }
-
     public function get_keywords()
     {
         return ['team', 'member'];
@@ -4569,7 +4557,7 @@ class FindBiz_Team extends Widget_Base
 }
 
 //Testimonial
-class FindBiz_Testimonial extends Widget_Base
+class Testimonial extends Widget_Base
 {
     public function get_name()
     {
@@ -4583,7 +4571,7 @@ class FindBiz_Testimonial extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-testimonial-carousel';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()
@@ -4691,7 +4679,7 @@ class FindBiz_Testimonial extends Widget_Base
 }
 
 //Booking Confirmation
-class Findbiz_Booking extends Widget_Base
+class Booking extends Widget_Base
 {
     public function get_name()
     {
@@ -4705,7 +4693,7 @@ class Findbiz_Booking extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-check-circle-o';
+        return 'findbiz-el-custom';
     }
 
     public function get_categories()

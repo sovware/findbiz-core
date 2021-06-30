@@ -9,39 +9,12 @@ class Demo_Importer {
 	protected static $instance;
 
 	public function __construct() {
-		 // Link from plugins page
-		add_filter(
-			'plugin_action_links_wpwax-demo-importer/wpwax-demo-importer.php',
-			function ( $links ) {
-				$mylinks = array(
-					'<a href="' . esc_url( admin_url( 'tools.php?page=fw-backups-demo-content' ) ) . '">' . __( 'Install Demo Contents', 'findbiz-core' ) . '</a>',
-				);
-				return array_merge( $links, $mylinks );
-			}
-		);
 
-		// Confirmation Text
-		add_filter(
-			'wpwax_demo_importer_confirmation',
-			function () {
-				$text = esc_html__( 'IMPORTANT: Installing this demo will delete all existing data and contents of your website, so use it only in fresh website. Do you want to continue?', 'findbiz-core' );
-				return $text;
-			}
-		);
-
-		// Warning Text
-		add_filter(
-			'wpwax_demo_importer_warning',
-			function () {
-				$html  = '<div style="margin-top:20px;color:#f00;font-size:20px;line-height:1.3;font-weight:600;margin-bottom:40px;border-color: #f00;border-style: dashed;border-width: 1px 0;padding:10px 0;">';
-				$html .= __( 'Warning: All your old data will be lost if you install demo data from here, so please use it only in new website.', 'findbiz-core' );
-				$html .= '</div>';
-				return $html;
-			}
-		);
-
-		add_filter( 'fw:ext:backups-demo:demos', array( $this, 'demo_importer_config' ) );
-		add_action( 'fw:ext:backups:tasks:success:id:demo-content-install', array( $this, 'execute_after_importing_demo' ) );
+		add_filter( 'plugin_action_links_rt-demo-importer/rt-demo-importer.php', array( $this, 'add_action_links' ) ); // Link from plugins page 
+		add_filter( 'wpwax_demo_importer_warning', array( $this, 'data_loss_warning' ) );
+		add_filter( 'fw:ext:backups-demo:demos', array( $this, 'demo_config' ) );
+		add_action( 'fw:ext:backups:tasks:success:id:demo-content-install', array( $this, 'after_demo_install' ) );
+		//add_filter( 'fw:ext:backups:add-restore-task:image-sizes-restore', '__return_false' ); // Enable it to skip image restore step
 	}
 
 	public static function instance() {
@@ -51,7 +24,22 @@ class Demo_Importer {
 		return self::$instance;
 	}
 
-	public function demo_importer_config( $demos ) {
+	public function add_action_links( $links ) {
+		$mylinks = array(
+			'<a href="' . esc_url( admin_url( 'tools.php?page=fw-backups-demo-content' ) ) . '">' . __( 'Install Demo Contents', 'findbiz-core' ) . '</a>',
+		);
+		return array_merge( $links, $mylinks );
+	}
+
+	// Confirmation Text
+	public function data_loss_warning( $links ) {
+		$html  = '<div style="margin-top:20px;color:#f00;font-size:20px;line-height:1.3;font-weight:600;margin-bottom:40px;border-color: #f00;border-style: dashed;border-width: 1px 0;padding:10px 0;">';
+		$html .= __( 'Warning: All your old data will be lost if you install One Click demo data from here, so it is suitable only for a new website.', 'findbiz-core');
+		$html .= '</div>';
+		return $html;
+	}
+
+	public function demo_config( $demos ) {
 		$demos_array = array(
 			'demo1' => array(
 				'title'        => __( 'Home Light', 'findbiz-core' ),
@@ -93,7 +81,7 @@ class Demo_Importer {
 		return $demos;
 	}
 
-	public function execute_after_importing_demo( $collection ) {
+	public function after_demo_install( $collection ) {
 		// Update front page id
 		$demos = array(
 			'demo1' => 3414,
@@ -112,6 +100,22 @@ class Demo_Importer {
 				break;
 			}
 		}
+
+		// Update contact form 7 email
+		$cf7ids = array( 593, 1141, 1208, 1238 );
+		foreach ( $cf7ids as $cf7id ) {
+			$mail = get_post_meta( $cf7id, '_mail', true );
+			$mail['recipient'] = get_option( 'admin_email' );
+
+			if ( class_exists( 'WPCF7_ContactFormTemplate' ) ) {
+				$pattern = "/<[^@\s]*@[^@\s]*\.[^@\s]*>/"; // <email@email.com>
+				$replacement = '<'. WPCF7_ContactFormTemplate::from_email().'>';
+				$mail['sender'] = preg_replace($pattern, $replacement, $mail['sender']);
+			}
+			
+			update_post_meta( $cf7id, '_mail', $mail );		
+		}
+
 		// Update post author id
 		global $wpdb;
 		$id    = get_current_user_id();
@@ -121,44 +125,3 @@ class Demo_Importer {
 }
 
 Demo_Importer::instance();
-
-/*
-=====================================================
-	One click demo config
-=================================================*/
-function findbiz_import_files() {
-	return array(
-		array(
-			'import_file_name'           => 'Demo',
-			'import_file_url'            => 'https://demo.directorist.com/theme/demo-content/findbiz/content.xml',
-			'import_widget_file_url'     => 'https://demo.directorist.com/theme/demo-content/findbiz/widgets.wie',
-			'import_customizer_file_url' => 'https://demo.directorist.com/theme/demo-content/findbiz/customizer.dat',
-			'import_notice'              => __( 'After you import this demo, You can deactivate the "One Click Demo Import" plugin.', 'findbiz-core' ),
-		),
-	);
-}
-
-add_filter( 'pt-ocdi/import_files', 'findbiz_import_files' );
-
-// Assign menus to their locations.
-
-function findbiz_after_import_setup() {
-	 $main_menu = get_term_by( 'name', 'primary menu', 'nav_menu' );
-	if ( isset( $main_menu->term_id ) && $main_menu->term_id > 0 ) {
-		set_theme_mod(
-			'nav_menu_locations',
-			array(
-				'primary' => $main_menu->term_id,
-			)
-		);
-	}
-
-	update_option( 'show_on_front', 'page' );
-
-	$front_page_id = get_page_by_title( 'Home' );
-	$blog_page_id  = get_page_by_title( 'Blogs' );
-	update_option( 'page_on_front', $front_page_id->ID );
-	update_option( 'page_for_posts', $blog_page_id->ID );
-}
-
-add_action( 'pt-ocdi/after_import', 'findbiz_after_import_setup' );

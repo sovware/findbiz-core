@@ -1,11 +1,11 @@
 <?php
 /**
- * @author  AazzTech
+ * @author  WpWax
  * @since   1.0
  * @version 1.0
  */
 
-namespace AazzTech\FindBiz;
+namespace WpWax\FindBiz;
 
 class DirHooks {
 

@@ -1,11 +1,11 @@
 <?php
 /**
- * @author  AazzTech
+ * @author  WpWax
  * @since   1.0
  * @version 1.0
  */
 
-namespace AazzTech\FindBiz;
+namespace WpWax\FindBiz;
 
 use ATBDP_Permalink;
 
@@ -29,13 +29,7 @@ class DirHelper {
 		add_action( 'bdmv_after_filter_button_in_listings_header', array( $this, 'listings_with_map_header' ), 10, 2 );
 
 		// Findbiz core script.
-		add_action( 'wp_enqueue_scripts', array( $this, 'core_script' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'menu_responsive' ) );
-	}
-
-	// Plugin main js scripts.
-	public function core_script() {
-		wp_enqueue_script( 'findbiz-core-main', plugin_dir_url( __DIR__ ) . 'assets/main.js', array( 'jquery' ), null, true );
 	}
 
 	// Theme option responsive localized.
@@ -52,7 +46,7 @@ class DirHelper {
 
 	// Login functions
 	public function login_init() {
-		wp_enqueue_script( 'ajax-login-script', get_theme_file_uri( 'theme_assets/js/ajax-login-register-script.js' ), 'jquery', null, true );
+		wp_enqueue_script( 'ajax-login-script', get_theme_file_uri( 'assets/js/ajax-login-register-script.js' ), 'jquery', null, true );
 		$password = class_exists( 'Directorist_Base' ) ? get_directorist_option( 'display_password_reg', 1 ) : '';
 		$notice   = ! $password ? __( ' Go to your inbox or spam/junk and get your password.', 'findbiz-core' ) : __( ' Congratulations! Registration completed.', 'findbiz-core' );
 
