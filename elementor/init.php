@@ -7,7 +7,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-use Elementor\Plugin as Plugin;
+use Elementor\Plugin;
 
 class Custom_Widget_Init
 {
@@ -28,8 +28,6 @@ class Custom_Widget_Init
 
 	public function init()
 	{
-		require_once __DIR__ . '/base.php';
-
 		$widgets1 = array(
 			'heading' => 'Heading',
 			'blogs' => 'Blogs',
@@ -84,7 +82,7 @@ class Custom_Widget_Init
 		}
 	}
 
-	public function widgets_category($class)
+	public function widgets_category()
 	{
 		$id         = FINDBIZ_CORE_THEME_PREFIX . '_category'; // Category /@dev
 		$properties = array(

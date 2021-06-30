@@ -5,10 +5,14 @@
  * @author  WpWax
  * @since   1.0
  * @version 1.0
- */
+*/ 
 
-namespace WpWax\FindBiz;
-
+use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
+use WpWax\FindBiz\Theme_Setup;
+use Elementor\Core\Schemes;
+use Elementor\Repeater;
+use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 

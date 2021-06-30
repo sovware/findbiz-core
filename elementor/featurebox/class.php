@@ -5,9 +5,7 @@
  * @author  WpWax
  * @since   1.0
  * @version 1.0
- */
-
-namespace WpWax\FindBiz;
+*/ 
 
 use WpWax\FindBiz\Helper;
 use Elementor\Utils;

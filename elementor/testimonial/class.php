@@ -5,9 +5,7 @@
  * @author  WpWax
  * @since   1.0
  * @version 1.0
- */
-
-namespace WpWax\FindBiz;
+*/ 
 
 use WpWax\FindBiz\Helper;
 use Elementor\Widget_Base;
@@ -128,7 +126,7 @@ class Testimonial extends Widget_Base
                         </div>
                     </div>
                     <p class="testimonial-text"><?php echo esc_attr($test['desc']); ?></p>
-                    <img src="<?php echo get_theme_file_uri('/img/text-quotes.svg'); ?>" alt="<?php echo esc_html('testimonial quote'); ?>" class="svg">
+                    <img src="<?php echo get_theme_file_uri('quotes.svg'); ?>" alt="<?php echo esc_html('testimonial quote'); ?>" class="svg">
                 </div>
             <?php } ?>
         </div>
