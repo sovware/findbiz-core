@@ -239,7 +239,7 @@ class Helper {
 
 	public static function options() {
 		if ( class_exists( 'Theme_Setup' )) {
-			$options = Theme_Setup::$options;
+			$options = WpWaxTheme::$options;
 		}
 		else {
 			$options = [];

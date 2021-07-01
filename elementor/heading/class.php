@@ -9,7 +9,7 @@
 
 use WpWax\FindBiz\DirHelper;
 use WpWax\FindBiz\Helper;
-use WpWax\FindBiz\Theme_Setup;
+use WpWax\FindBiz\WpWaxTheme;
 use Elementor\Core\Schemes;
 use Elementor\Repeater;
 use Elementor\Utils;

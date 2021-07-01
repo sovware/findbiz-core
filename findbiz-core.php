@@ -44,7 +44,6 @@ class FindBiz_Core {
 
 		require_once FINDBIZ_CORE_BASE_DIR . 'inc/general.php';
 		require_once FINDBIZ_CORE_BASE_DIR . 'inc/theme-helper.php';
-		require_once FINDBIZ_CORE_BASE_DIR . 'inc/dir-helper.php';
 		require_once FINDBIZ_CORE_BASE_DIR . 'inc/dir-hooks.php';
 		require_once FINDBIZ_CORE_BASE_DIR . 'inc/dir-support.php';
 		require_once FINDBIZ_CORE_BASE_DIR . 'widgets/custom-widgets.php';

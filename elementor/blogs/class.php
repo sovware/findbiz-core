@@ -7,7 +7,7 @@
  * @version 1.0
 */ 
 
-use WpWax\FindBiz\Theme_Setup;
+use WpWax\FindBiz\WpWaxTheme;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -122,8 +122,8 @@ class Blogs extends Widget_Base
                         <div class="blog-posts__single__contents">
                             <?php the_title(sprintf('<h4><a href="%s">', get_the_permalink()), '</a></h4>'); ?>
                             <ul>
-                                <li><?php echo Theme_Setup::time(); ?></li>
-                                <?php Theme_Setup::categories(); ?>
+                                <li><?php echo WpWaxTheme::time(); ?></li>
+                                <?php WpWaxTheme::categories(); ?>
                             </ul>
                             <?php the_excerpt(); ?>
                         </div>

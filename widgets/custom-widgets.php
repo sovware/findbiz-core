@@ -7,7 +7,7 @@
 
 use WpWax\FindBiz\DirHelper;
 use WpWax\FindBiz\Helper;
-use WpWax\FindBiz\Theme_Setup;
+use WpWax\FindBiz\WpWaxTheme;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -64,7 +64,7 @@ class findbiz_popular_post_widget extends WP_Widget {
 										<?php the_post_thumbnail( array( 60, 60 ), array( 'class' => 'rounded' ) ); ?>
 										<p>
 											<a href="<?php the_permalink(); ?>" class="post-title"><?php the_title(); ?></a>
-											<span><?php echo Theme_Setup::time(); ?></span>
+											<span><?php echo WpWaxTheme::time(); ?></span>
 										</p>
 									</div>
 								</div>
@@ -176,7 +176,7 @@ class findbiz_latest_post_widget extends WP_Widget {
 										<?php the_post_thumbnail( array( 60, 60 ), array( 'class' => 'rounded' ) ); ?>
 										<p>
 											<a href="<?php the_permalink(); ?>" class="post-title"><?php the_title(); ?></a>
-											<span><?php echo Theme_Setup::time(); ?></span>
+											<span><?php echo WpWaxTheme::time(); ?></span>
 
 										</p>
 									</div>
