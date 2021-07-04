@@ -7,7 +7,7 @@
  * @version 1.0
 */ 
 
-use WpWax\FindBiz\Helper;
+use WpWax\FindBiz\DirHelper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -87,7 +87,7 @@ class Logos extends Widget_Base
                     <?php
                     if ($logos) {
                         foreach ($logos as $logo) { ?>
-                            <div><img src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo Helper::image_alt($logo['id']); ?>"></div>
+                            <div><img src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo DirHelper::image_alt($logo['id']); ?>"></div>
                             <?php
                         }
                     }
@@ -101,7 +101,7 @@ class Logos extends Widget_Base
                 if ($logos) {
                     foreach ($logos as $logo) { ?>
                         <div class="carousel-single">
-                            <img src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo Helper::image_alt($logo['id']); ?>">
+                            <img src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo DirHelper::image_alt($logo['id']); ?>">
                         </div>
                         <?php
                     }

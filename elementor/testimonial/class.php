@@ -7,7 +7,7 @@
  * @version 1.0
 */ 
 
-use WpWax\FindBiz\Helper;
+use WpWax\FindBiz\DirHelper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -119,7 +119,7 @@ class Testimonial extends Widget_Base
             <?php foreach ($testimonials as $test) { ?>
                 <div class="testimonial-single">
                     <div class="testimonial-author">
-                        <img src="<?php echo esc_url($test['image']['url']); ?>" alt="<?php echo Helper::image_alt($test['image']['id']); ?>">
+                        <img src="<?php echo esc_url($test['image']['url']); ?>" alt="<?php echo DirHelper::image_alt($test['image']['id']); ?>">
                         <div>
                             <h4><?php echo esc_attr($test['name']); ?></h4>
                             <span><?php echo esc_attr($test['designation']); ?></span>

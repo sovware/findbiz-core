@@ -7,7 +7,7 @@
  * @version 1.0
 */ 
 
-use WpWax\FindBiz\Helper;
+use WpWax\FindBiz\DirHelper;
 use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -180,7 +180,7 @@ class FeatureSection extends Widget_Base
                         <a href="<?php echo esc_url($url); ?>" class="stretched-link video-iframe"><?php echo esc_attr($btn); ?></a>
                     </p>
                 </div>
-                <div class="process-img"><img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo Helper::image_alt($img['id']); ?>"></div>
+                <div class="process-img"><img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo DirHelper::image_alt($img['id']); ?>"></div>
             </div>
         <?php } elseif ('style-two' == $style) { ?>
             <div class="intro-video">
@@ -193,7 +193,7 @@ class FeatureSection extends Widget_Base
                         <div class="col-lg-5 col-md-6">
                             <div class="card-video">
                                 <figure>
-                                    <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo Helper::image_alt($img['id']); ?>">
+                                    <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo DirHelper::image_alt($img['id']); ?>">
                                     <figcaption>
                                         <a href="<?php echo esc_url($url); ?>" class="play--btn video-iframe">
                                             <span class=""><i class="fa fa-play"></i></span>
@@ -214,7 +214,7 @@ class FeatureSection extends Widget_Base
                             <p><?php echo wp_kses_post($desc) ?></p>
                         </div>
                         <div class="col-lg-6">
-                            <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr(Helper::image_alt($img['id'])); ?>" class="img-full">
+                            <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr(DirHelper::image_alt($img['id'])); ?>" class="img-full">
                         </div>
                     </div>
                 </div>

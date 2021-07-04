@@ -30,7 +30,7 @@ class FindBiz_Core {
 		add_action( 'plugins_loaded',       array( $this, 'load_textdomain' ), 20 );
 		add_action( 'plugins_loaded',       array( $this, 'demo_importer' ), 17 );
 		add_action( $this->action,          array( $this, 'after_theme_loaded' ) );
-		//add_action( 'rdtheme_social_share', array( $this, 'social_share' ) );
+		add_action( 'user_contactmethods',       array( $this, 'author_social' ) );
 	}
 
 	public static function instance() {
@@ -42,13 +42,8 @@ class FindBiz_Core {
 	
 	public function after_theme_loaded() {
 
-		require_once FINDBIZ_CORE_BASE_DIR . 'inc/general.php';
-		require_once FINDBIZ_CORE_BASE_DIR . 'inc/theme-helper.php';
-		require_once FINDBIZ_CORE_BASE_DIR . 'inc/dir-hooks.php';
-		require_once FINDBIZ_CORE_BASE_DIR . 'inc/dir-support.php';
-		require_once FINDBIZ_CORE_BASE_DIR . 'widgets/custom-widgets.php';
+		require_once FINDBIZ_CORE_BASE_DIR . 'widgets/init.php'; // Widgets
 		require_once FINDBIZ_CORE_BASE_DIR . 'inc/demo-importer.php';
-		require_once FINDBIZ_CORE_BASE_DIR . 'inc/social-share.php';
 
 		if ( ! class_exists( 'CSF' ) ) {
 			require_once FINDBIZ_CORE_BASE_DIR . 'lib/cdf/codestar-framework.php';
@@ -62,6 +57,15 @@ class FindBiz_Core {
 		if ( did_action( 'elementor/loaded' ) ) {
 			require_once FINDBIZ_CORE_BASE_DIR . 'elementor/init.php'; // Elementor
 		}
+	}
+
+	public static function author_social( $social ) {
+		$social['twitter']     = __( 'Twitter Username', 'findbiz-core' );
+		$social['google_plus'] = __( 'Google plus profile', 'findbiz-core' );
+		$social['facebook']    = __( 'Facebook Profile', 'findbiz-core' );
+		$social['linkedin']    = __( 'Linkedin Profile', 'findbiz-core' );
+	
+		return $social;
 	}
 
 	public function demo_importer() {

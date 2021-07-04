@@ -7,7 +7,7 @@
  * @version 1.0
 */ 
 
-use WpWax\FindBiz\Helper;
+use WpWax\FindBiz\DirHelper;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -104,7 +104,7 @@ class Team extends Widget_Base
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="team-single">
                         <figure>
-                            <img src="<?php echo esc_url($team['image']['url']) ?>" alt="<?php echo esc_attr(Helper::image_alt($team['image']['id'])); ?>">
+                            <img src="<?php echo esc_url($team['image']['url']) ?>" alt="<?php echo esc_attr(DirHelper::image_alt($team['image']['id'])); ?>">
                             <figcaption>
                                 <h5><?php echo esc_attr($team['name']); ?></h5>
                                 <p><?php echo esc_attr($team['designation']); ?></p>

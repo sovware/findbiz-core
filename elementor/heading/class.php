@@ -7,12 +7,6 @@
  * @version 1.0
 */ 
 
-use WpWax\FindBiz\DirHelper;
-use WpWax\FindBiz\Helper;
-use WpWax\FindBiz\WpWaxTheme;
-use Elementor\Core\Schemes;
-use Elementor\Repeater;
-use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 

@@ -7,7 +7,7 @@
  * @version 1.0
 */ 
 
-use WpWax\FindBiz\Helper;
+use WpWax\FindBiz\DirHelper;
 use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -245,7 +245,7 @@ class FeatureBox extends Widget_Base
                         </div>
                     <?php } else { ?>
                         <div class="service-icon">
-                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo Helper::image_alt($image['id']) ?>">
+                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo DirHelper::image_alt($image['id']) ?>">
                         </div>
                     <?php } ?>
                     <h4><?php echo esc_attr($title) ?></h4>
