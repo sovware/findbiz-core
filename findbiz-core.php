@@ -30,7 +30,7 @@ class FindBiz_Core {
 		add_action( 'plugins_loaded',       array( $this, 'load_textdomain' ), 20 );
 		add_action( 'plugins_loaded',       array( $this, 'demo_importer' ), 17 );
 		add_action( $this->action,          array( $this, 'after_theme_loaded' ) );
-		add_action( 'user_contactmethods',       array( $this, 'author_social' ) );
+		add_action( 'user_contactmethods',  array( $this, 'author_social' ) );
 	}
 
 	public static function instance() {
