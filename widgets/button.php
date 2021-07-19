@@ -5,7 +5,9 @@
  * @version 1.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Button extends WP_Widget {
 
@@ -40,7 +42,7 @@ class Button extends WP_Widget {
 
 							<?php
 					endif;
-				}
+					}
 					?>
 				</ul>
 			</div>

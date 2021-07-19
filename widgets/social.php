@@ -5,7 +5,9 @@
  * @version 1.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Social extends WP_Widget {
 

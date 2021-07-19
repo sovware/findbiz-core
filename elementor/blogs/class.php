@@ -1,138 +1,136 @@
 <?php
 /**
  * This file can be overridden by copying it to yourtheme/elementor-custom/accordion/class.php
- * 
+ *
  * @author  WpWax
  * @since   1.0
  * @version 1.0
-*/ 
+ */
 
 use WpWax\FindBiz\WpWaxTheme;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
-//Blog Posts
-class Blogs extends Widget_Base
-{
-    public function get_name()
-    {
-        return 'blog_posts';
-    }
+// Blog Posts
+class Blogs extends Widget_Base {
 
-    public function get_title()
-    {
-        return __('Blogs', 'findbiz-core');
-    }
+	public function get_name() {
+		return 'blog_posts';
+	}
 
-    public function get_icon()
-    {
-        return 'findbiz-el-custom';
-    }
-    public function get_categories()
-    {
-        return ['findbiz_category'];
-    }
+	public function get_title() {
+		return __( 'Blogs', 'findbiz-core' );
+	}
 
-    public function get_keywords()
-    {
-        return ['blog', 'post', 'blog post'];
-    }
+	public function get_icon() {
+		return 'findbiz-el-custom';
+	}
+	public function get_categories() {
+		return array( 'findbiz_category' );
+	}
 
-    protected function _register_controls()
-    {
-        $this->start_controls_section(
-            'blog_posts',
-            [
-                'label' => __('Blog Posts', 'findbiz-core'),
-            ]
-        );
+	public function get_keywords() {
+		return array( 'blog', 'post', 'blog post' );
+	}
 
-        $this->add_control(
-            'post_count',
-            [
-                'label'   => __('Number of Posts to Show:', 'findbiz-core'),
-                'type'    => Controls_Manager::NUMBER,
-                'min'     => 1,
-                'max'     => 100,
-                'step'    => 1,
-                'default' => 3,
-            ]
-        );
+	protected function _register_controls() {
+		$this->start_controls_section(
+			'blog_posts',
+			array(
+				'label' => __( 'Blog Posts', 'findbiz-core' ),
+			)
+		);
 
-        $this->add_control(
-            'order_by',
-            [
-                'label'   => __('Order by', 'findbiz-core'),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'date',
-                'options' => [
-                    'ID'            => esc_html__(' Post ID', 'findbiz-core'),
-                    'author'        => esc_html__(' Author', 'findbiz-core'),
-                    'title'         => esc_html__(' Title', 'findbiz-core'),
-                    'name'          => esc_html__(' Post name (post slug)', 'findbiz-core'),
-                    'type'          => esc_html__(' Post type (available since Version 4.0)', 'findbiz-core'),
-                    'date'          => esc_html__(' Date', 'findbiz-core'),
-                    'modified'      => esc_html__(' Last modified date', 'findbiz-core'),
-                    'rand'          => esc_html__(' Random order', 'findbiz-core'),
-                    'comment_count' => esc_html__(' Number of comments', 'findbiz-core')
-                ],
-            ]
-        );
+		$this->add_control(
+			'post_count',
+			array(
+				'label'   => __( 'Number of Posts to Show:', 'findbiz-core' ),
+				'type'    => Controls_Manager::NUMBER,
+				'min'     => 1,
+				'max'     => 100,
+				'step'    => 1,
+				'default' => 3,
+			)
+		);
 
-        $this->add_control(
-            'order_list',
-            [
-                'label'   => __('Order post', 'findbiz-core'),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'DESC',
-                'options' => [
-                    'ASC'  => esc_html__(' ASC', 'findbiz-core'),
-                    'DESC' => esc_html__(' DESC', 'findbiz-core'),
-                ],
-            ]
-        );
+		$this->add_control(
+			'order_by',
+			array(
+				'label'   => __( 'Order by', 'findbiz-core' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'date',
+				'options' => array(
+					'ID'            => esc_html__( ' Post ID', 'findbiz-core' ),
+					'author'        => esc_html__( ' Author', 'findbiz-core' ),
+					'title'         => esc_html__( ' Title', 'findbiz-core' ),
+					'name'          => esc_html__( ' Post name (post slug)', 'findbiz-core' ),
+					'type'          => esc_html__( ' Post type (available since Version 4.0)', 'findbiz-core' ),
+					'date'          => esc_html__( ' Date', 'findbiz-core' ),
+					'modified'      => esc_html__( ' Last modified date', 'findbiz-core' ),
+					'rand'          => esc_html__( ' Random order', 'findbiz-core' ),
+					'comment_count' => esc_html__( ' Number of comments', 'findbiz-core' ),
+				),
+			)
+		);
 
-        $this->end_controls_section();
-    }
+		$this->add_control(
+			'order_list',
+			array(
+				'label'   => __( 'Order post', 'findbiz-core' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'DESC',
+				'options' => array(
+					'ASC'  => esc_html__( ' ASC', 'findbiz-core' ),
+					'DESC' => esc_html__( ' DESC', 'findbiz-core' ),
+				),
+			)
+		);
 
-    protected function render()
-    {
-        $settings   = $this->get_settings_for_display();
-        $post_count = $settings['post_count'];
-        $order_by   = $settings['order_by'];
-        $order_list = $settings['order_list'];
+		$this->end_controls_section();
+	}
 
-        $args = array(
-            'post_type'      => 'post',
-            'posts_per_page' => esc_attr($post_count),
-            'order'          => esc_attr($order_list),
-            'orderby '       => esc_attr($order_by)
-        );
+	protected function render() {
+		$settings   = $this->get_settings_for_display();
+		$post_count = $settings['post_count'];
+		$order_by   = $settings['order_by'];
+		$order_list = $settings['order_list'];
 
-        $posts = new WP_Query($args); ?>
-        <div class="blog-posts row" data-uk-grid>
-            <?php while ($posts->have_posts()) {
-                $posts->the_post(); ?>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="blog-posts__single">
-                        <?php the_post_thumbnail('findbiz_blog_grid'); ?>
-                        <div class="blog-posts__single__contents">
-                            <?php the_title(sprintf('<h4><a href="%s">', get_the_permalink()), '</a></h4>'); ?>
-                            <ul>
-                                <li><?php echo WpWaxTheme::time(); ?></li>
-                                <?php WpWaxTheme::categories(); ?>
-                            </ul>
-                            <?php the_excerpt(); ?>
-                        </div>
-                    </div>
-                </div>
-            <?php
-            }
-            wp_reset_postdata(); ?>
-        </div>
-        <?php
-    }
+		$args = array(
+			'post_type'      => 'post',
+			'posts_per_page' => esc_attr( $post_count ),
+			'order'          => esc_attr( $order_list ),
+			'orderby '       => esc_attr( $order_by ),
+		);
+
+		$posts = new WP_Query( $args ); ?>
+		<div class="blog-posts row" data-uk-grid>
+			<?php
+			while ( $posts->have_posts() ) {
+				$posts->the_post();
+				?>
+				<div class="col-lg-4 col-md-6 col-sm-6">
+					<div class="blog-posts__single">
+						<?php the_post_thumbnail( 'findbiz_blog_grid' ); ?>
+						<div class="blog-posts__single__contents">
+							<?php the_title( sprintf( '<h4><a href="%s">', get_the_permalink() ), '</a></h4>' ); ?>
+							<ul>
+								<li><?php echo WpWaxTheme::time(); ?></li>
+								<?php WpWaxTheme::categories(); ?>
+							</ul>
+							<?php the_excerpt(); ?>
+						</div>
+					</div>
+				</div>
+				<?php
+			}
+			wp_reset_postdata();
+			?>
+		</div>
+		<?php
+	}
 }

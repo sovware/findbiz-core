@@ -1,99 +1,95 @@
 <?php
 /**
  * This file can be overridden by copying it to yourtheme/elementor-custom/accordion/class.php
- * 
+ *
  * @author  WpWax
  * @since   1.0
  * @version 1.0
-*/ 
+ */
 
 use WpWax\FindBiz\DirHelper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
-//Contact form 7
-class ContactForm extends Widget_Base
-{
-    public function get_name()
-    {
-        return 'contact_form';
-    }
+// Contact form 7
+class ContactForm extends Widget_Base {
 
-    public function get_title()
-    {
-        return __('Contact Form', 'findbiz-core');
-    }
+	public function get_name() {
+		return 'contact_form';
+	}
 
-    public function get_icon()
-    {
-        return 'findbiz-el-custom';
-    }
+	public function get_title() {
+		return __( 'Contact Form', 'findbiz-core' );
+	}
 
-    public function get_categories()
-    {
-        return ['findbiz_category'];
-    }
+	public function get_icon() {
+		return 'findbiz-el-custom';
+	}
 
-    public function get_keywords()
-    {
-        return ['contact', 'form', 'contact form'];
-    }
+	public function get_categories() {
+		return array( 'findbiz_category' );
+	}
 
-    protected function _register_controls()
-    {
-        $this->start_controls_section(
-            'contact_form',
-            [
-                'label' => __('Contact Form', 'findbiz-core'),
-            ]
-        );
+	public function get_keywords() {
+		return array( 'contact', 'form', 'contact form' );
+	}
 
-        $this->add_control(
-            'title',
-            [
-                'label'   => __('Form Title', 'findbiz-core'),
-                'type'    => Controls_Manager::TEXTAREA,
-                'dynamic' => [
-                    'active' => true,
-                ],
-                'placeholder' => __('Enter form title', 'findbiz-core'),
-            ]
-        );
+	protected function _register_controls() {
+		$this->start_controls_section(
+			'contact_form',
+			array(
+				'label' => __( 'Contact Form', 'findbiz-core' ),
+			)
+		);
 
-        $this->add_control(
-            'contact_form_id',
-            [
-                'label'   => __('Select Contact Form', 'findbiz-core'),
-                'type'    => Controls_Manager::SELECT,
-                'options' => DirHelper::cf7_names(),
-            ]
-        );
+		$this->add_control(
+			'title',
+			array(
+				'label'       => __( 'Form Title', 'findbiz-core' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'placeholder' => __( 'Enter form title', 'findbiz-core' ),
+			)
+		);
 
-        $this->end_controls_section();
-    }
+		$this->add_control(
+			'contact_form_id',
+			array(
+				'label'   => __( 'Select Contact Form', 'findbiz-core' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => DirHelper::cf7_names(),
+			)
+		);
 
-    protected function render()
-    {
-        $settings        = $this->get_settings_for_display();
-        $title           = $settings['title'];
-        $contact_form_id = $settings['contact_form_id'];
+		$this->end_controls_section();
+	}
 
-        if ($contact_form_id) { ?>
-            <div class="contact-wrapper">
-                <?php if ($title) { ?>
-                    <div class="contact-wrapper__title">
-                        <h4><?php echo esc_attr($title); ?></h4>
-                    </div>
-                <?php
-                } ?>
-                <div class="contact-wrapper__fields">
-                    <?php echo do_shortcode('[contact-form-7 id="' . intval(esc_attr($contact_form_id)) . '" ]'); ?>
-                </div>
-            </div>
-            <?php
-        }
-    }
+	protected function render() {
+		$settings        = $this->get_settings_for_display();
+		$title           = $settings['title'];
+		$contact_form_id = $settings['contact_form_id'];
+
+		if ( $contact_form_id ) { ?>
+			<div class="contact-wrapper">
+				<?php if ( $title ) { ?>
+					<div class="contact-wrapper__title">
+						<h4><?php echo esc_attr( $title ); ?></h4>
+					</div>
+					<?php
+				}
+				?>
+				<div class="contact-wrapper__fields">
+					<?php echo do_shortcode( '[contact-form-7 id="' . intval( esc_attr( $contact_form_id ) ) . '" ]' ); ?>
+				</div>
+			</div>
+			<?php
+		}
+	}
 }

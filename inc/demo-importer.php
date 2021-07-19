@@ -10,15 +10,15 @@ class Demo_Importer {
 
 	public function __construct() {
 
-		add_filter( 'plugin_action_links_rt-demo-importer/rt-demo-importer.php', array( $this, 'add_action_links' ) ); // Link from plugins page 
+		add_filter( 'plugin_action_links_rt-demo-importer/rt-demo-importer.php', array( $this, 'add_action_links' ) ); // Link from plugins page
 		add_filter( 'wpwax_demo_importer_warning', array( $this, 'data_loss_warning' ) );
 		add_filter( 'fw:ext:backups-demo:demos', array( $this, 'demo_config' ) );
 		add_action( 'fw:ext:backups:tasks:success:id:demo-content-install', array( $this, 'after_demo_install' ) );
-		//add_filter( 'fw:ext:backups:add-restore-task:image-sizes-restore', '__return_false' ); // Enable it to skip image restore step
+		// add_filter( 'fw:ext:backups:add-restore-task:image-sizes-restore', '__return_false' ); // Enable it to skip image restore step
 	}
 
 	public static function instance() {
-		if ( null == self::$instance ) {
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -34,7 +34,7 @@ class Demo_Importer {
 	// Confirmation Text
 	public function data_loss_warning( $links ) {
 		$html  = '<div style="margin-top:20px;color:#f00;font-size:20px;line-height:1.3;font-weight:600;margin-bottom:40px;border-color: #f00;border-style: dashed;border-width: 1px 0;padding:10px 0;">';
-		$html .= __( 'Warning: All your old data will be lost if you install One Click demo data from here, so it is suitable only for a new website.', 'findbiz-core');
+		$html .= __( 'Warning: All your old data will be lost if you install One Click demo data from here, so it is suitable only for a new website.', 'findbiz-core' );
 		$html .= '</div>';
 		return $html;
 	}
@@ -104,16 +104,16 @@ class Demo_Importer {
 		// Update contact form 7 email
 		$cf7ids = array( 593, 1141, 1208, 1238 );
 		foreach ( $cf7ids as $cf7id ) {
-			$mail = get_post_meta( $cf7id, '_mail', true );
+			$mail              = get_post_meta( $cf7id, '_mail', true );
 			$mail['recipient'] = get_option( 'admin_email' );
 
 			if ( class_exists( 'WPCF7_ContactFormTemplate' ) ) {
-				$pattern = "/<[^@\s]*@[^@\s]*\.[^@\s]*>/"; // <email@email.com>
-				$replacement = '<'. WPCF7_ContactFormTemplate::from_email().'>';
-				$mail['sender'] = preg_replace($pattern, $replacement, $mail['sender']);
+				$pattern        = '/<[^@\s]*@[^@\s]*\.[^@\s]*>/'; // <email@email.com>
+				$replacement    = '<' . WPCF7_ContactFormTemplate::from_email() . '>';
+				$mail['sender'] = preg_replace( $pattern, $replacement, $mail['sender'] );
 			}
-			
-			update_post_meta( $cf7id, '_mail', $mail );		
+
+			update_post_meta( $cf7id, '_mail', $mail );
 		}
 
 		// Update post author id

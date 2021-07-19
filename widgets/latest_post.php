@@ -7,7 +7,9 @@
 
 use WpWax\FindBiz\DirHelper;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
 class Latest_Post extends WP_Widget {

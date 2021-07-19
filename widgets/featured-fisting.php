@@ -7,7 +7,9 @@
 
 use WpWax\FindBiz\DirHelper;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Featured_Listing extends WP_Widget {
 
