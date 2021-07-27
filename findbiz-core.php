@@ -80,6 +80,10 @@ class FindBiz_Core {
 	public function load_textdomain() {
 		load_plugin_textdomain( $this->plugin, false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
+
+	public static function get_findbiz_mail( $email, $subject, $message, $headers ) {
+		return wp_mail( $email, $subject, $message, $headers );
+	}
 }
 
 FindBiz_Core::instance();
