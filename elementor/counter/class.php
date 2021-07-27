@@ -81,11 +81,18 @@ class Counter extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	private function wpwax_load_scripts() {
+		wp_enqueue_script( 'waypoints' );
+		wp_enqueue_script( 'counter-up' );
+	}
+
 	protected function render() {
+		$this->wpwax_load_scripts();
 		$settings = $this->get_settings_for_display();
 		$number   = $settings['number'];
 		$suffix   = $settings['suffix'];
-		$title    = $settings['label']; ?>
+		$title    = $settings['label'];
+		?>
 		<div class="list-unstyled counter-items">
 			<div>
 				<p>

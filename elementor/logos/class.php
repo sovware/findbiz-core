@@ -7,7 +7,7 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -71,7 +71,12 @@ class Logos extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	private function wpwax_load_scripts() {
+		wp_enqueue_script( 'owl-carousel' );
+	}
+
 	protected function render() {
+		$this->wpwax_load_scripts();
 		$settings = $this->get_settings_for_display();
 		$style    = $settings['style'];
 		$logos    = $settings['clients_logo'];
@@ -83,7 +88,7 @@ class Logos extends Widget_Base {
 					if ( $logos ) {
 						foreach ( $logos as $logo ) {
 							?>
-							<div><img src="<?php echo esc_url( $logo['url'] ); ?>" alt="<?php echo DirHelper::image_alt( $logo['id'] ); ?>"></div>
+							<div><img src="<?php echo esc_url( $logo['url'] ); ?>" alt="<?php echo Helper::image_alt( $logo['id'] ); ?>"></div>
 							<?php
 						}
 					}
@@ -99,7 +104,7 @@ class Logos extends Widget_Base {
 					foreach ( $logos as $logo ) {
 						?>
 						<div class="carousel-single">
-							<img src="<?php echo esc_url( $logo['url'] ); ?>" alt="<?php echo DirHelper::image_alt( $logo['id'] ); ?>">
+							<img src="<?php echo esc_url( $logo['url'] ); ?>" alt="<?php echo Helper::image_alt( $logo['id'] ); ?>">
 						</div>
 						<?php
 					}

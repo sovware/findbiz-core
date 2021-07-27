@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -59,7 +59,7 @@ class Latest_Post extends WP_Widget {
 										<?php the_post_thumbnail( array( 60, 60 ), array( 'class' => 'rounded' ) ); ?>
 										<p>
 											<a href="<?php the_permalink(); ?>" class="post-title"><?php the_title(); ?></a>
-											<span><?php echo DirHelper::time(); ?></span>
+											<span><?php echo Helper::time(); ?></span>
 
 										</p>
 									</div>

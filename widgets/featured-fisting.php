@@ -5,7 +5,7 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -25,7 +25,7 @@ class Featured_Listing extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$title      = ( ! empty( $instance['title'] ) ) ? $instance['title'] : '';
 		$number_cat = ( ! empty( $instance['posts_per'] ) ) ? $instance['posts_per'] : '';
-		add_filter( 'all_listings_wrapper', array( new DirHelper(), 'all_listings_wrapper' ) );
+		add_filter( 'all_listings_wrapper', array( new Helper(), 'all_listings_wrapper' ) );
 		add_filter(
 			'all_listings_column',
 			function() {

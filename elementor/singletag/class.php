@@ -7,7 +7,7 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -66,7 +66,7 @@ class SingleTag extends Widget_Base {
 				'label'     => __( 'Specify Listing Types', 'findbiz-core' ),
 				'type'      => Controls_Manager::SELECT2,
 				'multiple'  => true,
-				'options'   => DirHelper::directorist_listing_types(),
+				'options'   => Helper::directorist_listing_types(),
 				'condition' => array(
 					'layout!' => 'listings_with_map',
 				),
@@ -79,7 +79,7 @@ class SingleTag extends Widget_Base {
 				'label'    => __( 'Set Default Listing Type', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT,
 				'multiple' => true,
-				'options'  => DirHelper::directorist_listing_types(),
+				'options'  => Helper::directorist_listing_types(),
 			)
 		);
 
@@ -231,7 +231,7 @@ class SingleTag extends Widget_Base {
 				'label'    => __( 'Specify Categories', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT2,
 				'multiple' => true,
-				'options'  => DirHelper::categories(),
+				'options'  => Helper::categories(),
 			)
 		);
 
@@ -241,7 +241,7 @@ class SingleTag extends Widget_Base {
 				'label'    => __( 'Specify Tags', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT2,
 				'multiple' => true,
-				'options'  => DirHelper::tags(),
+				'options'  => Helper::tags(),
 			)
 		);
 
@@ -251,7 +251,7 @@ class SingleTag extends Widget_Base {
 				'label'    => __( 'Specify Locations', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT2,
 				'multiple' => true,
-				'options'  => DirHelper::locations(),
+				'options'  => Helper::locations(),
 			)
 		);
 

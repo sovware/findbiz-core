@@ -7,7 +7,7 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -61,7 +61,7 @@ class Categories extends Widget_Base {
 				'label'    => __( 'Specify Listing Types', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT2,
 				'multiple' => true,
-				'options'  => DirHelper::directorist_listing_types(),
+				'options'  => Helper::directorist_listing_types(),
 			)
 		);
 
@@ -71,7 +71,7 @@ class Categories extends Widget_Base {
 				'label'    => __( 'Set Default Listing Type', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT,
 				'multiple' => true,
-				'options'  => DirHelper::directorist_listing_types(),
+				'options'  => Helper::directorist_listing_types(),
 			)
 		);
 
@@ -139,7 +139,7 @@ class Categories extends Widget_Base {
 				'label'     => esc_html__( 'Select Categories', 'findbiz-core' ),
 				'type'      => Controls_Manager::SELECT2,
 				'multiple'  => true,
-				'options'   => DirHelper::categories(),
+				'options'   => Helper::categories(),
 				'condition' => array(
 					'order_by' => 'slug',
 				),
@@ -194,7 +194,12 @@ class Categories extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	private function wpwax_load_scripts() {
+		wp_enqueue_script( 'owl-carousel' );
+	}
+
 	protected function render() {
+		$this->wpwax_load_scripts();
 		$settings      = $this->get_settings_for_display();
 		$default_types = $settings['default_types'];
 		$types         = $settings['types'] ? implode( ',', $settings['types'] ) : '';

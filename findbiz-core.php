@@ -36,7 +36,7 @@ class FindBiz_Core {
 	}
 
 	public static function instance() {
-		if ( null == self::$instance ) {
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -52,10 +52,11 @@ class FindBiz_Core {
 		}
 
 		/*
-		 if ( defined( 'RT_FRAMEWORK_VERSION' ) ) {
+		if ( defined( 'RT_FRAMEWORK_VERSION' ) ) {
 			require_once FINDBIZ_CORE_BASE_DIR . 'inc/post-meta.php'; // Post Meta
 			require_once FINDBIZ_CORE_BASE_DIR . 'widgets/init.php'; // Widgets
-		} */
+		}
+		*/
 
 		if ( did_action( 'elementor/loaded' ) ) {
 			require_once FINDBIZ_CORE_BASE_DIR . 'elementor/init.php'; // Elementor

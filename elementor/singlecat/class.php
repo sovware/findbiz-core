@@ -7,7 +7,7 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -67,7 +67,7 @@ class SingleCat extends Widget_Base {
 				'label'     => __( 'Specify Listing Types', 'findbiz-core' ),
 				'type'      => Controls_Manager::SELECT2,
 				'multiple'  => true,
-				'options'   => DirHelper::directorist_listing_types(),
+				'options'   => Helper::directorist_listing_types(),
 				'condition' => array(
 					'layout!' => 'listings_with_map',
 				),
@@ -80,7 +80,7 @@ class SingleCat extends Widget_Base {
 				'label'    => __( 'Set Default Listing Type', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT,
 				'multiple' => true,
-				'options'  => DirHelper::directorist_listing_types(),
+				'options'  => Helper::directorist_listing_types(),
 			)
 		);
 

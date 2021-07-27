@@ -7,7 +7,7 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\DirHelper;
+use WpWax\FindBiz\Helper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -64,7 +64,7 @@ class ContactForm extends Widget_Base {
 			array(
 				'label'   => __( 'Select Contact Form', 'findbiz-core' ),
 				'type'    => Controls_Manager::SELECT,
-				'options' => DirHelper::cf7_names(),
+				'options' => Helper::cf7_names(),
 			)
 		);
 

@@ -71,7 +71,7 @@
  *     09. 01. Shortcode Modal
  *     09. 02. Gutenberg Modal
  *     09. 03. Icon Modal
- * 10. DirHelper
+ * 10. Helper
  * 11. Welcome Page
  * 12. Responsive
  * 13. Others
@@ -3255,7 +3255,7 @@
   }
 }
 /**
- * 10. DirHelper
+ * 10. Helper
  */
 .csf-subtitle-text {
   margin-top: 6px;
