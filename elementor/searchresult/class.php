@@ -290,7 +290,7 @@ class SearchResult extends Widget_Base {
 		$types           = $settings['types'] ? implode( ',', $settings['types'] ) : '';
 		$preview         = $settings['preview'] ? $settings['preview'] : 'no';
 		$layout          = $settings['layout'];
-		$zoom_level      = $settings['zoom_level'];
+		$zoom_level      = 'map' === $layout ? $settings['zoom_level']['size'] : '';
 		$map_height      = $settings['map_height'];
 		$header          = $settings['header'];
 		$title           = $settings['title'];
