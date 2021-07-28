@@ -13,7 +13,10 @@ use Elementor\Plugin;
 
 class Custom_Widget_Init {
 
-
+	public $prefix;
+	public $category;
+	public $widgets;
+	
 	public function __construct() {
 		 // Add Plugin actions
 		add_action( 'elementor/widgets/widgets_registered', array( $this, 'init' ) );
@@ -27,6 +30,10 @@ class Custom_Widget_Init {
 	}
 
 	public function init() {
+		$this->prefix   = 'findbiz-core';
+		$this->category = __( 'Findbiz Elements', 'findbiz-core' );
+
+		// Widgets -- dirname=>classname
 		$widgets1 = array(
 			'heading'        => 'Heading',
 			'blogs'          => 'Blogs',
@@ -82,9 +89,9 @@ class Custom_Widget_Init {
 	}
 
 	public function widgets_category() {
-		$id         = FINDBIZ_CORE_THEME_PREFIX . '_category'; // Category /@dev
+		$id         = $this->prefix . '_category'; // Category /@dev
 		$properties = array(
-			'title' => __( 'Findbiz Elements', 'findbiz-core' ),
+			'title' => $this->category,
 		);
 
 		Plugin::$instance->elements_manager->add_category( $id, $properties );

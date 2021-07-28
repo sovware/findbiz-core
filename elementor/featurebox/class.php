@@ -61,78 +61,60 @@ class FeatureBox extends Widget_Base {
 		);
 
 		$this->add_control(
-			'number',
+			'features',
 			array(
-				'label'     => __( 'Feature Number', 'findbiz-core' ),
-				'type'      => Controls_Manager::NUMBER,
-				'min'       => 1,
-				'max'       => 10,
-				'step'      => 1,
-				'condition' => array(
-					'style' => 'style-one',
+				'label'       => __( 'Features', 'findbiz-core' ),
+				'type'        => Controls_Manager::REPEATER,
+				'title_field' => '{{{ name }}}',
+				'fields'      => array(
+					array(
+						'name'        => 'type',
+						'type'        => Controls_Manager::SELECT,
+						'label'       => __( 'Type', 'findbiz-core' ),
+						'options' => array(
+							'icon'  => esc_html__( 'Icon Type', 'findbiz-core' ),
+							'image' => esc_html__( 'Image Type', 'findbiz-core' ),
+						),
+						'default'     => 'icon',
+					),
+					array(
+						'name'        => 'icon',
+						'label'     => __( 'Font-Awesome', 'findbiz-core' ),
+						'type'      => Controls_Manager::ICON,
+						'condition' => array(
+							'type'  => 'icon',
+						),
+					),
+					array(
+						'name'        => 'image',
+						'label'     => __( 'Choose Image', 'findbiz-core' ),
+						'type'      => Controls_Manager::MEDIA,
+						'default'   => array(
+							'url' => Utils::get_placeholder_image_src(),
+						),
+						'condition' => array(
+							'type' => 'image',
+						),
+					),
+					array(
+						'name'  => 'title',
+						'label'       => __( 'Title', 'findbiz-core' ),
+						'type'        => Controls_Manager::TEXTAREA,
+						'dynamic'     => array(
+							'active' => true,
+						),
+						'placeholder' => __( 'Enter your title', 'findbiz-core' ),
+					),
+					array(
+						'name'  => 'desc',
+						'label'       => __( 'Title', 'findbiz-core' ),
+						'type'        => Controls_Manager::TEXTAREA,
+						'dynamic'     => array(
+							'active' => true,
+						),
+						'placeholder' => __( 'Enter your description', 'findbiz-core' ),
+					),
 				),
-			)
-		);
-
-		$this->add_control(
-			'type',
-			array(
-				'label'   => __( 'Type', 'findbiz-core' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'icon',
-				'options' => array(
-					'icon'  => esc_html__( 'Icon Type', 'findbiz-core' ),
-					'image' => esc_html__( 'Image Type', 'findbiz-core' ),
-				),
-			)
-		);
-
-		$this->add_control(
-			'icon',
-			array(
-				'label'     => __( 'Font-Awesome', 'findbiz-core' ),
-				'type'      => Controls_Manager::ICON,
-				'condition' => array(
-					'type' => 'icon',
-				),
-			)
-		);
-
-		$this->add_control(
-			'image',
-			array(
-				'label'     => __( 'Choose Image', 'findbiz-core' ),
-				'type'      => Controls_Manager::MEDIA,
-				'default'   => array(
-					'url' => Utils::get_placeholder_image_src(),
-				),
-				'condition' => array(
-					'type' => 'image',
-				),
-			)
-		);
-
-		$this->add_control(
-			'title',
-			array(
-				'label'       => __( 'Title', 'findbiz-core' ),
-				'type'        => Controls_Manager::TEXTAREA,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'placeholder' => __( 'Enter your title', 'findbiz-core' ),
-			)
-		);
-
-		$this->add_control(
-			'desc',
-			array(
-				'label'       => __( 'Title', 'findbiz-core' ),
-				'type'        => Controls_Manager::TEXTAREA,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'placeholder' => __( 'Enter your description', 'findbiz-core' ),
 			)
 		);
 
@@ -222,33 +204,40 @@ class FeatureBox extends Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		$title    = $settings['title'];
-		$desc     = $settings['desc'];
-		$type     = $settings['type'];
-		$image    = $settings['image'];
-		$icon     = $settings['icon'];
-		$number   = $settings['number'];
 		$style    = $settings['style'];
+		$features = $settings['features'];
 		?>
-
-		<div class="service-cards" id="<?php echo esc_attr( $style ); ?>">
-			<div class="card-single">
-				<div class="card-single-content">
-					<?php if ( 'icon' == $type ) { ?>
-						<div class="service-icon">
-							<i class="<?php echo esc_attr( $icon ); ?>"></i>
+		<div class="feature_boxes">
+			<div class="row">
+				<?php 
+				$i = 1; 
+				foreach ( $features as $feature ) { ?>
+					<div class="col-md-4">
+						<div class="service-cards" id="<?php echo esc_attr( $style ); ?>">
+							<div class="card-single">
+								<div class="card-single-content">
+									<?php if ( 'icon' == $feature['type'] ) { ?>
+										<div class="service-icon">
+											<i class="<?php echo esc_attr( $feature['icon'] ); ?>"></i>
+										</div>
+									<?php } else { ?>
+										<div class="service-icon">
+											<img src="<?php echo esc_url( $feature['image']['url'] ); ?>" alt="<?php echo Helper::image_alt( $feature['image']['id'] ); ?>">
+										</div>
+									<?php } ?>
+									<h4><?php echo esc_attr( $feature['title'] ); ?></h4>
+									<p><?php echo esc_attr( $feature['desc'] ); ?></p>
+									<?php if ( 'style-one' === $style ) { ?>
+										<span class="service-count"><?php echo ( 10 <= $i ) ? esc_attr( $i ) : esc_attr( '0' . $i ); ?></span>
+									<?php } ?>
+								</div>
+							</div>
 						</div>
-					<?php } else { ?>
-						<div class="service-icon">
-							<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo Helper::image_alt( $image['id'] ); ?>">
-						</div>
-					<?php } ?>
-					<h4><?php echo esc_attr( $title ); ?></h4>
-					<p><?php echo esc_attr( $desc ); ?></p>
-					<?php if ( 'style-one' == $style ) { ?>
-						<span class="service-count"><?php echo esc_attr( '0' . $number ); ?></span>
-					<?php } ?>
-				</div>
+					</div>
+					<?php
+					$i++;
+				}
+				?>
 			</div>
 		</div>
 		<?php

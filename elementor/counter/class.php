@@ -44,36 +44,38 @@ class Counter extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'number',
+	$this->add_control(
+			'counters',
 			array(
-				'label'   => __( 'Number', 'findbiz-core' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 0,
-				'dynamic' => array(
-					'active' => true,
-				),
-			)
-		);
-
-		$this->add_control(
-			'suffix',
-			array(
-				'label'   => __( 'Number Suffix', 'findbiz-core' ),
-				'type'    => Controls_Manager::TEXT,
-				'dynamic' => array(
-					'active' => true,
-				),
-			)
-		);
-
-		$this->add_control(
-			'label',
-			array(
-				'label'   => __( 'Title', 'findbiz-core' ),
-				'type'    => Controls_Manager::TEXT,
-				'dynamic' => array(
-					'active' => true,
+				'label'       => __( 'Counters', 'findbiz-core' ),
+				'type'        => Controls_Manager::REPEATER,
+				'title_field' => '{{{ name }}}',
+				'fields'      => array(
+					array(
+						'name'        => 'number',
+						'label'   => __( 'Number', 'findbiz-core' ),
+						'type'    => Controls_Manager::NUMBER,
+						'default' => 0,
+						'dynamic' => array(
+							'active' => true,
+						),
+					),
+					array(
+						'name'        => 'suffix',
+						'label'   => __( 'Number Suffix', 'findbiz-core' ),
+						'type'    => Controls_Manager::TEXT,
+						'dynamic' => array(
+							'active' => true,
+						),
+					),
+					array(
+						'name'        => 'label',
+						'label'   => __( 'Title', 'findbiz-core' ),
+						'type'    => Controls_Manager::TEXT,
+						'dynamic' => array(
+							'active' => true,
+						),
+					),
 				),
 			)
 		);
@@ -89,18 +91,20 @@ class Counter extends Widget_Base {
 	protected function render() {
 		$this->wpwax_load_scripts();
 		$settings = $this->get_settings_for_display();
-		$number   = $settings['number'];
-		$suffix   = $settings['suffix'];
-		$title    = $settings['label'];
+		$counters   = $settings['counters'];
 		?>
-		<div class="list-unstyled counter-items">
-			<div>
-				<p>
-					<span class="count_up"><?php echo esc_attr( $number ); ?></span>
-					<?php echo esc_attr( $suffix ); ?>
-				</p>
-				<span><?php echo esc_attr( $title ); ?></span>
-			</div>
+		<div class="counters row">
+			<?php foreach ( $counters as $counter ) { ?>
+				<div class="list-unstyled counter-items col-md-3">
+					<div>
+						<p>
+							<span class="count_up"><?php echo esc_attr( $counter['number'] ); ?></span>
+							<?php echo esc_attr( $counter['suffix'] ); ?>
+						</p>
+						<span><?php echo esc_attr( $counter['label'] ); ?></span>
+					</div>
+				</div>
+			<?php } ?>
 		</div>
 		<?php
 	}
