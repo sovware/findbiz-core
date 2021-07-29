@@ -30,8 +30,6 @@ class Custom_Widget_Init {
 	}
 
 	public function init() {
-		$this->prefix   = 'findbiz-core';
-		$this->category = __( 'Findbiz Elements', 'findbiz-core' );
 
 		// Widgets -- dirname=>classname
 		$widgets1 = array(
@@ -46,28 +44,12 @@ class Custom_Widget_Init {
 			'logos'          => 'Logos',
 			'team'           => 'Team',
 			'testimonial'    => 'Testimonial',
+			'accordion'    => 'Accordion',
+			'contactform'  => 'ContactForm',
 		);
 		$widgets2 = array(
-			'listings'     => 'Listings',
-			'accordion'    => 'Accordion',
-			'form'         => 'Form',
-			'profile'      => 'Profile',
 			'categories'   => 'Categories',
-			'locations'    => 'Locations',
-			'checkout'     => 'Checkout',
-			'contactform'  => 'ContactForm',
-			'dashboard'    => 'Dashboard',
-			'login'        => 'Login',
-			'transaction'  => 'Transaction',
-			'registration' => 'Registration',
-			'payment'      => 'Payment',
-			'pricingplan'  => 'PricingPlan',
 			'searchform'   => 'SearchForm',
-			'searchresult' => 'SearchResult',
-			'singlecat'    => 'SingleCat',
-			'singleloc'    => 'SingleLoc',
-			'singletag'    => 'SingleTag',
-			'booking'      => 'Booking',
 		);
 
 		( ! class_exists( 'Directorist_Base' ) ) ? $widgets2 = array() : '';
@@ -92,13 +74,14 @@ class Custom_Widget_Init {
 	}
 
 	public function widgets_category() {
-		$id         = $this->prefix . '_category'; // Category /@dev
+		$id         = 'findbiz_category'; // Category /@dev
 		$properties = array(
-			'title' => $this->category,
+			'title' => __( 'Theme Elements', 'findbiz-core' ),
 		);
 
 		Plugin::$instance->elements_manager->add_category( $id, $properties );
 	}
+	
 }
 
 new Custom_Widget_Init();

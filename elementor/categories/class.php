@@ -23,7 +23,7 @@ class Categories extends Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'All Categories', 'findbiz-core' );
+		return __( 'Listing Categories', 'findbiz-core' );
 	}
 
 	public function get_icon() {
@@ -81,11 +81,11 @@ class Categories extends Widget_Base {
 				'label'   => __( 'View', 'findbiz-core' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => array(
-					'grid'          => esc_html__( 'Grid View', 'findbiz-core' ),
-					'list'          => esc_html__( 'List View', 'findbiz-core' ),
-					'icon'          => esc_html__( 'Icon View', 'findbiz-core' ),
-					'carousel'      => esc_html__( 'Carousel View', 'findbiz-core' ),
-					'icon_carousel' => esc_html__( 'Icon Carousel View', 'findbiz-core' ),
+					'grid'          => esc_html__( 'Grid', 'findbiz-core' ),
+					'list'          => esc_html__( 'List', 'findbiz-core' ),
+					'icon'          => esc_html__( 'Icon', 'findbiz-core' ),
+					'carousel'      => esc_html__( 'Image Carousel', 'findbiz-core' ),
+					'icon_carousel' => esc_html__( 'Icon Carousel', 'findbiz-core' ),
 				),
 				'default' => 'grid',
 			)
@@ -211,17 +211,31 @@ class Categories extends Widget_Base {
 		$columns       = $settings['row'];
 		$number_cat    = $settings['number_cat'];
 		$logged_in     = $settings['logged_in'];
+		
+		if ( 'icon_carousel' === $views || 'carousel' === $views ) {
 
-		( 'icon_carousel' === $views ) || ( 'carousel' === $views ) ? add_action(
-			'findbiz_category_column',
-			function () {
+			add_action( 'findbiz_category_carousel', function () {
+				echo esc_html( ' category-carousel owl-carousel' );
+			});
+
+			add_action( 'findbiz_category_column', function () {
 				echo esc_html( '-carousel' );
-			}
-		) : '';
-		( 'icon' === $views ) || ( 'icon_carousel' === $views ) ? add_filter( 'findbiz_category_image', '__return_false' ) : '';
-		( 'icon' != $views ) && ( 'icon_carousel' != $views ) ? add_filter( 'findbiz_category_icon', '__return_false' ) : '';
-		( 'icon' === $views ) || ( 'grid' === $views ) || ( 'list' === $views ) ? add_filter( 'findbiz_category_carousel', '__return_false' ) : '';
+			});
+			add_filter( 'findbiz_category_column', '__return_false' );
+
+			$this->wpwax_load_scripts();
+		}
+		
+		if ( 'icon' === $views || 'icon_carousel' === $views ) {
+			add_filter( 'findbiz_category_image', '__return_false' );
+		}
+		
+		if ( 'icon_carousel' === $views || 'icon' === $views ) {
+			add_filter( 'findbiz_category_icon', '__return_true' );
+		}
+		add_filter( 'show_listings_count', '__return_true' );
 		?>
+		
 		<div class="findbiz-cat-view-<?php echo $views; ?>">
 			<?php echo do_shortcode( '[directorist_all_categories view="' . $view . '" orderby="' . $order_by . '" order="' . $order . '" cat_per_page="' . $number_cat . '" columns="' . $columns . '" slug="' . $slug . '" logged_in_user_only="' . $logged_in . '" directory_type="' . $types . '" default_directory_type="' . $default_types . '"]' ); ?>
 		</div>

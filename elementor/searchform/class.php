@@ -7,9 +7,10 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\Helper;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
+use WpWax\FindBiz_Core\Helper as FindBiz_CoreHelper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -41,157 +42,194 @@ class SearchForm extends Widget_Base {
 
 	protected function _register_controls() {
 		$this->start_controls_section(
-			'hero_area',
+			'sec_general',
 			array(
-				'label' => __( 'Search Form', 'findbiz-core' ),
+				'label' => __( 'General', 'findbiz-core' ),
 			)
 		);
 
 		$this->add_control(
-			'logged_in',
+			'show_subtitle',
 			array(
-				'label'   => __( 'Show Only For Logging User?', 'findbiz-core' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'no',
+			'type'      => Controls_Manager::SWITCHER,
+			'label'     => __( 'Add Element Title & Subtitle?', 'directorist' ),
+			'default'   => 'yes',
 			)
 		);
-
 		$this->add_control(
-			'title_subtitle',
+			'title_subtitle_alignment',
 			array(
-				'label'   => __( 'Show Title & Subtitle?', 'findbiz-core' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'yes',
+			'type'      => Controls_Manager::CHOOSE,
+			'label'     => __( 'Title/Subtitle Alignment', 'directorist' ),
+			'options'   => array(
+				'left'   => array(
+					'title' => __( 'Left', 'directorist' ),
+					'icon'  => 'fa fa-align-left',
+				),
+				'center' => array(
+					'title' => __( 'Center', 'directorist' ),
+					'icon'  => 'fa fa-align-center',
+				),
+				'right'  => array(
+					'title' => __( 'Right', 'directorist' ),
+					'icon'  => 'fa fa-align-right',
+				),
+			),
+			'toggle'    => true,
+			'selectors' => array(
+				'{{WRAPPER}} .directorist-search-top__title' => 'text-align: {{VALUE}}',
+				'{{WRAPPER}} .directorist-search-top__subtitle' => 'text-align: {{VALUE}}',
+			),
+			'condition' => array( 'show_subtitle' => array( 'yes' ) ),
 			)
 		);
-
 		$this->add_control(
 			'title',
 			array(
-				'label'       => __( 'Title', 'findbiz-core' ),
-				'type'        => Controls_Manager::TEXTAREA,
-				'placeholder' => __( 'Enter your title', 'findbiz-core' ),
-				'default'     => __( 'Explore Trusted Business', 'findbiz-core' ),
-				'condition'   => array(
-					'title_subtitle' => 'yes',
-				),
+			'type'      => Controls_Manager::TEXTAREA,
+			'label'     => __( 'Search Form Title', 'directorist' ),
+			'default'   => __( 'Search here', 'directorist' ),
+			'condition' => array( 'show_subtitle' => array( 'yes' ) ),
 			)
 		);
-
 		$this->add_control(
 			'subtitle',
 			array(
-				'label'       => __( 'Subtitle', 'findbiz-core' ),
-				'type'        => Controls_Manager::TEXTAREA,
-				'placeholder' => __( 'Enter your subtitle', 'findbiz-core' ),
-				'default'     => __( 'Get notified about services that match your requirement', 'findbiz-core' ),
-				'condition'   => array(
-					'title_subtitle' => 'yes',
-				),
+			'type'      => Controls_Manager::TEXTAREA,
+			'label'     => __( 'Search Form Subtitle', 'directorist' ),
+			'default'   => __( 'Find the best match of your interest', 'directorist' ),
+			'condition' => array( 'show_subtitle' => array( 'yes' ) ),
 			)
 		);
-
 		$this->add_control(
-			'types',
+			'type',
 			array(
-				'label'    => __( 'Specify Listing Types', 'findbiz-core' ),
-				'type'     => Controls_Manager::SELECT2,
-				'multiple' => true,
-				'options'  => Helper::directorist_listing_types(),
+			'type'     => Controls_Manager::SELECT2,
+			'label'    => __( 'Directory Types', 'directorist' ),
+			'multiple' => true,
+			'options'  => FindBiz_CoreHelper::az_listing_types(),
+			'condition' => FindBiz_CoreHelper::multi_directory_enabled() ? '' : ['nocondition' => true],
 			)
 		);
-
 		$this->add_control(
-			'default_types',
+			'default_type',
 			array(
-				'label'    => __( 'Set Default Listing Type', 'findbiz-core' ),
-				'type'     => Controls_Manager::SELECT,
-				'multiple' => true,
-				'options'  => Helper::directorist_listing_types(),
+			'type'     => Controls_Manager::SELECT2,
+			'label'    => __( 'Default Directory Types', 'directorist' ),
+			'options'  => FindBiz_CoreHelper::az_listing_types(),
+			'condition' => FindBiz_CoreHelper::multi_directory_enabled() ? '' : ['nocondition' => true],
 			)
 		);
-
 		$this->add_control(
-			'search',
+			'search_btn_text',
 			array(
-				'label'       => __( 'Search Button Label', 'findbiz-core' ),
-				'type'        => Controls_Manager::TEXT,
-				'placeholder' => __( 'Enter search button label', 'findbiz-core' ),
-				'default'     => __( 'Search', 'findbiz-core' ),
+			'type'      => Controls_Manager::TEXT,
+			'label'     => __( 'Search Button Label', 'directorist' ),
+			'default'   => __( 'Search Listing', 'directorist' ),
 			)
 		);
-
 		$this->add_control(
-			'more_btn',
+			'show_more_filter_btn',
 			array(
-				'label'   => __( 'Advance Search Field?', 'findbiz-core' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'no',
+			'type'      => Controls_Manager::SWITCHER,
+			'label'     => __( 'Show More Search Field?', 'directorist' ),
+			'default'   => 'yes',
 			)
 		);
-
 		$this->add_control(
-			'reset',
+			'more_filter_btn_text',
 			array(
-				'label'     => __( 'Reset Button Label', 'findbiz-core' ),
-				'type'      => Controls_Manager::TEXT,
-				'default'   => 'Reset',
-				'condition' => array(
-					'more_btn' => 'yes',
-				),
+			'type'      => Controls_Manager::TEXT,
+			'label'     => __( 'More Search Field Button Label', 'directorist' ),
+			'default'   => __( 'More Filters', 'directorist' ),
+			'condition' => array( 'show_more_filter_btn' => array( 'yes' ) ),
 			)
 		);
-
 		$this->add_control(
-			'apply',
+			'more_filter_reset_btn',
 			array(
-				'label'     => __( 'Apply Button Label', 'findbiz-core' ),
-				'type'      => Controls_Manager::TEXT,
-				'default'   => 'Apply',
-				'condition' => array(
-					'more_btn' => 'yes',
-				),
+			'type'      => Controls_Manager::SWITCHER,
+			'label'     => __( 'Show More Field Reset Button?', 'directorist' ),
+			'default'   => 'yes',
+			'condition' => array( 'show_more_filter_btn' => array( 'yes' ) ),
 			)
 		);
-
 		$this->add_control(
-			'popular_cat',
+			'more_filter_reset_btn_text',
 			array(
-				'label'   => __( 'Show Popular Category?', 'findbiz-core' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'no',
+			'type'      => Controls_Manager::TEXT,
+			'label'     => __( 'More Field Reset Button Label', 'directorist' ),
+			'default'   => __( 'Reset Filters', 'directorist' ),
+			'condition' => array( 'more_filter_reset_btn' => 'yes', 'show_more_filter_btn' => 'yes' ),
+			)
+		);
+		$this->add_control(
+			'more_filter_search_btn',
+			array(
+			'type'      => Controls_Manager::SWITCHER,
+			'label'     => __( 'Show More Field Search Button?', 'directorist' ),
+			'default'   => 'yes',
+			'condition' => array( 'show_more_filter_btn' => array( 'yes' ) ),
+			)
+		);
+		$this->add_control(
+			'more_filter_search_btn_text',
+			array(
+			'type'      => Controls_Manager::TEXT,
+			'label'     => __( 'More Field Search Button Label', 'directorist' ),
+			'default'   => __( 'Apply Filters', 'directorist' ),
+			'condition' => array( 'more_filter_search_btn' => 'yes', 'show_more_filter_btn' => 'yes' ),
+			)
+		);
+		$this->add_control(
+			'more_filter',
+			array(
+			'type'    => Controls_Manager::SELECT,
+			'label'   => __( 'More Filter By', 'directorist' ),
+			'options' => array(
+				'overlapping' => __('Overlapping', 'directorist'),
+				'sliding'     => __('Sliding', 'directorist'),
+				'always_open' => __('Always Open', 'directorist')
+			),
+			'default' => 'overlapping',
+			)
+		);
+		$this->add_control(
+			'user',
+			array(
+			'type'      => Controls_Manager::SWITCHER,
+			'label'     => __( 'Show only for logged in user?', 'directorist' ),
+			'default'   => 'no',
 			)
 		);
 
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'section_title_style',
+			'sec_style',
 			array(
-				'label' => __( 'Styling', 'findbiz-core' ),
+				'label' => __( 'Color', 'findbiz-core' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => array( 'show_subtitle' => array( 'yes' ) ),
 			)
 		);
 
 		$this->add_control(
 			'title_color',
 			array(
-				'label'     => __( 'Title Color', 'findbiz-core' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .directorist-search-top__title' => 'color: {{VALUE}};',
-				),
+				'label'     => __( 'Title', 'directorist' ),
+				'default'   => '#51526e',
+				'selectors' => array( '{{WRAPPER}} .directorist-search-top__title' => 'color: {{VALUE}}' )
 			)
 		);
-
 		$this->add_control(
 			'subtitle_color',
 			array(
-				'label'     => __( 'Subtitle Color', 'findbiz-core' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .directorist-search-top__subtitle' => 'color: {{VALUE}};',
-				),
+				'label'     => __( 'Subtitle', 'directorist' ),
+				'default'   => '#51526e',
+				'selectors' => array( '{{WRAPPER}} .directorist-search-top__subtitle' => 'color: {{VALUE}}' ),
 			)
 		);
 
@@ -230,25 +268,62 @@ class SearchForm extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'sec_style_type',
+			array(
+				'tab'   => Controls_Manager::TAB_STYLE,
+				'label' => __( 'Typography', 'directorist' ),
+				'condition' => array( 'show_subtitle' => array( 'yes' ) ),
+			)
+		);
+
+		/* $this->add_control(
+			'title_typo',
+			array(
+				'label'    => __( 'Title', 'directorist' ),
+				'type'     => Group_Control_Typography::get_type(),
+				'selector' => '{{WRAPPER}} .directorist-search-top__title',
+			)
+		);
+		$this->add_control(
+			'subtitle_typo',
+			array(
+				'label'    => __( 'Subtitle', 'directorist' ),
+				'type'     => Group_Control_Typography::get_type(),
+				'selector' => '{{WRAPPER}} .directorist-search-top__subtitle',
+			)
+		); */
+
+		$this->end_controls_section();
 	}
 
 	protected function render() {
 		$settings       = $this->get_settings_for_display();
-		$title_subtitle = $settings['title_subtitle'];
-		$title          = $settings['title'];
-		$subtitle       = $settings['subtitle'];
-		$search         = $settings['search'];
-		$more_btn       = $settings['more_btn'];
-		$reset          = $settings['reset'];
-		$apply          = $settings['apply'];
-		$popular_cat    = $settings['popular_cat'];
-		$logged_in      = $settings['logged_in'];
-		$default_types  = $settings['default_types'];
-		$types          = $settings['types'] ? implode( ',', $settings['types'] ) : ''; ?>
+		$atts = array(
+			'show_title_subtitle'   => $settings['show_subtitle'],
+			'search_bar_title'      => $settings['title'],
+			'search_bar_sub_title'  => $settings['subtitle'],
+			'search_button_text'    => $settings['search_btn_text'],
+			'more_filters_button'   => $settings['show_more_filter_btn'],
+			'more_filters_text'     => $settings['more_filter_btn_text'],
+			'reset_filters_button'  => $settings['more_filter_reset_btn'],
+			'apply_filters_button'  => $settings['more_filter_search_btn'],
+			'reset_filters_text'    => $settings['more_filter_reset_btn_text'],
+			'apply_filters_text'    => $settings['more_filter_search_btn_text'],
+			'more_filters_display'  => $settings['more_filter'],
+			'logged_in_user_only'   => $settings['user'] ? $settings['user'] : 'no',
+		);
 
-		<div class="search-form-wrapper search-form-wrapper--one">
-			<?php echo do_shortcode( '[directorist_search_listing show_title_subtitle="' . $title_subtitle . '" search_bar_title="' . $title . '" search_bar_sub_title="' . $subtitle . '" search_button="yes" search_button_text="' . $search . '" more_filters_button="' . $more_btn . '" more_filters_text="" reset_filters_button="yes" apply_filters_button="yes" reset_filters_text="' . $reset . '" apply_filters_text="' . $apply . '" more_filters_display="overlapping" logged_in_user_only="' . $logged_in . '" directory_type="' . $types . '" default_directory_type="' . $default_types . '" show_popular_category="' . $popular_cat . '"]' ); ?>
-		</div>
-		<?php
+		if ( FindBiz_CoreHelper::multi_directory_enabled() ) {
+			if ( $settings['type'] ) {
+				$atts['directory_type'] = implode( ',', $settings['type'] );
+			}
+			if ( $settings['default_type'] ) {
+				$atts['default_directory_type'] = $settings['default_type'];
+			}
+		}
+		
+		FindBiz_CoreHelper::az_run_shortcode( 'directorist_search_listing', $atts );
 	}
 }

@@ -93,6 +93,32 @@ class Helper {
 	public static function add_listing_action_url() {
 		return esc_url( $_SERVER['REQUEST_URI'] );
 	}
+
+	public static function multi_directory_enabled() {
+		return get_directorist_option( 'enable_multi_directory', false );
+	}
+
+	public static function az_run_shortcode( $shortcode, $atts = [] ) {
+		$html = '';
+
+		foreach ( $atts as $key => $value ) {
+			$html .= sprintf( ' %s="%s"', $key, esc_html( $value ) );
+		}
+
+		$html = sprintf( '[%s%s]', $shortcode, $html );
+
+		echo do_shortcode( $html );
+	}
+
+	public static function az_listing_types() {
+		$listing_types = array();
+		$all_types = get_terms( [ 'taxonomy'=> ATBDP_TYPE, 'hide_empty' => false ] );
+
+		foreach ( $all_types as $type ) {
+			$listing_types[ $type->slug ] = $type->name;
+		}
+		return $listing_types;
+	}
 }
 
 new Helper();
