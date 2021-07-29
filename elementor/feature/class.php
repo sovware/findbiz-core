@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Feature section
-class FeatureSection extends Widget_Base {
+class Feature extends Widget_Base {
 
 	public function get_name() {
 		return 'feature_section';
@@ -51,11 +51,11 @@ class FeatureSection extends Widget_Base {
 			array(
 				'label'   => __( 'Style', 'findbiz-core' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-one',
+				'default' => 'style1',
 				'options' => array(
-					'style-one'   => esc_html__( 'Style 1', 'findbiz-core' ),
-					'style-two'   => esc_html__( 'Style 2', 'findbiz-core' ),
-					'style-three' => esc_html__( 'Style 3', 'findbiz-core' ),
+					'style1'   => esc_html__( 'Style 1', 'findbiz-core' ),
+					'style2'   => esc_html__( 'Style 2', 'findbiz-core' ),
+					'style3'   => esc_html__( 'Style 3', 'findbiz-core' ),
 				),
 			)
 		);
@@ -69,7 +69,7 @@ class FeatureSection extends Widget_Base {
 					'active' => true,
 				),
 				'placeholder' => __( 'Enter your title', 'findbiz-core' ),
-				'default'     => 'See how it works',
+				'default'     => 'We help build trusted connections in local businesses',
 			)
 		);
 
@@ -82,39 +82,7 @@ class FeatureSection extends Widget_Base {
 					'active' => true,
 				),
 				'placeholder' => __( 'Enter your description', 'findbiz-core' ),
-				'default'     => 'The best place for people and businesses to outsource tasks.',
-			)
-		);
-
-		$this->add_control(
-			'btn',
-			array(
-				'label'     => __( 'Video Button Label', 'findbiz-core' ),
-				'type'      => Controls_Manager::TEXT,
-				'dynamic'   => array(
-					'active' => true,
-				),
-				'condition' => array(
-					'style' => 'style-one',
-				),
-			)
-		);
-
-		$this->add_control(
-			'url',
-			array(
-				'label'         => __( 'Link', 'findbiz-core' ),
-				'type'          => Controls_Manager::URL,
-				'placeholder'   => __( 'https://your-link.com', 'findbiz-core' ),
-				'show_external' => true,
-				'default'       => array(
-					'url'         => '',
-					'is_external' => true,
-					'nofollow'    => true,
-				),
-				'condition'     => array(
-					'style' => array( 'style-one', 'style-two' ),
-				),
+				'default'     => 'Lorem Ipsum is simply dummy text of the printing and type setting industry has been the industry stan.',
 			)
 		);
 
@@ -123,9 +91,6 @@ class FeatureSection extends Widget_Base {
 			array(
 				'label'   => __( 'Right Side Image', 'findbiz-core' ),
 				'type'    => Controls_Manager::MEDIA,
-				'default' => array(
-					'url' => Utils::get_placeholder_image_src(),
-				),
 			)
 		);
 
@@ -162,50 +127,11 @@ class FeatureSection extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		$title    = $settings['title'];
 		$desc     = $settings['desc'];
-		$btn      = $settings['btn'];
-		$url      = $settings['url'] ? $settings['url']['url'] : '';
 		$img      = $settings['img'];
 		$style    = $settings['style'];
 		?>
 		
-		<?php if ( 'style-one' == $style ) { ?>
-			<div class="service-process">
-				<div class="process-desc">
-					<h2><?php echo wp_kses_post( $title ); ?></h2>
-					<p><?php echo wp_kses_post( $desc ); ?></p>
-					<p class="play--btn">
-					<span class="">
-						<i class="fas fa-play"></i>
-					</span>
-						<a href="<?php echo esc_url( $url ); ?>" class="stretched-link video-iframe"><?php echo esc_attr( $btn ); ?></a>
-					</p>
-				</div>
-				<div class="process-img"><img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo Helper::image_alt( $img['id'] ); ?>"></div>
-			</div>
-		<?php } elseif ( 'style-two' == $style ) { ?>
-			<div class="intro-video">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-7 col-md-6">
-							<h1><?php echo wp_kses_post( $title ); ?></h1>
-							<p class="col-md-10"><?php echo wp_kses_post( $desc ); ?></p>
-						</div>
-						<div class="col-lg-5 col-md-6">
-							<div class="card-video">
-								<figure>
-									<img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo Helper::image_alt( $img['id'] ); ?>">
-									<figcaption>
-										<a href="<?php echo esc_url( $url ); ?>" class="play--btn video-iframe">
-											<span class=""><i class="fa fa-play"></i></span>
-										</a>
-									</figcaption>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		<?php } else { ?>
+		<?php if ( 'style1' === $style ) { ?>
 			<section class="intro-img">
 				<div class="container">
 					<div class="row">
@@ -213,12 +139,55 @@ class FeatureSection extends Widget_Base {
 							<h1><?php echo wp_kses_post( $title ); ?></h1>
 							<p><?php echo wp_kses_post( $desc ); ?></p>
 						</div>
-						<div class="col-lg-6">
-							<img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo esc_attr( Helper::image_alt( $img['id'] ) ); ?>" class="img-full">
-						</div>
+
+						<?php if ( $img['url'] ) { ?>
+							<div class="col-lg-6">
+								<img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo esc_attr( Helper::image_alt( $img['id'] ) ); ?>" class="img-full">
+							</div>
+						<?php } ?>
 					</div>
 				</div>
 			</section>
+			<?php 
+		}
+		elseif( 'style2' === $style ) {
+			?>
+			<div class="row block-content">
+				<?php if ( $img['url'] ) { ?>
+					<div class="col-lg-6">
+						<div class="block-content__img">
+							<img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo esc_attr( Helper::image_alt( $img['id'] ) ); ?>" class="img-full">
+						</div>
+					</div>
+				<?php } ?>
+				
+				<div class="col-lg-6">
+					<div class="block-content__details">
+						<h3><?php echo wp_kses_post( $title ); ?></h3>
+						<p><?php echo wp_kses_post( $desc ); ?></p>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+		else {
+			?>
+			<div class="row block-content">
+				<div class="col-lg-6">
+					<div class="block-content__details">
+						<h3><?php echo wp_kses_post( $title ); ?></h3>
+						<p><?php echo wp_kses_post( $desc ); ?></p>
+					</div>
+				</div>
+
+				<?php if ( $img['url'] ) { ?>
+					<div class="col-lg-6">
+						<div class="block-content__img">
+							<img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo esc_attr( Helper::image_alt( $img['id'] ) ); ?>" class="img-full">
+						</div>
+					</div>
+				<?php } ?>
+			</div>
 			<?php
 		}
 	}

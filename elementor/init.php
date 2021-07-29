@@ -40,8 +40,9 @@ class Custom_Widget_Init {
 			'contactitems'   => 'ContactItems',
 			'counter'        => 'Counter',
 			'cta'            => 'CTA',
-			'featurebox'     => 'FeatureBox',
-			'featuresection' => 'FeatureSection',
+			'infobox'     	 => 'infoBox',
+			'feature' 		 => 'Feature',
+			'featurevideo' 	 => 'FeatureVideo',
 			'logos'          => 'Logos',
 			'team'           => 'Team',
 			'testimonial'    => 'Testimonial',
@@ -68,6 +69,8 @@ class Custom_Widget_Init {
 			'singletag'    => 'SingleTag',
 			'booking'      => 'Booking',
 		);
+
+		( ! class_exists( 'Directorist_Base' ) ) ? $widgets2 = array() : '';
 
 		$widgets = array_merge( $widgets1, $widgets2 );
 

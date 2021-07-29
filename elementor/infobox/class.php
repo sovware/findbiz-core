@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Feature Box
-class FeatureBox extends Widget_Base {
+class InfoBox extends Widget_Base {
 
 	public function get_name() {
 		return 'feature_boxes';
 	}
 
 	public function get_title() {
-		return __( 'Feature Box', 'findbiz-core' );
+		return __( 'Info Box', 'findbiz-core' );
 	}
 
 	public function get_icon() {
@@ -43,7 +43,7 @@ class FeatureBox extends Widget_Base {
 		$this->start_controls_section(
 			'feature_box',
 			array(
-				'label' => __( 'Feature Box', 'findbiz-core' ),
+				'label' => __( 'Info Box', 'findbiz-core' ),
 			)
 		);
 
@@ -89,9 +89,6 @@ class FeatureBox extends Widget_Base {
 						'name'        => 'image',
 						'label'     => __( 'Choose Image', 'findbiz-core' ),
 						'type'      => Controls_Manager::MEDIA,
-						'default'   => array(
-							'url' => Utils::get_placeholder_image_src(),
-						),
 						'condition' => array(
 							'type' => 'image',
 						),
