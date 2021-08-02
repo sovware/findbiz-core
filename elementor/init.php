@@ -34,7 +34,7 @@ class Custom_Widget_Init {
 		// Widgets -- dirname=>classname
 		$widgets1 = array(
 			'heading'        => 'Heading',
-			'blogs'          => 'Blogs',
+			//'blogs'          => 'Blogs',
 			'contactitems'   => 'ContactItems',
 			'counter'        => 'Counter',
 			'cta'            => 'CTA',

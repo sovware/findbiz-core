@@ -7,9 +7,10 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\Helper;
+
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use WpWax\FindBiz\Directorist_Support;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -61,7 +62,7 @@ class Categories extends Widget_Base {
 				'label'    => __( 'Specify Listing Types', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT2,
 				'multiple' => true,
-				'options'  => Helper::directorist_listing_types(),
+				'options'  => Directorist_Support::directorist_listing_types(),
 			)
 		);
 
@@ -71,7 +72,7 @@ class Categories extends Widget_Base {
 				'label'    => __( 'Set Default Listing Type', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT,
 				'multiple' => true,
-				'options'  => Helper::directorist_listing_types(),
+				'options'  => Directorist_Support::directorist_listing_types(),
 			)
 		);
 
@@ -139,7 +140,7 @@ class Categories extends Widget_Base {
 				'label'     => esc_html__( 'Select Categories', 'findbiz-core' ),
 				'type'      => Controls_Manager::SELECT2,
 				'multiple'  => true,
-				'options'   => Helper::categories(),
+				'options'   => Directorist_Support::listing_categories(),
 				'condition' => array(
 					'order_by' => 'slug',
 				),

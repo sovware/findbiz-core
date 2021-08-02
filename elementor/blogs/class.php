@@ -7,14 +7,13 @@
  * @version 1.0
  */
 
-use WpWax\FindBiz\WpWaxTheme;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use WpWax\FindBiz\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 
 // Blog Posts
 class Blogs extends Widget_Base {
@@ -107,7 +106,7 @@ class Blogs extends Widget_Base {
 			'orderby '       => esc_attr( $order_by ),
 		);
 
-		$posts = new WP_Query( $args ); ?>
+		$posts = new \WP_Query( $args ); ?>
 		<div class="blog-posts row" data-uk-grid>
 			<?php
 			while ( $posts->have_posts() ) {
@@ -119,8 +118,8 @@ class Blogs extends Widget_Base {
 						<div class="blog-posts__single__contents">
 							<?php the_title( sprintf( '<h4><a href="%s">', get_the_permalink() ), '</a></h4>' ); ?>
 							<ul>
-								<li><?php echo WpWaxTheme::time(); ?></li>
-								<?php WpWaxTheme::categories(); ?>
+								<li><?php echo Helper::time(); ?></li>
+								<?php Helper::post_categories(); ?>
 							</ul>
 							<?php the_excerpt(); ?>
 						</div>
@@ -128,7 +127,6 @@ class Blogs extends Widget_Base {
 				</div>
 				<?php
 			}
-			wp_reset_postdata();
 			?>
 		</div>
 		<?php

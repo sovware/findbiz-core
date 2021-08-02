@@ -43,9 +43,9 @@ if ( ! class_exists( 'CSF_Shortcoder' ) ) {
       $this->pre_tabs     = $this->pre_tabs( $this->sections );
       $this->pre_sections = $this->pre_sections( $this->sections );
 
-      add_action( 'admin_footer', array( &$this, 'add_footer_modal_shortcode' ) );
-      add_action( 'customize_controls_print_footer_scripts', array( &$this, 'add_footer_modal_shortcode' ) );
-      add_action( 'wp_ajax_csf-get-shortcode-'. $this->unique, array( &$this, 'get_shortcode' ) );
+      add_action( 'admin_footer', array( $this, 'add_footer_modal_shortcode' ) );
+      add_action( 'customize_controls_print_footer_scripts', array( $this, 'add_footer_modal_shortcode' ) );
+      add_action( 'wp_ajax_csf-get-shortcode-'. $this->unique, array( $this, 'get_shortcode' ) );
 
       if ( ! empty( $this->args['show_in_editor'] ) ) {
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'CSF_Shortcoder' ) ) {
         if ( CSF::is_active_plugin( 'elementor/elementor.php' ) ) {
           add_action( 'elementor/editor/before_enqueue_scripts', array( 'CSF', 'add_admin_enqueue_scripts' ) );
           add_action( 'elementor/editor/footer', array( 'CSF_Field_icon', 'add_footer_modal_icon' ) );
-          add_action( 'elementor/editor/footer', array( &$this, 'add_footer_modal_shortcode' ) );
+          add_action( 'elementor/editor/footer', array( $this, 'add_footer_modal_shortcode' ) );
         }
 
       }
