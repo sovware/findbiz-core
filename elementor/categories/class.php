@@ -62,7 +62,7 @@ class Categories extends Widget_Base {
 				'label'    => __( 'Specify Listing Types', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT2,
 				'multiple' => true,
-				'options'  => Directorist_Support::directorist_listing_types(),
+				'options'  => Directorist_Support::listing_types(),
 			)
 		);
 
@@ -72,7 +72,7 @@ class Categories extends Widget_Base {
 				'label'    => __( 'Set Default Listing Type', 'findbiz-core' ),
 				'type'     => Controls_Manager::SELECT,
 				'multiple' => true,
-				'options'  => Directorist_Support::directorist_listing_types(),
+				'options'  => Directorist_Support::listing_types(),
 			)
 		);
 

@@ -7,10 +7,10 @@
  * @version 1.0
  */
 
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Typography;
-use WpWax\FindBiz_Core\Helper as FindBiz_CoreHelper;
+use Elementor\Widget_Base;
+use WpWax\FindBiz\Directorist_Support;
+use WpWax\FindBiz\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -107,8 +107,8 @@ class SearchForm extends Widget_Base {
 			'type'     => Controls_Manager::SELECT2,
 			'label'    => __( 'Directory Types', 'directorist' ),
 			'multiple' => true,
-			'options'  => FindBiz_CoreHelper::az_listing_types(),
-			'condition' => FindBiz_CoreHelper::multi_directory_enabled() ? '' : ['nocondition' => true],
+			'options'  => Directorist_Support::listing_types(),
+			'condition'=> Directorist_Support::multi_directory_enabled() ? '' : ['nocondition' => true],
 			)
 		);
 		$this->add_control(
@@ -116,8 +116,8 @@ class SearchForm extends Widget_Base {
 			array(
 			'type'     => Controls_Manager::SELECT2,
 			'label'    => __( 'Default Directory Types', 'directorist' ),
-			'options'  => FindBiz_CoreHelper::az_listing_types(),
-			'condition' => FindBiz_CoreHelper::multi_directory_enabled() ? '' : ['nocondition' => true],
+			'options'  => Directorist_Support::listing_types(),
+			'condition' => Directorist_Support::multi_directory_enabled() ? '' : ['nocondition' => true],
 			)
 		);
 		$this->add_control(
@@ -315,7 +315,7 @@ class SearchForm extends Widget_Base {
 			'logged_in_user_only'   => $settings['user'] ? $settings['user'] : 'no',
 		);
 
-		if ( FindBiz_CoreHelper::multi_directory_enabled() ) {
+		if ( Directorist_Support::multi_directory_enabled() ) {
 			if ( $settings['type'] ) {
 				$atts['directory_type'] = implode( ',', $settings['type'] );
 			}
@@ -324,6 +324,6 @@ class SearchForm extends Widget_Base {
 			}
 		}
 		
-		FindBiz_CoreHelper::az_run_shortcode( 'directorist_search_listing', $atts );
+		Helper::findbiz_run_shortcode( 'directorist_search_listing', $atts );
 	}
 }
