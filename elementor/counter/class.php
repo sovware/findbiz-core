@@ -9,6 +9,7 @@
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -43,8 +44,7 @@ class Counter extends Widget_Base {
 				'label' => __( 'Counter', 'findbiz-core' ),
 			)
 		);
-
-	$this->add_control(
+		$this->add_control(
 			'counters',
 			array(
 				'label'       => __( 'Counters', 'findbiz-core' ),
@@ -77,9 +77,76 @@ class Counter extends Widget_Base {
 						),
 					),
 				),
+				'default'	=> array(
+					'number' => '2.8',
+					'suffix' => 'M+',
+					'label' => 'Verified users',
+				),
 			)
 		);
+		$this->end_controls_section();
 
+		// color tab
+		$this->start_controls_section(
+			'style',
+			array(
+				'label' => __( 'Style', 'findbiz-core' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_control(
+			'number_color',
+			array(
+				'type'      => Controls_Manager::COLOR,
+				'label'     => __( 'Numbers Color', 'directorist' ),
+				'default'   => '#272b41',
+				'selectors' => array( '{{WRAPPER}} .counters .counter-items p span.count_up' => 'color: {{VALUE}}' )
+			)
+		);
+		$this->add_control(
+			'suffix_color',
+			array(
+				'type'      => Controls_Manager::COLOR,
+				'label'     => __( 'Suffix Color', 'directorist' ),
+				'default'   => '#272b41',
+				'selectors' => array( '{{WRAPPER}} .counters .counter-items p' => 'color: {{VALUE}}' )
+			)
+		);
+		$this->add_control(
+			'label_color',
+			array(
+				'type'      => Controls_Manager::COLOR,
+				'label'     => __( 'Title Color', 'directorist' ),
+				'default'   => '#9299b8',
+				'selectors' => array( '{{WRAPPER}} .counters .counter-items span.items-title' => 'color: {{VALUE}}' )
+			)
+		);
+		$this->end_controls_section();
+
+		// typography
+		$this->start_controls_section(
+			'sec_typography',
+			array(
+				'label' => __( 'Typography', 'findbiz-core' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'number_typo',
+				'label' => __( 'Number', 'findbiz-core' ),
+				'selector' => '{{WRAPPER}} .counters .counter-items p',
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'title_typo',
+				'label' => __( 'Title', 'findbiz-core' ),
+				'selector' => '{{WRAPPER}} .counters .counter-items span.items-title',
+			]
+		);
 		$this->end_controls_section();
 	}
 
@@ -96,12 +163,12 @@ class Counter extends Widget_Base {
 		<div class="counters row">
 			<?php foreach ( $counters as $counter ) { ?>
 				<div class="list-unstyled counter-items col-md-3">
-					<div>
+					<div class="counter-items">
 						<p>
 							<span class="count_up"><?php echo esc_attr( $counter['number'] ); ?></span>
 							<?php echo esc_attr( $counter['suffix'] ); ?>
 						</p>
-						<span><?php echo esc_attr( $counter['label'] ); ?></span>
+						<span class="items-title"><?php echo esc_attr( $counter['label'] ); ?></span>
 					</div>
 				</div>
 			<?php } ?>

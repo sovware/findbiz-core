@@ -44,7 +44,7 @@ class Custom_Widget_Init {
 			'logos'          => 'Logos',
 			'team'           => 'Team',
 			'testimonial'    => 'Testimonial',
-			'accordion'    => 'Accordion',
+			'faq'				=> 'FAQ',
 			'contactform'  => 'ContactForm',
 		);
 		$widgets2 = array(
