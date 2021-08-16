@@ -84,8 +84,7 @@ class Icon_Title extends WP_Widget {
 
 					<label for="<?php echo esc_attr( $this->get_field_id( "icon$i" ) ); ?>">
 						<?php echo "#$i : Icon Name"; ?>
-						<a href='https://icons8.com/line-awesome' target='_blank'>Line Awesome Icons
-							List</a>
+						<a href='https://icons8.com/line-awesome' target='_blank'>Line Awesome Icons List</a>
 					</label>
 					<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( "icon$i" ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( "icon$i" ) ); ?>" type="text" value="<?php echo esc_attr( $icon ); ?>" />
 				</p>
