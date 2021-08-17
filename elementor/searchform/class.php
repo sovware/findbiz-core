@@ -52,7 +52,7 @@ class SearchForm extends Widget_Base {
 			'show_subtitle',
 			array(
 			'type'      => Controls_Manager::SWITCHER,
-			'label'     => __( 'Add Element Title & Subtitle?', 'directorist' ),
+			'label'     => __( 'Add Element Title & Subtitle?', 'findbiz-core' ),
 			'default'   => 'yes',
 			)
 		);
@@ -60,18 +60,18 @@ class SearchForm extends Widget_Base {
 			'title_subtitle_alignment',
 			array(
 			'type'      => Controls_Manager::CHOOSE,
-			'label'     => __( 'Title/Subtitle Alignment', 'directorist' ),
+			'label'     => __( 'Title/Subtitle Alignment', 'findbiz-core' ),
 			'options'   => array(
 				'left'   => array(
-					'title' => __( 'Left', 'directorist' ),
+					'title' => __( 'Left', 'findbiz-core' ),
 					'icon'  => 'fa fa-align-left',
 				),
 				'center' => array(
-					'title' => __( 'Center', 'directorist' ),
+					'title' => __( 'Center', 'findbiz-core' ),
 					'icon'  => 'fa fa-align-center',
 				),
 				'right'  => array(
-					'title' => __( 'Right', 'directorist' ),
+					'title' => __( 'Right', 'findbiz-core' ),
 					'icon'  => 'fa fa-align-right',
 				),
 			),
@@ -87,8 +87,8 @@ class SearchForm extends Widget_Base {
 			'title',
 			array(
 			'type'      => Controls_Manager::TEXTAREA,
-			'label'     => __( 'Search Form Title', 'directorist' ),
-			'default'   => __( 'Search here', 'directorist' ),
+			'label'     => __( 'Search Form Title', 'findbiz-core' ),
+			'default'   => __( 'Search here', 'findbiz-core' ),
 			'condition' => array( 'show_subtitle' => array( 'yes' ) ),
 			)
 		);
@@ -96,8 +96,8 @@ class SearchForm extends Widget_Base {
 			'subtitle',
 			array(
 			'type'      => Controls_Manager::TEXTAREA,
-			'label'     => __( 'Search Form Subtitle', 'directorist' ),
-			'default'   => __( 'Find the best match of your interest', 'directorist' ),
+			'label'     => __( 'Search Form Subtitle', 'findbiz-core' ),
+			'default'   => __( 'Find the best match of your interest', 'findbiz-core' ),
 			'condition' => array( 'show_subtitle' => array( 'yes' ) ),
 			)
 		);
@@ -105,7 +105,7 @@ class SearchForm extends Widget_Base {
 			'type',
 			array(
 			'type'     => Controls_Manager::SELECT2,
-			'label'    => __( 'Directory Types', 'directorist' ),
+			'label'    => __( 'Directory Types', 'findbiz-core' ),
 			'multiple' => true,
 			'options'  => Directorist_Support::listing_types(),
 			'condition'=> Directorist_Support::multi_directory_enabled() ? '' : ['nocondition' => true],
@@ -115,7 +115,7 @@ class SearchForm extends Widget_Base {
 			'default_type',
 			array(
 			'type'     => Controls_Manager::SELECT2,
-			'label'    => __( 'Default Directory Types', 'directorist' ),
+			'label'    => __( 'Default Directory Types', 'findbiz-core' ),
 			'options'  => Directorist_Support::listing_types(),
 			'condition' => Directorist_Support::multi_directory_enabled() ? '' : ['nocondition' => true],
 			)
@@ -124,15 +124,15 @@ class SearchForm extends Widget_Base {
 			'search_btn_text',
 			array(
 			'type'      => Controls_Manager::TEXT,
-			'label'     => __( 'Search Button Label', 'directorist' ),
-			'default'   => __( 'Search Listing', 'directorist' ),
+			'label'     => __( 'Search Button Label', 'findbiz-core' ),
+			'default'   => __( 'Search Listing', 'findbiz-core' ),
 			)
 		);
 		$this->add_control(
 			'show_more_filter_btn',
 			array(
 			'type'      => Controls_Manager::SWITCHER,
-			'label'     => __( 'Show More Search Field?', 'directorist' ),
+			'label'     => __( 'Show More Search Field?', 'findbiz-core' ),
 			'default'   => 'yes',
 			)
 		);
@@ -140,8 +140,8 @@ class SearchForm extends Widget_Base {
 			'more_filter_btn_text',
 			array(
 			'type'      => Controls_Manager::TEXT,
-			'label'     => __( 'More Search Field Button Label', 'directorist' ),
-			'default'   => __( 'More Filters', 'directorist' ),
+			'label'     => __( 'More Search Field Button Label', 'findbiz-core' ),
+			'default'   => __( 'More Filters', 'findbiz-core' ),
 			'condition' => array( 'show_more_filter_btn' => array( 'yes' ) ),
 			)
 		);
@@ -149,7 +149,7 @@ class SearchForm extends Widget_Base {
 			'more_filter_reset_btn',
 			array(
 			'type'      => Controls_Manager::SWITCHER,
-			'label'     => __( 'Show More Field Reset Button?', 'directorist' ),
+			'label'     => __( 'Show More Field Reset Button?', 'findbiz-core' ),
 			'default'   => 'yes',
 			'condition' => array( 'show_more_filter_btn' => array( 'yes' ) ),
 			)
@@ -158,8 +158,8 @@ class SearchForm extends Widget_Base {
 			'more_filter_reset_btn_text',
 			array(
 			'type'      => Controls_Manager::TEXT,
-			'label'     => __( 'More Field Reset Button Label', 'directorist' ),
-			'default'   => __( 'Reset Filters', 'directorist' ),
+			'label'     => __( 'More Field Reset Button Label', 'findbiz-core' ),
+			'default'   => __( 'Reset Filters', 'findbiz-core' ),
 			'condition' => array( 'more_filter_reset_btn' => 'yes', 'show_more_filter_btn' => 'yes' ),
 			)
 		);
@@ -167,7 +167,7 @@ class SearchForm extends Widget_Base {
 			'more_filter_search_btn',
 			array(
 			'type'      => Controls_Manager::SWITCHER,
-			'label'     => __( 'Show More Field Search Button?', 'directorist' ),
+			'label'     => __( 'Show More Field Search Button?', 'findbiz-core' ),
 			'default'   => 'yes',
 			'condition' => array( 'show_more_filter_btn' => array( 'yes' ) ),
 			)
@@ -176,8 +176,8 @@ class SearchForm extends Widget_Base {
 			'more_filter_search_btn_text',
 			array(
 			'type'      => Controls_Manager::TEXT,
-			'label'     => __( 'More Field Search Button Label', 'directorist' ),
-			'default'   => __( 'Apply Filters', 'directorist' ),
+			'label'     => __( 'More Field Search Button Label', 'findbiz-core' ),
+			'default'   => __( 'Apply Filters', 'findbiz-core' ),
 			'condition' => array( 'more_filter_search_btn' => 'yes', 'show_more_filter_btn' => 'yes' ),
 			)
 		);
@@ -185,11 +185,11 @@ class SearchForm extends Widget_Base {
 			'more_filter',
 			array(
 			'type'    => Controls_Manager::SELECT,
-			'label'   => __( 'More Filter By', 'directorist' ),
+			'label'   => __( 'More Filter By', 'findbiz-core' ),
 			'options' => array(
-				'overlapping' => __('Overlapping', 'directorist'),
-				'sliding'     => __('Sliding', 'directorist'),
-				'always_open' => __('Always Open', 'directorist')
+				'overlapping' => __('Overlapping', 'findbiz-core'),
+				'sliding'     => __('Sliding', 'findbiz-core'),
+				'always_open' => __('Always Open', 'findbiz-core')
 			),
 			'default' => 'overlapping',
 			)
@@ -198,7 +198,7 @@ class SearchForm extends Widget_Base {
 			'user',
 			array(
 			'type'      => Controls_Manager::SWITCHER,
-			'label'     => __( 'Show only for logged in user?', 'directorist' ),
+			'label'     => __( 'Show only for logged in user?', 'findbiz-core' ),
 			'default'   => 'no',
 			)
 		);
@@ -218,7 +218,7 @@ class SearchForm extends Widget_Base {
 			'title_color',
 			array(
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Title', 'directorist' ),
+				'label'     => __( 'Title', 'findbiz-core' ),
 				'default'   => '#51526e',
 				'selectors' => array( '{{WRAPPER}} .directorist-search-top__title' => 'color: {{VALUE}}' )
 			)
@@ -227,7 +227,7 @@ class SearchForm extends Widget_Base {
 			'subtitle_color',
 			array(
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Subtitle', 'directorist' ),
+				'label'     => __( 'Subtitle', 'findbiz-core' ),
 				'default'   => '#51526e',
 				'selectors' => array( '{{WRAPPER}} .directorist-search-top__subtitle' => 'color: {{VALUE}}' ),
 			)
@@ -273,7 +273,7 @@ class SearchForm extends Widget_Base {
 			'sec_style_type',
 			array(
 				'tab'   => Controls_Manager::TAB_STYLE,
-				'label' => __( 'Typography', 'directorist' ),
+				'label' => __( 'Typography', 'findbiz-core' ),
 				'condition' => array( 'show_subtitle' => array( 'yes' ) ),
 			)
 		);
@@ -281,7 +281,7 @@ class SearchForm extends Widget_Base {
 		/* $this->add_control(
 			'title_typo',
 			array(
-				'label'    => __( 'Title', 'directorist' ),
+				'label'    => __( 'Title', 'findbiz-core' ),
 				'type'     => Group_Control_Typography::get_type(),
 				'selector' => '{{WRAPPER}} .directorist-search-top__title',
 			)
@@ -289,7 +289,7 @@ class SearchForm extends Widget_Base {
 		$this->add_control(
 			'subtitle_typo',
 			array(
-				'label'    => __( 'Subtitle', 'directorist' ),
+				'label'    => __( 'Subtitle', 'findbiz-core' ),
 				'type'     => Group_Control_Typography::get_type(),
 				'selector' => '{{WRAPPER}} .directorist-search-top__subtitle',
 			)

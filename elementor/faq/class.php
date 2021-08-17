@@ -49,7 +49,7 @@ class FAQ extends Widget_Base {
 			'section_title',
 			array(
 				'type'      => Controls_Manager::TEXT,
-				'label'     => __( 'Section Title', 'directorist' ),
+				'label'     => __( 'Section Title', 'findbiz-core' ),
 				'default'   => "Listing FAQ's",
 				'dynamic' => array(
 					'active' => true,
@@ -90,18 +90,18 @@ class FAQ extends Widget_Base {
 			'title_alignment',
 			array(
 				'type'      => Controls_Manager::CHOOSE,
-				'label'     => __( 'Section Title Alignment', 'directorist' ),
+				'label'     => __( 'Section Title Alignment', 'findbiz-core' ),
 				'options'   => array(
 					'left'   => array(
-						'title' => __( 'Left', 'directorist' ),
+						'title' => __( 'Left', 'findbiz-core' ),
 						'icon'  => 'fa fa-align-left',
 					),
 					'center' => array(
-						'title' => __( 'Center', 'directorist' ),
+						'title' => __( 'Center', 'findbiz-core' ),
 						'icon'  => 'fa fa-align-center',
 					),
 					'right'  => array(
-						'title' => __( 'Right', 'directorist' ),
+						'title' => __( 'Right', 'findbiz-core' ),
 						'icon'  => 'fa fa-align-right',
 					),
 				),
@@ -109,6 +109,22 @@ class FAQ extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .faq-contents .atbd_area_title h4' => 'text-align: {{VALUE}}',
 				),
+			)
+		);
+		$this->add_control(
+			'wpwax_animation_duration',
+			array(
+				'type'      => Controls_Manager::NUMBER,
+				'label'     => __( 'Animation Duration', 'findbiz-core' ),
+				'default' => '2000',
+			)
+		);
+		$this->add_control(
+			'delay',
+			array(
+				'type'      => Controls_Manager::NUMBER,
+				'label'     => __( 'Delay', 'findbiz-core' ),
+				'default' => '10',
 			)
 		);
 		$this->end_controls_section();
@@ -125,7 +141,7 @@ class FAQ extends Widget_Base {
 			's_title_color',
 			array(
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Section Title Color', 'directorist' ),
+				'label'     => __( 'Section Title Color', 'findbiz-core' ),
 				'default'   => '#272b41',
 				'selectors' => array( '{{WRAPPER}} .faq-contents .atbd_area_title h4' => 'color: {{VALUE}}' )
 			)
@@ -134,7 +150,7 @@ class FAQ extends Widget_Base {
 			'tab_title_color',
 			array(
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Tab Title Color', 'directorist' ),
+				'label'     => __( 'Tab Title Color', 'findbiz-core' ),
 				'default'   => '#272b41',
 				'selectors' => array( '{{WRAPPER}} .faq-contents .atbdb_content_module_contents .dacc_single h3 a' => 'color: {{VALUE}}' )
 			)
@@ -143,7 +159,7 @@ class FAQ extends Widget_Base {
 			'tab_content_color',
 			array(
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Tab Content Color', 'directorist' ),
+				'label'     => __( 'Tab Content Color', 'findbiz-core' ),
 				'default'   => '#272b41',
 				'selectors' => array( '{{WRAPPER}} .faq-contents .atbdb_content_module_contents .dacc_single p.dac_body' => 'color: {{VALUE}}' )
 			)
@@ -163,7 +179,7 @@ class FAQ extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name' => 'section_title_typo',
-				'label'     => __( 'Section Title Color', 'directorist' ),
+				'label'     => __( 'Section Title Color', 'findbiz-core' ),
 				'selector' => '{{WRAPPER}} .faq-contents .atbd_area_title h4',
 			),
 		);
@@ -171,7 +187,7 @@ class FAQ extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name' => 'tab_title_typo',
-				'label'     => __( 'Tab Title Color', 'directorist' ),
+				'label'     => __( 'Tab Title Color', 'findbiz-core' ),
 				'selector' => '{{WRAPPER}} .faq-contents .atbdb_content_module_contents .dacc_single h3 a',
 			),
 		);
@@ -179,7 +195,7 @@ class FAQ extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name' => 'tab_content_typos',
-				'label'     => __( 'Tab Content Color', 'directorist' ),
+				'label'     => __( 'Tab Content Color', 'findbiz-core' ),
 				'selector' => '{{WRAPPER}} .faq-contents .atbdb_content_module_contents .dacc_single p.dac_body',
 			),
 		);

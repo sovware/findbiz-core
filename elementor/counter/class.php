@@ -98,7 +98,7 @@ class Counter extends Widget_Base {
 			'number_color',
 			array(
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Numbers Color', 'directorist' ),
+				'label'     => __( 'Numbers Color', 'findbiz-core' ),
 				'default'   => '#272b41',
 				'selectors' => array( '{{WRAPPER}} .counters .counter-items p span.count_up' => 'color: {{VALUE}}' )
 			)
@@ -107,7 +107,7 @@ class Counter extends Widget_Base {
 			'suffix_color',
 			array(
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Suffix Color', 'directorist' ),
+				'label'     => __( 'Suffix Color', 'findbiz-core' ),
 				'default'   => '#272b41',
 				'selectors' => array( '{{WRAPPER}} .counters .counter-items p' => 'color: {{VALUE}}' )
 			)
@@ -116,7 +116,7 @@ class Counter extends Widget_Base {
 			'label_color',
 			array(
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Title Color', 'directorist' ),
+				'label'     => __( 'Title Color', 'findbiz-core' ),
 				'default'   => '#9299b8',
 				'selectors' => array( '{{WRAPPER}} .counters .counter-items span.items-title' => 'color: {{VALUE}}' )
 			)
